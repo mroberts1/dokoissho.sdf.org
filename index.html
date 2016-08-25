@@ -1,0 +1,33 @@
+---
+layout: default
+---
+
+<header class="site-header">
+  <h1>{{ site.name }}</h1>
+  <ul>
+    {% for item in site.data.navigation %}
+      <li>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</header>
+
+<div class="content-container">
+  <h2>Blog Posts</h2>
+  <ul>
+    {% for post in site.posts %}
+      <li>
+        <span class="date">{{ post.date | date: '%Y %b %d' }}</span>
+        -
+        <a href="{{ post.url }}">{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<footer class="site-footer">
+  <p>
+    Site hosted by <a href="http://sdf.org/">SDF Public Access UNIX System</a>
+  </p>
+</footer>

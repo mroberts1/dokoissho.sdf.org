@@ -1,0 +1,31 @@
+---
+title:  Projects
+layout: default
+---
+
+<header class="site-header">
+  <h1>{{ site.name }}</h1>
+  <ul>
+    {% for item in site.data.navigation %}
+      <li>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</header>
+
+<div class="content-container">
+  <h2>Projects</h2>
+
+  <dl class="project-list">
+    {% for project in site.projects %}
+      <dt>
+        <a href="{{ project.url }}">{{ project.title }}</a>
+      </dt>
+      {% if project.description %}
+        <dd>&nbsp; -- {{ project.description }}</dd>
+      {% endif %}
+    {% endfor %}
+  </dl>
+
+</div>

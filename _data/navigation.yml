@@ -1,0 +1,11 @@
+-
+  title: home
+  url: '/'
+
+-
+  title: projects
+  url: '/projects/'
+
+-
+  title: elsewhere
+  url: '/elsewhere/'

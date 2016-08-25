@@ -1,0 +1,37 @@
+# Blog settings
+permalink: /blog/:title/
+
+# Site config
+name: Phil Newton
+description: Project Dump
+google_verification: null
+url: http://sodaware.sdf.org
+
+# File management
+include: ['.htaccess']
+exclude: ['README.md', 'LICENSE', 'Gemfile', 'Gemfile.lock', 'deploy']
+
+# Sass
+sass:
+  style: :compressed
+  sass_dir: _sass
+
+# Markdown
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+highlighter: rouge
+
+# Custom Collections
+collections:
+  projects:
+    output: true
+    layout: 'project'
+
+defaults:
+  - scope:
+      path: ""
+      type: projects
+    values:
+      layout: project

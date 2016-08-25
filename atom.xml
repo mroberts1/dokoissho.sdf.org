@@ -1,0 +1,31 @@
+---
+layout: null
+---
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+  <title>sodaware.sdf.org</title>
+  <link href="http://sodaware.sdf.org/"/>
+  <link type="application/atom+xml" rel="self" href="http://sodaware.sdf.org/atom.xml"/>
+  <updated>{{ site.time | date_to_xmlschema }}</updated>
+  <id>http://sodaware.sdf.org/</id>
+  <author>
+    <name>Phil Newton</name>
+    <email>phil@sodaware.net</email>
+  </author>
+
+  {% for post in site.posts %}
+  <entry>
+    <id>http://sodaware.sdf.org{{ post.id }}</id>
+    <link type="text/html" rel="alternate" href="http://sodaware.sdf.org{{ post.url }}"/>
+    <title>{{ post.title | xml_escape }}</title>
+    <updated>{{ post.date | date_to_xmlschema }}</updated>
+    <author>
+      <name>Phil Newton</name>
+      <email>phil@sodaware.net</email>
+    </author>
+    <content type="html">{{ post.content | xml_escape }}</content>
+  </entry>
+  {% endfor %}
+ 
+</feed>
