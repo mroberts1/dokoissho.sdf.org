@@ -1,0 +1,54 @@
+---
+layout: default
+title: Me
+---
+
+<div class="content-container">
+
+  <section>
+
+    <h2>About me...</h2>
+
+    <p>
+      My name is Phil. I write software.
+    </p>
+
+    <p>
+      This site is a place to collect all of my boring, technical junk that I
+      don't know where else to put.
+    </p>
+
+  </section>
+
+  <section>
+
+    <h2>Other places I'm active...</h2>
+    <ul>
+      {% for item in site.data.elsewhere %}
+      <li>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.description %}
+        -- {{ item.description }}
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+
+  </section>
+
+  <section>
+
+    <h2>About this site...</h2>
+
+    <p>
+      This site is hosted by <a href="http://sdf.org/">SDF Public Access UNIX System</a>
+    </p>
+
+    <p>
+      The template is a slightly modified version of
+      <a href="https://getmicah.github.io">getmicah.github.io</a>.
+    </p>
+
+  </section>
+
+</div>
