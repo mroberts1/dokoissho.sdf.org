@@ -99,11 +99,11 @@ dl.project-list {
  * ---------------------------------------------------------------------- */
 
 .site-wrapper {
-    max-width: 600px;
+    max-width: 40em;
     margin: auto;
-    padding: 60px 30px 60px 30px;
+    padding: 4em 2em;
     @media screen and (max-width: $br) {
-        padding: 20px;
+        padding: 1.5em 1em;
     }
 }
 
@@ -120,6 +120,18 @@ dl.project-list {
     h1 {
         font-size: 2em;
         margin-bottom: 0;
+    }
+
+    .site-navigation {
+        li:after {
+            content: ' | ';
+            color: #aaa;
+            font-size: 0.8em;
+        }
+
+        li:last-child:after {
+            display: none;
+        }
     }
 
     ul {

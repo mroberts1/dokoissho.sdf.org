@@ -9,8 +9,6 @@
   <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ site.url }}/rss2.xml" />
   <link rel="alternate" type="application/atom+xml" title="Atom" href="{{ site.url }}/atom.xml" />
 
-  
-
   {% if page.title %}
     <title>{{ page.title }}</title>
   {% else %}
@@ -26,7 +24,22 @@
 <body>
 
   <div class="site-wrapper">
+
+    <header class="site-header">
+      <h1>{{ site.name }}</h1>
+      <nav class="site-navigation">
+        <ul>
+          {% for item in site.data.navigation %}
+            <li>
+              <a href="{{ item.url }}">{{ item.title }}</a>
+            </li>
+            {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
     {{ content }}
+
   </div>
 
 </body>
