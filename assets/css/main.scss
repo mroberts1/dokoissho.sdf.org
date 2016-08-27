@@ -280,8 +280,10 @@ dl.project-list {
             margin-bottom: 15px;
             padding: 10px;
             line-height: 1.5;
+            background: #fafafa;
+            border: 2px solid #ccc;
             code {
-                color: white;
+                color: #333;
                 background: none;
             }
         }
