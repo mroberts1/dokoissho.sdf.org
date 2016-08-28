@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<div class="content-container">
+  <h2>Notes</h2>
+
+  <ul>
+    {% for note in site.notes %}
+      <li>
+        <span class="date">{{ note.date | date: '%Y %b %d' }}</span>
+        -
+        <a href="{{ note.url }}">{{ note.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
