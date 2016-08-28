@@ -100,6 +100,12 @@ img.bordered {
     box-sizing: border-box;
 }
 
+.project--content img.centered,
+img.centered {
+    margin: 2em auto;
+    display: block;
+}
+
 
 /* ----------------------------------------------------------------------
  * -- Site Layout
