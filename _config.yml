@@ -28,10 +28,18 @@ collections:
   projects:
     output: true
     layout: 'project'
+  notes:
+    output: true
+    layout: 'note'
 
 defaults:
   - scope:
       path: ""
       type: projects
     values:
-      layout: project
+      layout: 'project'
+  - scope:
+      path: ""
+      type: notes
+    values:
+      layout: 'note'

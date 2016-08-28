@@ -7,5 +7,9 @@
   url: '/projects/'
 
 -
+  title: notes
+  url: '/notes/'
+
+-
   title: about
   url: '/me/'
