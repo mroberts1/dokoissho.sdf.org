@@ -94,6 +94,12 @@ dl.project-list {
     }
 }
 
+img.bordered {
+    padding: 1px;
+    border: 2px solid #ccc;
+    box-sizing: border-box;
+}
+
 
 /* ----------------------------------------------------------------------
  * -- Site Layout
