@@ -9,7 +9,7 @@ url: http://sodaware.sdf.org
 
 # File management
 include: ['.htaccess']
-exclude: ['README.md', 'LICENSE', 'Gemfile', 'Gemfile.lock', 'deploy']
+exclude: ['README.md', 'LICENSE', 'Gemfile', 'Gemfile.lock', 'deploy', 'Makefile']
 
 # Sass
 sass:
