@@ -1,6 +1,6 @@
 ---
 title: BlitzUnit
-homepage: https://www.sodaware.net/dev/tools/blitzunut/
+homepage: https://www.sodaware.net/dev/tools/blitzunit/
 description:
   A unit testing application for BlitzPlus and Blitz3D.
 
