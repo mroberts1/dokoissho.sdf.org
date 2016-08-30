@@ -453,3 +453,8 @@ img.centered {
         text-align: right;
     }
 }
+
+.has-cl-prompt code > .nv:first-child {
+    color: blueviolet;
+    font-weight: bold;
+}
