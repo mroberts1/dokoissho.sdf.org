@@ -43,3 +43,6 @@ defaults:
       type: notes
     values:
       layout: 'note'
+
+gems:
+  - jekyll-minifier
