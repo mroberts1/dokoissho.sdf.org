@@ -20,7 +20,7 @@ layout: default
   <section>
     <h2>Latest Notes</h2>
     <ul>
-      {% for note in site.notes limit:5 %}
+      {% for note in site.notes reversed limit:5 %}
       <li>
         <span class="date">{{ note.date | date: '%Y %b %d' }}</span>
         -
