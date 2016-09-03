@@ -3,7 +3,7 @@ title: blitz.zipapi
 github: sodaware/blitz.zipapi
 documentation: blitz.zipapi
 description:
-  Zip functionality to BlitzPlus & Blitz3D. Extract files, create archives and compress banks. http
+  Zip functionality to BlitzPlus & Blitz3D. Extract files, create archives and compress banks
 ---
 
 One of the first libraries I wrote for BlitzPlus. It has functionality for

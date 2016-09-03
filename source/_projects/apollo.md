@@ -1,8 +1,9 @@
 ---
 title: apollo
 github: sodaware/apollo
-description:
-  An ActionScript (AS3) port of the Artemis framework
+description: >
+  An ActionScript (AS3) port of the Artemis framework, an entity-component
+  system for game development
 ---
 
 Apollo is an entity/component framework for ActionScript, based on the
