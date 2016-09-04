@@ -14,7 +14,7 @@ layout: null
     <atom:link href="{{ '/notes.xml' | prepend: site.baseurl | prepend: site.url }}" rel="self" type="application/rss+xml" />
 
       <generator>Jekyll {{ jekyll.version }}</generator>
-      {% for post in site.notes limit:page.feed_posts_limit %}
+      {% for post in site.notes reversed limit:page.feed_posts_limit %}
         <item>
           <title>{{ post.title | xml_escape }}</title>
           <pubDate>{{ post.date | date_to_rfc822 }}</pubDate>
