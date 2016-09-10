@@ -2,8 +2,10 @@
 ---
 
 @import "reset";
+@import "fonts";
 @import "config";
 @import "syntax";
+
 
 /* ----------------------------------------------------------------------
  * -- Standard HTML elements
@@ -13,12 +15,10 @@ body {
     color: $color-black;
     background: $color-white;
     font-family: 'Inconsolata', monospace;
-    font-size: 100%;
-    font-weight: 400;
 }
 
 h1 {
-    margin-bottom: 5px;
+    margin-bottom: 0.5em;
 }
 
 p {
@@ -36,16 +36,19 @@ hr {
 a {
     color: $color-link;
     text-decoration: none;
+
     &:visited {
         color: $color-link;
         text-decoration: none;
     }
+
     &:hover {
         color: $color-link-hover;
         text-decoration: none;
         padding-bottom: 1px;
         border-bottom: 2px solid $color-link-hover;
     }
+
     &:active {
         color: $color-link;
         text-decoration: none;
@@ -180,7 +183,7 @@ img.centered {
 .site-footer {
     border-top: 2px solid #ddd;
     padding-top: 1em;
-    
+
     p {
         text-align: right;
     }
@@ -321,7 +324,7 @@ img.centered {
             border-bottom: 3px solid $color-black;
             margin-bottom: 0.5em;
         }
-        
+
         p {
             margin: 0.25em 0;
         }
