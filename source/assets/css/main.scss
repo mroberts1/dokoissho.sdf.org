@@ -189,6 +189,37 @@ img.centered {
     }
 }
 
+.loading-indicator {
+    position: fixed;
+    right: 8px;
+    top: 8px;
+    display: none;
+    width: 32px;
+    height: 6px;
+    animation-name: flicker;
+	animation-duration: 0.2s;
+	animation-iteration-count: infinite;
+    animation-timing-function: steps(1);
+   -webkit-transform: skew( 320deg ); 
+   -moz-transform: skew( 320deg ); 
+   -o-transform: skew( 320deg );
+   transform: skew( 320deg );
+   background: #f7a831;
+   background: -moz-radial-gradient(center, ellipse cover,  #f7a831 0%, #cc5e10 100%);
+   background: -webkit-radial-gradient(center, ellipse cover,  #f7a831 0%,#cc5e10 100%);
+   background: radial-gradient(ellipse at center,  #f7a831 0%,#cc5e10 100%);
+   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f7a831', endColorstr='#cc5e10',GradientType=1 );
+}
+
+@keyframes flicker {
+	from { opacity: 1; }
+	8%   { opacity: 0.5; }
+	16%  { opacity: 1; }
+	38%  { opacity: 0.5; }
+	70%  { opacity: 1; }
+	to   { opacity: 1; }
+}
+
 
 /* ----------------------------------------------------------------------
  * -- Blog Post / Note

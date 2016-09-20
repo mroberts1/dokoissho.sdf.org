@@ -37,8 +37,14 @@
 
   </div>
 
+  <span id="loading-indicator" class="loading-indicator"></span>
+  
   <script src="/assets/js/page-accelerator.min.js"></script>
-  <script>pageAccelerator();</script>
+  <script>
+   pageAccelerator( function() {
+       document.getElementById( "loading-indicator" ).style.display = 'none';
+   } );
+  </script>
 
 </body>
 
