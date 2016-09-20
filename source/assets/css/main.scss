@@ -466,6 +466,11 @@ code {
     border-bottom: 1px dashed $color-black;
 }
 
+code.code--keycode {
+    box-shadow: 0 2px 0 0 #aaa;
+    border: 1px solid #ccc;
+    padding: 0.2em 0.5em;
+}
 
 .has-cl-prompt code > .nv:first-child {
     color: blueviolet;
