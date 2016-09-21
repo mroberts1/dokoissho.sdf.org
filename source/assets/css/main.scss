@@ -398,6 +398,14 @@ sup a {
             margin-top: 25px;
             margin-bottom: 5px;
         }
+
+        h3 {
+            font-size: 1em;
+            font-weight: 700;
+            margin-top: 25px;
+            margin-bottom: 5px;
+        }
+        
         p {
             font-size: 1em;
             line-height: 150%;
@@ -494,6 +502,10 @@ code.code--keycode {
 .has-cl-prompt code > .nv:first-child {
     color: blueviolet;
     font-weight: bold;
+}
+
+code.code--cl-error {
+    color: #c00;
 }
 
 
