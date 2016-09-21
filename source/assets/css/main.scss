@@ -110,6 +110,11 @@ img.centered {
     display: block;
 }
 
+table {
+    line-height: 150%;
+    margin-bottom: 1em;
+}
+
 
 /* ----------------------------------------------------------------------
  * -- Site Layout
@@ -475,4 +480,45 @@ code.code--keycode {
 .has-cl-prompt code > .nv:first-child {
     color: blueviolet;
     font-weight: bold;
+}
+
+
+/* ----------------------------------------------------------------------
+ * -- Nicer tables
+ * ---------------------------------------------------------------------- */
+
+.table--fancy {
+    width: 100%;
+    border: 2px solid #ccc;
+
+    th, td {
+        padding: 0.1em 0.5em;
+    }
+
+    thead {
+        th {
+            background: #eee;
+            border-bottom: 2px solid #ccc;
+            border-right: 1px solid #ccc;
+            font-weight: bold;
+        }
+    }
+
+    tbody th,
+    tbody td {
+        border-bottom: 1px solid #ccc;
+        border-right: 1px solid #ccc;
+    }
+
+}
+
+.table--striped {
+    tbody tr:nth-child(even) th,
+    tbody tr:nth-child(even) td {
+        background: #fafafa;
+    }
+}
+
+.table--function-map {
+    thead th { text-align: left }
 }
