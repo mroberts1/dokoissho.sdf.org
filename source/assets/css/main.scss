@@ -115,6 +115,16 @@ table {
     margin-bottom: 1em;
 }
 
+sup {
+    vertical-align: super;
+    font-size: small;
+    font-weight: bold;
+}
+
+sup a {
+    border: 0 !important;
+}
+
 
 /* ----------------------------------------------------------------------
  * -- Site Layout
@@ -465,6 +475,10 @@ code {
     padding: 0;
 }
 
+.highlighter-rouge pre {
+    overflow-x: auto;
+}
+
 .codebreak {
     margin: 15px;
     border: 0;
@@ -521,4 +535,15 @@ code.code--keycode {
 
 .table--function-map {
     thead th { text-align: left }
+}
+
+
+/* ----------------------------------------------------------------------
+ * -- Footnotes
+ * ---------------------------------------------------------------------- */
+
+.footnotes {
+    border-top: 2px solid #ddd;
+    padding-top: 1em;
+    margin-top: 1em;
 }
