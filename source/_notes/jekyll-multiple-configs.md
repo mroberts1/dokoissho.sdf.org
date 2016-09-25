@@ -54,4 +54,4 @@ serve:
 	bundle exec jekyll serve --drafts --watch --config=_config.yml,_config.development.yml
 ```
 
-[^1]: See [/notes/jekyll-makefile/](A simple Jekyll deployment Makefile)
+[^1]: See [A simple Jekyll deployment Makefile](/notes/jekyll-makefile/)
