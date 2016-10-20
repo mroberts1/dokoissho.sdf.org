@@ -559,3 +559,82 @@ code.code--cl-error {
     padding-top: 1em;
     margin-top: 1em;
 }
+
+
+/* ----------------------------------------------------------------------
+ * -- Browser mockups
+ * ---------------------------------------------------------------------- */
+
+.browser-mockup {
+    border-top: 2em solid rgba(230, 230, 230, 0.7);
+    box-shadow: 0 0 0px 2px #ccc;
+    margin: 0 2px 1em;
+    position: relative;
+    border-radius: 2px 2px 0 0;
+
+    .browser-mockup-url {
+        position: absolute;
+        left: 5.5em;
+        top: -1.6em;
+        z-index: 2;
+        line-height: 1.2em;
+        padding-left: 0.2em;
+
+        span {
+            font-size: 80%;
+        }
+    }
+
+    // Add controls
+    &:before {
+        display: block;
+        position: absolute;
+        content: '';
+        top: -1.25em;
+        left: 1em;
+        width: 0.5em;
+        height: 0.5em;
+        border-radius: 50%;
+        background-color: #f44;
+        box-shadow: 0 0 0 2px #f44, 1.5em 0 0 2px #fb5, 3em 0 0 2px #9b3;
+    }
+
+    // Add a tab
+    &.has-tab:after {
+        display: block;
+        position: absolute;
+        content: '';
+        top: -2em;
+        left: 5.5em;
+        width: 20%;
+        height: 0em;
+        border-bottom: 2em solid white;
+        border-left: 0.8em solid transparent;
+        border-right: 0.8em solid transparent;
+    }
+
+    // Add a URL control
+    &.has-url:after {
+        display: block;
+        position: absolute;
+        content: '';
+        top: -1.6em;
+        left: 5.5em;
+        width: calc(100% - 6em);
+        height: 1.2em;
+        border-radius: 2px;
+        background-color: white;
+    }
+
+    // Inside the browser
+    .browser-mockup-inner {
+        display: block;
+        border-top: 2px solid #ccc;
+        text-align: center;
+
+        img {
+            margin: 0;
+        }
+    }
+
+}
