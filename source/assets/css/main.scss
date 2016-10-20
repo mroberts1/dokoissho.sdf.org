@@ -63,8 +63,10 @@ ol, ul {
 ul {
     list-style: none;
     li {
-        padding: 5px;
         padding-left: 10px;
+        list-style-type: square;
+        list-style-position: outside;
+        list-style-image: none;
         @media screen and (max-width: $br) {
             padding: 10px 0 10px 0;
         }
@@ -319,7 +321,6 @@ sup a {
             margin-top: -10px;
             margin-bottom: 15px;
             li {
-                padding: 5px;
                 padding-left: 5px;
                 @media screen and (max-width: $br) {
                     padding: 10px 0 10px 0;
@@ -432,7 +433,6 @@ sup a {
             margin-top: -10px;
             margin-bottom: 15px;
             li {
-                padding: 5px;
                 padding-left: 5px;
                 @media screen and (max-width: $br) {
                     padding: 10px 0 10px 0;
