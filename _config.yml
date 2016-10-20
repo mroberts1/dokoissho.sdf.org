@@ -7,7 +7,8 @@ description: Project Dump
 google_verification: null
 url: http://sodaware.sdf.org
 
-source: ./source
+source:      ./source
+plugins_dir: ./plugins
 
 # File management
 include: ['.htaccess']
