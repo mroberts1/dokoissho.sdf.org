@@ -6,7 +6,7 @@ layout: default
 
   <section>
     <h2>Blog Posts</h2>
-    <ul>
+    <ul class="posts-list">
       {% for post in site.posts %}
       <li>
         <span class="date">{{ post.date | date: '%Y %b %d' }}</span>
@@ -19,7 +19,7 @@ layout: default
 
   <section>
     <h2>Latest Notes</h2>
-    <ul>
+    <ul class="posts-list">
       {% assign notes = site.notes | sort: 'date' | reverse %}
       {% for note in notes limit: 5 %}
       <li>

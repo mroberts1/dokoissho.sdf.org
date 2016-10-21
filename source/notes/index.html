@@ -6,7 +6,7 @@ title: notes
 <div class="content-container">
   <h2>Notes</h2>
 
-  <ul>
+  <ul class="posts-list">
     {% for note in site.notes reversed %}
       <li>
         <span class="date">{{ note.date | date: '%Y %b %d' }}</span>

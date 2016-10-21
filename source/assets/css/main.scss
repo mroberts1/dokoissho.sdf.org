@@ -71,6 +71,12 @@ ul {
             padding: 10px 0 10px 0;
         }
     }
+
+    &.posts-list li {
+        list-style: none;
+        padding-left: 0;
+        margin-bottom: 0.25em;
+    }
 }
 
 ol {
@@ -324,7 +330,6 @@ blockquote {
 
         ul {
             font-size: 1em;
-            list-style: circle;
             margin-left: 30px;
             margin-top: -10px;
             margin-bottom: 15px;
@@ -436,7 +441,6 @@ blockquote {
         }
         ul {
             font-size: 1em;
-            list-style: circle;
             margin-left: 30px;
             margin-top: -10px;
             margin-bottom: 15px;
