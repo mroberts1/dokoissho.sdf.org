@@ -35,7 +35,7 @@ Into this:
                         {
                             "name": "name",
                             "type": "String",
-                            "description": "Who is cool?",
+                            "description": "Who is cool?"
                         }
                     ],
                     "line": 1,
