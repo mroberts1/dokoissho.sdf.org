@@ -4,7 +4,7 @@ layout: default
 
 <div class="blog">
   <ul class="posts-list">
-    {% for post in site.posts %}
+    {% for post in site.posts | limit: 100 %}
       <li>
         <span class="date">{{ post.date | date: '%Y %b %d' }}</span>
         -
