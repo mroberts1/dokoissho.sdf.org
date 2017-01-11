@@ -3,7 +3,9 @@ ruby RUBY_VERSION
 
 gem 'jekyll', '3.3.0'
 
-gem 'jekyll-sitemap'
-gem 'jekyll-livereload'
-gem 'jekyll-minifier'
+group :jekyll_plugins do
+  gem 'jekyll-sitemap'
+  gem 'jekyll-livereload'
+end
 
+gem 'jekyll-minifier'
