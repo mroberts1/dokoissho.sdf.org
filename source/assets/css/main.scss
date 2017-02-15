@@ -203,12 +203,19 @@ blockquote {
 
     & > section {
         margin-bottom: 2em;
-
         p {
             margin-bottom: 1em;
         }
     }
+}
 
+section .more-links {
+    border-top: 2px solid #eee;
+    padding-top: 0.5em;
+
+    .sep {
+        color: #aaa;
+    }
 }
 
 .site-footer {
