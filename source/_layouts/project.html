@@ -6,10 +6,9 @@ layout: default
   
   <header class="project--header">
     <h2>{{ page.title }}</h2>
-
     {% if page.github %}
       <p class="project--meta">
-        <a href="https://github.com/{{ page.github }}/" target="_blank">
+        <a href="https://github.com/{{ page.github }}/" target="_blank" class="button button--github">
           View project on github
         </a>
       </p>
@@ -17,7 +16,7 @@ layout: default
 
     {% if page.homepage %}
       <p class="project--meta">
-        <a href="{{ page.homepage }}" target="_blank">
+        <a href="{{ page.homepage }}" target="_blank" class="button button--github">
           View project homepage
         </a>
       </p>

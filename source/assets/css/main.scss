@@ -359,6 +359,20 @@ section .more-links {
 
 .project {
 
+    .project--meta {
+        .button {
+            text-decoration: none;
+            border: 2px solid $color-link;
+            padding: 0.25em 1em;
+            display: inline-block;
+        }
+
+        .button:hover {
+            border-color: $color-link-hover;
+        }
+
+    }
+
     img {
         max-width: 100%;
     }
