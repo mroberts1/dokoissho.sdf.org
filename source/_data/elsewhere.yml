@@ -14,9 +14,14 @@
 -
   title: lab.sodaware.net
   url: 'http://lab.sodaware.net/'
-  description: Experimental stuff I've made. Mostly bad games.
+  description: "Experimental stuff I've made. Mostly bad games."
 
 -
   title: philnewton.net
   url: 'https://www.philnewton.net/'
   description: My homepage with a bunch of bad writing.
+
+-
+  title: itch.io
+  url: 'https://sodaware.itch.io/'
+  description: "Games I've written that are actually playable."
