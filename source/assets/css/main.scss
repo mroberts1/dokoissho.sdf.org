@@ -44,19 +44,17 @@ a {
 
     &:visited {
         color: $color-link;
-        text-decoration: none;
     }
 
     &:hover {
         color: $color-link-hover;
-        text-decoration: none;
         padding-bottom: 1px;
         border-bottom: 2px solid $color-link-hover;
     }
 
     &:active {
         color: $color-link;
-        text-decoration: none;
+        border-bottom: 2px solid $color-link;
     }
 }
 
