@@ -3,22 +3,22 @@ layout: default
 ---
 
 <div class="project">
-  
+
   <header class="project--header">
     <h2>{{ page.title }}</h2>
-    {% if page.github %}
+    {% if page.github or page.homepage %}
       <p class="project--meta">
-        <a href="https://github.com/{{ page.github }}/" target="_blank" class="button button--github">
-          View project on github
-        </a>
-      </p>
-    {% endif %}
+        {% if page.github %}
+          <a href="https://github.com/{{ page.github }}/" target="_blank" class="button button--github">
+            View project on github
+          </a>
+        {% endif %}
 
-    {% if page.homepage %}
-      <p class="project--meta">
-        <a href="{{ page.homepage }}" target="_blank" class="button button--github">
-          View project homepage
-        </a>
+        {% if page.homepage %}
+          <a href="{{ page.homepage }}" target="_blank" class="button button--github">
+            View project homepage
+          </a>
+        {% endif %}
       </p>
     {% endif %}
   </header>
