@@ -63,6 +63,13 @@ ol, ul {
     margin-bottom: 1em;
 }
 
+li > ul,
+li > ol,
+.post-content li > ul,
+.post-content li > ol {
+    margin-bottom: 0;
+}
+
 ul {
     list-style: none;
     li {
@@ -308,6 +315,11 @@ section .more-links {
             font-weight: 700;
             margin-top: 1.5em;
             margin-bottom: 1em;
+        }
+
+        h4 {
+            font-weight: bold;
+            margin-bottom: 0.5em;
         }
 
         p {
@@ -566,6 +578,17 @@ code.code--cl-error {
 
 .table--function-map {
     thead th { text-align: left }
+}
+
+.table--benchmark {
+    thead tr th:first-child,
+    tbody tr td:first-child {
+        text-align: left;
+    }
+    thead th,
+    tbody td {
+        text-align: right
+    }
 }
 
 
