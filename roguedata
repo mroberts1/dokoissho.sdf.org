@@ -1,0 +1,54 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.dirname(__FILE__)
+
+require 'open-uri'
+require 'json'
+require 'csv'
+require 'fileutils'
+require 'ostruct'
+require 'date'
+
+# Extract the id
+def extract_id(slug)
+  slug.split('/').first
+end
+
+def cache_slug(slug)
+  id = extract_id(slug)
+  url = "https://www.reddit.com/r/roguelikedev/comments/#{slug}.json"
+  response = open(url, 'User-Agent' => "Ruby/#{RUBY_VERSION}").read
+  File.write(".cache/roguelikedev/#{id}.json", response)
+end
+
+def fetch_post(slug)
+  id = extract_id(slug)
+  if ! File.exist?(".cache/roguelikedev/#{id}.json")
+    cache_slug(slug)
+    sleep(5)
+  end
+
+  JSON.parse(File.read(".cache/roguelikedev/#{id}.json"))
+end
+
+# Ensure output directories exist.
+FileUtils.mkdir_p('.cache/roguelikedev')
+
+# Load CSV data and strip off the header row.
+csv_data = CSV.read('raw/roguelike_dev_topics.csv')
+csv_data.shift
+
+# Output the CSV header.
+puts 'number,date,title,slug,description'
+
+csv_data.each do |row|
+  response = fetch_post(row[2])
+
+  created_at = response.first['data']['children'].first['data']['created']
+  timestamp  = DateTime.strptime(created_at.to_i.to_s, '%s')
+
+  # Each row
+  # TODO: Make this much nicer!
+  puts "#{row[0]}," + timestamp.strftime('%Y-%m-%d') + ",\"" + row[1] + "\"," + row[2] + ',' + row[3].to_s
+
+end
