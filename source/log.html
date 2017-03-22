@@ -1,0 +1,18 @@
+---
+layout: default
+title: logs
+---
+
+<div class="content-container">
+  <h2>Logs</h2>
+
+  <ul class="posts-list">
+    {% for note in site.logs reversed %}
+      <li>
+        <span class="date">{{ note.date | date: '%Y %b %d' }}</span>
+        -
+        <a href="{{ note.url }}">{{ note.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
