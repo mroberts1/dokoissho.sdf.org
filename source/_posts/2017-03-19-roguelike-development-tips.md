@@ -38,7 +38,7 @@ some UI discussion.
 
 ## /r/roguelikedev/ "FAQ Friday" archives
 
-**Last update:** 2017-03-19
+**Last update:** 2017-04-13
 
 <ul class="posts-list posts-list--no-indent">
   {% for topic in site.data.roguelike_dev reversed %}
