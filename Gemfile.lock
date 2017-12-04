@@ -40,6 +40,7 @@ GEM
       listen (~> 3.0, < 3.1)
     json (2.0.2)
     kramdown (1.12.0)
+    libv8 (3.16.14.19-x86_64-linux)
     liquid (3.0.6)
     listen (3.0.8)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -50,9 +51,13 @@ GEM
     rb-fsevent (0.9.8)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    ref (2.0.0)
     rouge (1.11.1)
     safe_yaml (1.0.4)
     sass (3.4.22)
+    therubyracer (0.12.3)
+      libv8 (~> 3.16.14.15)
+      ref
     uglifier (2.7.2)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
@@ -65,6 +70,10 @@ DEPENDENCIES
   jekyll-livereload
   jekyll-minifier
   jekyll-sitemap
+  therubyracer
+
+RUBY VERSION
+   ruby 2.4.2p198
 
 BUNDLED WITH
-   1.10.6
+   1.16.0
