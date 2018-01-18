@@ -751,3 +751,22 @@ code.code--cl-error {
         }
     }
 }
+
+
+/* ----------------------------------------------------------------------
+ * -- Meta Links
+ * ---------------------------------------------------------------------- */
+
+.project-information {
+    .button {
+        text-decoration: none;
+        border: 2px solid $color-link;
+        padding: 0.25em 1em;
+        display: inline-block;
+    }
+
+    .button:hover {
+        border-color: $color-link-hover;
+    }
+
+}
