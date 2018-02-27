@@ -327,7 +327,6 @@ section .more-links {
         }
 
         p {
-            font-size: 1em;
             line-height: 150%;
             margin-bottom: 15px;
         }
@@ -501,7 +500,7 @@ code {
     color: $code-color;
 }
 
-.highlight {
+div.highlight {
     margin: 1em 0 1.5em;
     padding: 1em;
     line-height: 1.5;
