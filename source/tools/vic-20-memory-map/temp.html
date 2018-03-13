@@ -1,0 +1,74 @@
+---
+layout: default
+title: vic-20 memory map
+---
+<div class="content-container">
+
+  <!-- http://commodore64.se/wiki/index.php/Commodore_VIC-20_Memory_Map -->
+  
+  <section>
+
+    <h2>Vic-20 Memory Map</h2>
+
+  </section>
+
+  <section id="vic-20-memory-map-form">
+    <form>
+      <label for="memory-address" class="label--full-width">
+        Hexadecimal memory address 
+      </label>
+      <div class="form-row--inline">
+        <span class="form-prefix">$</span>
+        <input type="search" name="memory-address" id="memory-address" class="is-prefixed">
+        <input type="submit" class="button button--submit"  value="search">
+      </div>
+    </form>
+  </section>
+
+  <section id="vic-20-memory-map-results">
+    <hr>
+
+    <table class="table--fancy table--striped">
+      <thead>
+        <tr>
+          <th class="align-right" width="15%">Hex</th>
+          <th class="align-right" width="15%">Decimal</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td class="align-right">0000</td>
+          <td class="align-right">0</td>
+          <td>Jump for USR</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<script>
+ var search_box = document.getElementById('memory-address');
+ var search_memory_addresses = debounce(function() {
+     console.log( 'searching' );
+ }, 250);
+
+ search_box.addEventListener('keyup', search_memory_addresses);
+ 
+ function debounce(func, wait, immediate) {
+	 var timeout;
+	 return function() {
+		 var context = this, args = arguments;
+		 var later = function() {
+			 timeout = null;
+			 if (!immediate) func.apply(context, args);
+		 };
+		 var callNow = immediate && !timeout;
+		 clearTimeout(timeout);
+		 timeout = setTimeout(later, wait);
+		 if (callNow) func.apply(context, args);
+	 };
+ };
+</script>

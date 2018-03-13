@@ -150,6 +150,9 @@ blockquote {
     margin: 0 0 1em;
 }
 
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+
 
 /* ----------------------------------------------------------------------
  * -- Site Layout
@@ -768,4 +771,59 @@ code.code--cl-error {
         border-color: $color-link-hover;
     }
 
+}
+
+
+/* ----------------------------------------------------------------------
+ * -- Forms
+ * ---------------------------------------------------------------------- */
+
+form .label--full-width {
+    display: block;
+    margin-bottom: 1em;
+}
+
+.form-prefix,
+input[type='search'],
+input[type='submit'],
+input[type='text'] {
+    color: $color-black;
+    background: $color-white;
+    font-family: 'Inconsolata', monospace;
+    border: 2px solid $color-grey;
+    font-size: 1em;
+    line-height: 150%;
+    padding: 0.25em 1em;
+
+    &.is-prefixed {
+        border-left: 0;
+        padding-left: 0.5em;
+    }
+}
+
+.form-prefix {
+    background: $color-grey;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+input[type='submit'].button--submit {
+    text-decoration: none;
+    border: 2px solid $color-link;
+    display: inline-block;
+    cursor: pointer;
+
+    &:hover {
+        border-color: $color-link-hover;
+    }
+}
+
+.form-row--inline {
+    width: 100%;
+    display: flex;
+
+    input[type='search'],
+    input[type='text'] {
+        flex-grow: 1;
+    }
 }
