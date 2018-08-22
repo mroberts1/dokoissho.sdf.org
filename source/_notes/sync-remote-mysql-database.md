@@ -10,6 +10,9 @@ It can't be used to import the local contents into the remote one (deliberately
 to prevent me from making mistakes). I use it to keep my local development copy
 of a site up-to-date with the production version.
 
+**Important:** Running this script will OVERWRITE the contents of the local
+database.
+
 
 ## Configuration
 
