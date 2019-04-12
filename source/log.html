@@ -7,11 +7,11 @@ title: logs
   <h2>Logs</h2>
 
   <ul class="posts-list">
-    {% for note in site.logs reversed %}
+    {% for log in site.logs reversed %}
       <li>
-        <span class="date">{{ note.date | date: '%Y %b %d' }}</span>
-        -
-        <a href="{{ note.url }}">{{ note.title }}</a>
+        <h3>
+          <a href="{{ log.url }}">{{ log.title }}</a>
+        </h3>
       </li>
     {% endfor %}
   </ul>
