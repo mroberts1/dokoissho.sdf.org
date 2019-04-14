@@ -3,6 +3,7 @@ ruby RUBY_VERSION
 
 gem 'jekyll'
 gem 'therubyracer'
+gem 'liquid-c'
 
 group :jekyll_plugins do
   gem 'jekyll-compose'
