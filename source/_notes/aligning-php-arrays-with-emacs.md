@@ -16,7 +16,7 @@ Once it's installed, calling `M-x align-current` will align an array and turn th
 ```php
 $my_array = array(
     'key' => 'Value',
-    'key_two => 'Another value',
+    'key_two' => 'Another value',
     'really_long_key' => 'Value',
     'k' => 'Value',
 );
@@ -27,7 +27,7 @@ into this:
 ```php
 $my_array = array(
     'key'             => 'Value',
-    'key_two          => 'Another value',
+    'key_two'         => 'Another value',
     'really_long_key' => 'Value',
     'k'               => 'Value',
 );
