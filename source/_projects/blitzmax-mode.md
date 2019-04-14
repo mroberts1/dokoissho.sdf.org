@@ -22,7 +22,7 @@ To manually install this extension:
 
 Once everything is loaded, blitzmax-mode can be enabled for a buffer by running
 `M-x blitzmax-mode`. The mode also associates itself with `.bmx` files, so they
-will automatically switch to `blitzmax-mode** when enabled.
+will automatically switch to **blitzmax-mode** when enabled.
 
 
 ## Configuration
@@ -39,7 +39,7 @@ will automatically switch to `blitzmax-mode** when enabled.
   `nil`. `t` by default.
 
 * `blitzmax-mode-compiler-pathname` - Full pathname to the BlitzMax compiler
-  `bmk**. Empty by default.
+  `bmk`. Empty by default.
 
 
 ## Current Features
