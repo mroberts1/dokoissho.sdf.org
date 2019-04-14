@@ -14,7 +14,7 @@ type.
 
 For example:
 
-```
+```blitzmax
 Type MyType
     Field something:String
      
@@ -80,7 +80,7 @@ almost as fast but can also be resized on the fly.
 
 ## Code Samples
 
-```
+```blitzmax
 SuperStrict
 Framework brl.basic
 
