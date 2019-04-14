@@ -14,3 +14,4 @@ worth implementing, but sometimes it's useful to see benchmarks.
 ## Optimizations
 
 * [BlitzMax optimization - Object casting](/blog/blitzmax-optimization-casting/)
+* [BlitzMax optimization - Resizing arrays](/blog/blitzmax-optimization-arrays/)
