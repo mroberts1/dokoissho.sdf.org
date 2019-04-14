@@ -5,7 +5,7 @@ layout: post
 
 BlitzMax supports function pointers, but they can be a bit tricky at times.
 
-```
+```blitzmax
 Function my_callback_function:String(name:String)
     Return name + " was called!"
 End Function
@@ -19,7 +19,7 @@ The example above will print "callback was called" when run.
 This approach works well enough, but what if you'd like to call a method on an
 object? You need to work around it a little bit:
 
-```
+```blitzmax
 Type MyType
     Function MyCallback:String(obj:MyType, name:String)
         return MyType(obj).myActualCallback(name)
@@ -52,7 +52,7 @@ which calls the method on an object instance.
 Using the example `MyType` above, we could get information on `myActualCallback`
 using the following:
 
-```
+```blitzmax
 Local objectInfo:TTypeId = TTypeId.ForName("MyType")
 Local methodInfo:TMethod = objectInfo.FindMethod("myActualCallback")
 ```
@@ -60,7 +60,7 @@ Local methodInfo:TMethod = objectInfo.FindMethod("myActualCallback")
 When combined with `invoke`, a method on `instance` can be executed without
 explicitly calling it.
 
-```
+```blitzmax
 ' Executes the 'myActualCallback' method on our instance.
 Print String(methodInfo.invoke(instance, ["invoked callback"]))
 ```
@@ -74,7 +74,7 @@ objects that are passed as parameters to the method.
 With a little wrapper class we can call a method on any object instance.
 
 
-```
+```blitzmax
 SuperStrict
 
 Import brl.reflection
@@ -109,7 +109,7 @@ End Type
 
 This allows us to do the following using the `MyType` object from earlier:
 
-```
+```blitzmax
 Local instance:MyType         = new MyType
 Local wrapper:CallbackWrapper = CallbackWrapper.create(instance, "myActualCallback")
 
@@ -130,7 +130,7 @@ massaging to get it working.
 To get around this I'll usually write an `execute` method for specific method
 signatures I want:
 
-```
+```blitzmax
 ' Wrapping the `execute` method with something nicer.
 Method execute_callback:String(name:String)
     Return String(self._method.invoke(self._caller, [name]))
