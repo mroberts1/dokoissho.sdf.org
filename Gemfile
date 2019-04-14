@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 ruby RUBY_VERSION
 
 gem 'jekyll'
+gem 'rouge', '3.1.1'
 gem 'therubyracer'
 gem 'liquid-c'
 
