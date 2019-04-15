@@ -1,4 +1,4 @@
 # Gems - minification
-gems:
+plugins:
   - jekyll-minifier
   - jekyll-sitemap
