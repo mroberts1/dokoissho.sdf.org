@@ -78,7 +78,7 @@ same, an array will be fastest. A strongly-typed
 almost as fast but can also be resized on the fly.
 
 
-## Code Samples
+## Test code
 
 ```blitzmax
 SuperStrict
