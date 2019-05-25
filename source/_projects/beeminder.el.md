@@ -1,6 +1,7 @@
 ---
 title: beeminder.el
 github: sodaware/beeminder.el
+homepage: https://www.philnewton.net/code/beeminder-el/
 description:
   Simple extension that adds Beeminder integration to Emacs
 ---
