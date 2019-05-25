@@ -586,6 +586,10 @@ code.code--cl-error {
     thead th { text-align: left }
 }
 
+.table--shortcuts {
+    tbody td { padding: 0.4em 0.5em; }
+}
+
 .table--benchmark {
     thead tr th:first-child,
     tbody tr td:first-child {
