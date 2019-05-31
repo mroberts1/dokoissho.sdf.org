@@ -16,3 +16,4 @@ worth implementing, but sometimes it's useful to see benchmarks.
 * [BlitzMax optimization - Object casting](/blog/blitzmax-optimization-casting/)
 * [BlitzMax optimization - Resizing arrays](/blog/blitzmax-optimization-arrays/)
 * [BlitzMax optimization - Null checks](/blog/blitzmax-optimization-null-checks/)
+* [BlitzMax optimization - Loops](/blog/blitzmax-optimization-loops/)
