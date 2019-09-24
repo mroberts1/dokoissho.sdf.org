@@ -26,7 +26,7 @@ title: about
     <ul>
       {% for item in site.data.elsewhere %}
       <li>
-        <a href="{{ item.url }}">{{ item.title }}</a>
+        <a href="{{ item.url }}" rel="{{ item.rel }}">{{ item.title }}</a>
         {% if item.description %}
         -- {{ item.description }}
         {% endif %}
