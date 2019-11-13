@@ -1,7 +1,9 @@
 ---
-title: docgen
+title:    docgen
+homepage: https://www.sodaware.net/docgen/
+github:   sodaware/docgen
 description:
-  A stupid tool for parsing BlitzMax source code and creating documentation files.
+  A terrible tool for parsing BlitzMax source code and creating documentation files.
 ---
 
 **docgen** is a quick and dirty tool I built to extract documentation tags from
@@ -54,4 +56,5 @@ Which can then be turned into this:
 Exciting, right? The example above was converted from json to docbook XML, and
 then from XML to HTML.
 
-More examples can be seen at [docs.sodaware.net](http://docs.sodaware.net/).
+More examples of what it can do can be seen at
+[docs.sodaware.net](https://docs.sodaware.net/).
