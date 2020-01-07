@@ -1,2 +1,4 @@
 /.sass-cache/
 /source/_data/roguelike_dev.csv
+/.cache/
+/_site/
