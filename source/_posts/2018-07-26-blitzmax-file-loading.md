@@ -39,7 +39,7 @@ very slow as they get larger.
 
 I figured loading everything into a bank and converting that to a string would
 be quicker. After all, a string is just a collection of bytes with a null
-terminator, and a BlitzMax bank isn't that different.
+terminator, and a BlitzMax bank is a collection of bytes.
 
 The first approach was to read the bank using `LoadBank` and then building a
 string using `PeekByte` for each character.
@@ -97,9 +97,7 @@ The following benchmark is for a 900KB text file.
 Method              | Average Time (ms)
 --------------------|------------------
 Method 1 (ReadLine) | 933.18
-Method 2 (LoadBank )| 2.8
+Method 2 (LoadBank) | 2.8
 
-
-
-
-Sometimes [yak shaving](http://catb.org/jargon/html/Y/yak-shaving.html) comes in handy.
+Sometimes [yak shaving](http://catb.org/jargon/html/Y/yak-shaving.html) comes in
+handy.
