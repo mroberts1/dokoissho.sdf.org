@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby RUBY_VERSION
 
 gem 'jekyll'
-gem 'rouge', path: 'vendor/rouge-3.1.1'
+gem 'rouge', path: 'vendor/rouge'
 gem 'therubyracer'
 gem 'liquid-c'
 
