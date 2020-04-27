@@ -134,8 +134,8 @@ print "String check: " + (millisecs() - startTime)
 
 ' ----------
 
-Local lstval1:String = MakeRandomLlongString()
-Local lstval2:String = MakeRandomLlongString()
+Local lstval1:String = MakeRandomLongString()
+Local lstval2:String = MakeRandomLongString()
 
 startTime = millisecs()
 For local i:Int = 1 to ITERATIONS
@@ -153,7 +153,7 @@ For local i:Int = 1 to ITERATIONS
 Next
 print "Object check: " + (millisecs() - startTime) 
 
-Function MakeRandomLlongString:String(length:Int = 255)
+Function MakeRandomLongString:String(length:Int = 255)
     Local result:String = ""
 
     For Local i:Int = 1 To length
