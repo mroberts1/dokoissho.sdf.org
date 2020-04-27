@@ -13,7 +13,7 @@ work with bmx code.
 
 I have `java -jar simian.jar` aliased to just `simian` so it's easier to read.
 
-An example report looks a little like this (run on
+An example run looks a little like this (scanning
 [pangolin/contentdb](https://github.com/Sodaware/pangolin.mod/tree/master/contentdb.mod)):
 
 
