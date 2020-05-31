@@ -1,6 +1,6 @@
 ---
 title: Opening a Quake-style terminal in XFCE
-date: 2019-04-13
+date:  2019-04-13
 ---
 
 There are a plenty of packages for GNU/Linux that open Quake-style terminal
