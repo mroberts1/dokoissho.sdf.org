@@ -6,7 +6,7 @@ date:  2020-06-02
 In Emacs Lisp, a property list (`plist`) looks like this:
 
 ```lisp
-(list :property1 "value1" :property2 "value2)
+(list :property1 "value1" :property2 "value2")
 ```
 
 I'm currently working on [beeminder.el](/projects/beeminder.el/) and wanted to
