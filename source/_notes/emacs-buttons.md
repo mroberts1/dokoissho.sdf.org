@@ -27,10 +27,10 @@ The previous code looked a little like this:
   "Handle a click on the 'Read more data' text."
   (when (get-text-property (point) 'beeminder-is-read-more)
         (beeminder-view-data-for-current-goal)))
-        
+
 ;; Bind to <RET>
-(define-key beeminder-mode-map 
-            (kbd "<RET>") 
+(define-key beeminder-mode-map
+            (kbd "<RET>")
             #'beeminder-handle-view-all-data-link)
 ```
 
