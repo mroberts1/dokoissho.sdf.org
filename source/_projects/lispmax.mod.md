@@ -49,4 +49,4 @@ lisp.printExpression(result)
 
 Running the above example will print `30`.
 
--> Read more on the [lispmax.mod project homepage](https://www.sodaware.net/lispmax.mod/).
+-> Read more on the [lispmax.mod project homepage](https://www.sodaware.net/lispmax/).
