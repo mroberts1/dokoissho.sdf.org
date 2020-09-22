@@ -1,12 +1,10 @@
 ---
 layout: default
-title: about
+title:  about
 ---
 
 <div class="content-container">
-
   <section>
-
     <h2>About me...</h2>
 
     <p>
@@ -14,36 +12,30 @@ title: about
     </p>
 
     <p>
-      This site is a place to collect all of my boring, technical junk that I
-      don't know where else to put.
+      This site is a place to collect all of my notes and technical writing that
+      I don't really know where to put.
     </p>
-
   </section>
 
   <section>
-
     <h2>Other places I'm active...</h2>
     <ul>
       {% for item in site.data.elsewhere %}
-      <li>
-        <a href="{{ item.url }}" rel="{{ item.rel }}">{{ item.title }}</a>
-        {% if item.description %}
-        -- {{ item.description }}
-        {% endif %}
-      </li>
+        <li>
+          <a href="{{ item.url }}" rel="{{ item.rel }}">{{ item.title }}</a>
+          {% if item.description %}
+            -- {{ item.description }}
+          {% endif %}
+        </li>
       {% endfor %}
     </ul>
-
   </section>
 
   <section>
-
     <h2>About this site...</h2>
 
     <p>
       This site is hosted by <a href="http://sdf.org/">SDF Public Access UNIX System</a>
     </p>
-
   </section>
-
 </div>
