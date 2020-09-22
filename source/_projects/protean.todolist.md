@@ -1,6 +1,6 @@
 ---
 title: protean.todolist
-github: protean.todolist
+github: sodaware/protean.todolist
 description:
   A Protean IDE plugin that provides a simple task list from comments in code.
 ---
