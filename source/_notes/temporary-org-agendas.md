@@ -7,7 +7,6 @@ This is a really simple way to run org-agenda commands on just a single
 file:
 
 ```lisp
-
 (defun sodaware/agenda-for-my-file ()
   "Run org-agenda on a single file."
   (interactive)
