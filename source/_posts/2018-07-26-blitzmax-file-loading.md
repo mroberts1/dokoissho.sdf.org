@@ -5,7 +5,7 @@ layout: post
 
 A few days ago I was trying to track down a performance issue in a project that
 loads and parses JSON. I wrote a couple of benchmarks in different languages to
-see if it was a language issue, a library issue or something else entirely.
+see if it was a language issue, a library issue, or something else entirely.
 
 One thing that stood out was my BlitzMax test was parsing quickly, but it took
 an age to load the initial data.
