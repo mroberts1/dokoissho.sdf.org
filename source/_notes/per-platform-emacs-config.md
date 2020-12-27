@@ -13,15 +13,15 @@ For example, it can be used to set a different font depending on the os:
 ```emacs-lisp
 ;; Windows only font
 (when (string= "windows-nt" system-type)
-  (set-face-font 'default "Consolas"'))
+  (set-face-font 'default "Consolas"))
 
 ;; Mac OS only font
 (when (string= "darwin" system-type)
-  (set-face-font 'default "Monaco"'))
+  (set-face-font 'default "Monaco"))
   
 ;; Linux only font
 (when (string= "gnu/linux" system-type)
-  (set-face-font 'default "Ubuntu"'))
+  (set-face-font 'default "Ubuntu"))
 ```
 
 **More info**:
