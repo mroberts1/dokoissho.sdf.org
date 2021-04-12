@@ -1,0 +1,27 @@
+I"�<p>I started writing this at the end of 2018 to learn a little more about 6502
+machine code and how it all fits together. I never got around to finishing it,
+so set it as a goal for 2019.</p>
+
+<p>The following code (once assembled) runs correctly…</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>loop: LDA $FE
+      STA $00
+      LDA $FE
+      AND #$3
+      CLC
+      ADC #$2
+      STA $01
+      LDA $FE
+      LDY #$0
+      STA ($00),Y
+      JMP LOOP
+</code></pre></div></div>
+
+<p>..and produces this wonderful screen:</p>
+
+<p><img src="/assets/images/6502-max.png" alt="6502-max" class="centered" /></p>
+
+<p>It still needs unit testing thoroughly, mostly to check various flags work
+correctly, but it’s functional enough for now. Eventually I’d like to add some
+debugging commands for stepping through functions and examining memory.</p>
+:ET

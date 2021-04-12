@@ -1,0 +1,143 @@
+I"�<p>BlitzMax comes with a number of data structures. Arrays are a staple of the
+BASIC dialect, but they can be a pain to use if items need to be frequently
+added and removed. BlitzMax’s <code class="language-plaintext highlighter-rouge">TList</code> structure is more flexible, but comes with
+a <a href="/blog/blitzmax-optimization-casting/">performance hit when casting objects</a>.</p>
+
+<h2 id="resizing-arrays">Resizing arrays</h2>
+
+<p>Normally I’d do something like this to resize an array:</p>
+
+<pre><code class="language-blitzmax">Framework brl.basic
+
+' Create initial array.
+Local original:Int[] = [1, 2, 3, 4, 5]
+Print original.length
+' =&gt; 5
+
+' Resize to hold 6 elements.
+original = ResizeArray(original, 6)
+Print original.length
+' =&gt; 6
+
+Function ResizeArray:Int[](target:Int[], newSize:Int)
+    Local dest:Int[newSize]
+
+    For Local i:Int = 0 to target.Length - 1
+        dest[i] = target[i]
+    Next
+    
+    Return dest
+End Function
+</code></pre>
+
+<p>It works, but it’s not the most efficient. Things slow down when the target
+array is large. The main <code class="language-plaintext highlighter-rouge">For</code> loop can be unrolled or converted to a
+<code class="language-plaintext highlighter-rouge">Repeat...Until</code> loop, but that’s a small optimization. It would be nice to
+remove the loop entirely.</p>
+
+<p><a href="https://github.com/bmx-ng/bmk">bmk-ng</a> comes with a handy function called
+<code class="language-plaintext highlighter-rouge">ArrayCopy</code> for copying the contents of one array to another.</p>
+
+<p>I wrote a <a href="https://gist.github.com/Sodaware/2a4a5ae46d45d0f64a8e50af7c260623">quick performance
+test</a> to
+compare <code class="language-plaintext highlighter-rouge">ArrayCopy</code> against copying elements using a <code class="language-plaintext highlighter-rouge">For...Next</code> loop. It’s
+probably not that accurate, but the results are encouraging.</p>
+
+<p>Time to copy a 1,000 element array 1,000,000 times:</p>
+
+<table class="table table--fancy table--striped">
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: right">Time (millisecs)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Copy (<code class="language-plaintext highlighter-rouge">For...Next</code>)</td>
+      <td style="text-align: right">2249</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code class="language-plaintext highlighter-rouge">ArrayCopy</code></td>
+      <td style="text-align: right">1127</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Object Copy (<code class="language-plaintext highlighter-rouge">For...Next</code>)</td>
+      <td style="text-align: right">3264</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Object <code class="language-plaintext highlighter-rouge">ArrayCopy</code></td>
+      <td style="text-align: right">2152</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>For simple Integer arrays, <code class="language-plaintext highlighter-rouge">ArrayCopy</code> is about twice as fast as copying using a <code class="language-plaintext highlighter-rouge">For...Next</code> loop. Copying objects is slower, but still shows a good speed improvement. Nice!</p>
+
+<p>But I wondered if there was a better way to implement resizing.</p>
+
+<p>BlitzMax has built-in (and mostly undocumented) functionality for <a href="https://blitzmax.org/docs/en/language/arrays/#copying-an-array">copying and
+resizing arrays using “slices”</a>.</p>
+
+<p>Instead of creating a larger array and copying the contents, resizing can be
+done in a single command:</p>
+
+<pre><code class="language-blitzmax">Local myArray:Int[10]
+
+' Resize array to be 20 elements.
+myArray = myArray[..20]
+</code></pre>
+
+<p>Copying can be done in a single line too:</p>
+
+<pre><code class="language-blitzmax">Local target:Int[10]
+Local destination:Int[10]
+
+destination = myArray[..]
+</code></pre>
+
+<p>Using slices reduces the <code class="language-plaintext highlighter-rouge">ResizeArray</code> method to this:</p>
+
+<pre><code class="language-blitzmax">Method ResizeArray:Int[](target:Int[], newCapacity:Int)
+    Return target[..newCapacity]
+End Method
+</code></pre>
+
+<p>I’ve resized arrays using <code class="language-plaintext highlighter-rouge">For...Next</code> loops in a few of my
+modules. <a href="https://github.com/Sodaware/sodaware.mod/blob/1847b8ecf53754f3452a6595546a87beb058ddb5/objectbag.mod/src/object_bag.bmx#L316">ObjectBag#_grow</a>
+used it when resizing the internal storage array.</p>
+
+<p>A <a href="https://gist.github.com/Sodaware/ed1151972c586a6b62facbe986de2fef">quick performance
+test</a> gave
+the following results for adding 10,000 items to a bag 10,000 times:</p>
+
+<table class="table table--fancy table--striped">
+  <thead>
+    <tr>
+      <th style="text-align: left">Method</th>
+      <th style="text-align: right">Time (millisecs)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Original <code class="language-plaintext highlighter-rouge">_grow</code></td>
+      <td style="text-align: right">821</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">ArrayCopy <code class="language-plaintext highlighter-rouge">_grow</code></td>
+      <td style="text-align: right">559</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Slices <code class="language-plaintext highlighter-rouge">_grow</code></td>
+      <td style="text-align: right">482</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><code class="language-plaintext highlighter-rouge">ArrayCopy</code> is a big improvement, but slices are even faster (and work with
+vanilla BlitzMax too).</p>
+
+<hr />
+
+<p>The original issue that spawned this post: <a href="https://github.com/Sodaware/pangolin.mod/issues/2">#2 Array growing using ArrayCopy</a></p>
+:ET

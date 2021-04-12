@@ -1,0 +1,23 @@
+I"X<p>I wanted to use <a href="https://github.com/Fuco1/smartparens">smartparens</a> with
+<a href="https://www.sodaware.net/blitzmax-mode/">blitzmax-mode</a>, but the global <code class="language-plaintext highlighter-rouge">'</code>
+completion was inserting two <code class="language-plaintext highlighter-rouge">'</code> characters whenever I commented a line. Not the
+end of the world, but it was annoying and I wanted a solution.</p>
+
+<p><strong>smartparens</strong> can disable a global pair by setting <code class="language-plaintext highlighter-rouge">:actions nil</code> when using
+<code class="language-plaintext highlighter-rouge">sp-local-pair</code>. For blitzmax-mode, my config looks like this:</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">smartparens</span>
+  <span class="ss">:diminish</span> <span class="nv">smartparens-mode</span>
+  <span class="ss">:commands</span> <span class="p">(</span><span class="nv">smartparens-mode</span> <span class="nv">sp-local-pair</span><span class="p">)</span>
+  <span class="ss">:hook</span>
+  <span class="p">((</span><span class="nv">blitzmax-mode</span> <span class="o">.</span> <span class="nv">smartparens-mode</span><span class="p">))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nb">require</span> <span class="ss">'smartparens-config</span><span class="p">)</span>
+
+  <span class="c1">;; Disable ' auto-pair in blitzmax-mode.</span>
+  <span class="p">(</span><span class="nv">sp-local-pair</span> <span class="ss">'blitzmax-mode</span> <span class="s">"'"</span> <span class="no">nil</span> <span class="ss">:actions</span> <span class="no">nil</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>Now smartparens inserts a single <code class="language-plaintext highlighter-rouge">'</code> character when I comment a line, but still
+inserts matching <code class="language-plaintext highlighter-rouge">(</code> and <code class="language-plaintext highlighter-rouge">[</code> characters. Perfect!</p>
+:ET

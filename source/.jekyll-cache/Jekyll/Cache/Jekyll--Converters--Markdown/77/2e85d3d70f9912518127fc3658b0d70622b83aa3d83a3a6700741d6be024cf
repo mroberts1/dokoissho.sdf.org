@@ -1,0 +1,53 @@
+I"ª<p>When building this site I wanted to use <code class="language-plaintext highlighter-rouge">jekyll-minifier</code> to keep the page size
+small. However, it increases the build time significantly which is a pain during
+development.</p>
+
+<p>Thankfully Jekyll can accept multiple configuration files at a time.</p>
+
+<p>The following command will start a Jekyll server with the standard <code class="language-plaintext highlighter-rouge">_config.yml</code>
+configuration as well as <code class="language-plaintext highlighter-rouge">_config.development.yml</code>.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bundle <span class="nb">exec </span>jekyll serve <span class="nt">--drafts</span> <span class="nt">--watch</span> <span class="nt">--config</span><span class="o">=</span>_config.yml,_config.development.yml
+</code></pre></div></div>
+
+<p>Anything in the <em>development</em> configuration will override the base values in
+<code class="language-plaintext highlighter-rouge">_config.yml</code>.</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>The production &amp; development configurations for this site look like this:</p>
+
+<p><strong>_config.production.yml</strong></p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gems</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-minifier</span>
+</code></pre></div></div>
+
+<p><strong>_config.development.yml</strong></p>
+<div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">livereload</span><span class="pi">:</span> <span class="no">true</span>
+<span class="na">gems</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="s">jekyll-livereload</span>
+</code></pre></div></div>
+
+<p>Cutting <code class="language-plaintext highlighter-rouge">jekyll-minifier</code> from development cuts page generation times from 10
+seconds to about 0.8. Coupled with <code class="language-plaintext highlighter-rouge">jekyll-livereload</code> it makes previewing site
+changes much easier.</p>
+
+<h2 id="updated-makefile">Updated Makefile</h2>
+
+<p>This changes the build and serve parts of the Makefile<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> to look like this:</p>
+
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">build</span><span class="o">:</span>
+	bundle <span class="nb">exec </span>jekyll build <span class="nt">--config</span><span class="o">=</span>_config.yml,_config.production.yml
+
+<span class="nl">serve</span><span class="o">:</span>
+	bundle <span class="nb">exec </span>jekyll serve <span class="nt">--drafts</span> <span class="nt">--watch</span> <span class="nt">--config</span><span class="o">=</span>_config.yml,_config.development.yml
+</code></pre></div></div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>See <a href="/notes/jekyll-makefile/">A simple Jekyll deployment Makefile</a>Â <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

@@ -1,0 +1,32 @@
+I"ù<p>The following <em>Makefile</em> can be used to build, serve and deploy a Jekyll site.</p>
+
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">REMOTE</span> <span class="o">?=</span> <span class="s2">"&lt;connection info here&gt;"</span>
+<span class="nl">build</span><span class="o">:</span>
+	bundle <span class="nb">exec </span>jekyll build
+
+<span class="nl">push</span><span class="o">:</span>
+	rsync <span class="nt">-avrz</span> <span class="nt">--delete-excluded</span> _site/<span class="k">*</span> <span class="nv">$(REMOTE)</span>
+
+<span class="nl">deploy</span><span class="o">:</span> <span class="nf">build push</span>
+
+<span class="nl">serve</span><span class="o">:</span>
+	bundle <span class="nb">exec </span>jekyll serve <span class="nt">--drafts</span> <span class="nt">--watch</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">REMOTE</code> should be something like this <code class="language-plaintext highlighter-rouge">username@server:path</code>, where:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">username</code> is your username on the remote server</li>
+  <li><code class="language-plaintext highlighter-rouge">server</code> is the remote server to deploy to</li>
+  <li><code class="language-plaintext highlighter-rouge">path</code> is the remote directory files should be copied to</li>
+</ul>
+
+<p>If <em>rsync</em> is unavailable on the remote machine, <em>scp</em> can also be used by
+changing <code class="language-plaintext highlighter-rouge">push</code> to the following:</p>
+
+<div class="language-make highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">push</span><span class="o">:</span>
+	scp <span class="nt">-r</span> _site/<span class="k">*</span> <span class="nv">$(REMOTE)</span>
+</code></pre></div></div>
+
+<p>Running <code class="language-plaintext highlighter-rouge">make deploy</code> will build the site and upload it in one command.</p>
+:ET

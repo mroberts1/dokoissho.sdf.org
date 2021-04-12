@@ -1,0 +1,145 @@
+I"�"<p><img src="https://img.shields.io/github/license/Sodaware/blitzmax-mode.svg" alt="GPLv2" />
+<img src="https://img.shields.io/github/release/Sodaware/blitzmax-mode.svg" alt="GitHub release" />
+<img src="http://melpa.org/packages/blitzmax-mode-badge.svg" alt="MELPA" />
+<img src="http://stable.melpa.org/packages/blitzmax-mode-badge.svg" alt="MELPA Stable" /></p>
+
+<p>This project adds a new major mode to GNU Emacs for editing BlitzMax source
+files. It supports keyword highlighting, keyword capitalization, and automatic
+indentation.</p>
+
+<p><img src="https://www.sodaware.net/assets/images/projects/blitzmax-mode/blitzmax-mode-screenshot.png" alt="blitzmax-mode in action" class="centered" /></p>
+
+<h2 id="installation">Installation</h2>
+
+<p>It is recommended to install this package directly from
+<a href="http://melpa.org/">MELPA</a> or via
+<a href="http://www.emacswiki.org/emacs/el-get">el-get</a>. The package is listed in Melpa
+as <code class="language-plaintext highlighter-rouge">blitzmax-mode</code>.</p>
+
+<p>To manually install this extension:</p>
+
+<ol>
+  <li>Download the source code and put it somewhere Emacs can find it (probably
+<code class="language-plaintext highlighter-rouge">~/.emacs.d/</code>).</li>
+  <li>Add that directory to your <code class="language-plaintext highlighter-rouge">load-path</code> if it’s not yet there: 
+    <code class="language-plaintext highlighter-rouge">(add-to-list 'load-path "/path/to/blitzmax-mode")</code></li>
+  <li>Require the mode:
+<code class="language-plaintext highlighter-rouge">(require 'blitzmax-mode)</code></li>
+</ol>
+
+<p>Once everything is loaded, blitzmax-mode can be enabled for a buffer by running
+<code class="language-plaintext highlighter-rouge">M-x blitzmax-mode</code>. The mode also associates itself with <code class="language-plaintext highlighter-rouge">.bmx</code> files, so they
+will automatically switch to <code class="language-plaintext highlighter-rouge">blitzmax-mode</code> when enabled.</p>
+
+<h2 id="configuration-via-use-package">Configuration via use-package</h2>
+
+<p>The following configuration code will enable <code class="language-plaintext highlighter-rouge">blitzmax-mode</code> for <code class="language-plaintext highlighter-rouge">.bmx</code> files.</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">blitzmax-mode</span>
+  <span class="ss">:mode</span> <span class="s">"\\.bmx\\'"</span>
+</code></pre></div></div>
+
+<h2 id="configuration-options">Configuration Options</h2>
+
+<p><strong>blitzmax-mode</strong> provides the following configuration options:</p>
+
+<ul>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">blitzmax-mode-indent</code> - The number of spaces to indent by. By default
+<strong>blitzmax-mode</strong> indents by 4 spaces which is converted to a single tab.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">blitzmax-mode-capitalize-keywords-p</code> - Disable automatic capitalization of
+keywords by setting this to <code class="language-plaintext highlighter-rouge">nil</code>. <code class="language-plaintext highlighter-rouge">t</code> by default.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">blitzmax-mode-smart-indent-p</code> - Disable smart indentation by setting this to
+<code class="language-plaintext highlighter-rouge">nil</code>. <code class="language-plaintext highlighter-rouge">t</code> by default.</p>
+  </li>
+  <li>
+    <p><code class="language-plaintext highlighter-rouge">blitzmax-mode-compiler-pathname</code> - Full pathname to the BlitzMax compiler
+<code class="language-plaintext highlighter-rouge">bmk</code>. “bmk” by default.</p>
+  </li>
+</ul>
+
+<h2 id="running-the-current-buffer-using-quickrun">Running the current buffer using quickrun</h2>
+
+<p><a href="https://github.com/syohex/emacs-quickrun/">quickrun.el</a> is an extension for
+compiling and executing the current buffer.</p>
+
+<p>To enable quickrun support, add the following to your Emacs initialization file:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">with-eval-after-load</span> <span class="ss">'quickrun</span>
+  <span class="p">(</span><span class="nv">blitzmax-mode-quickrun-integration</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>To bind quickrun to a key press (<code class="language-plaintext highlighter-rouge">C-c C-c</code> in this example), add the following
+to <code class="language-plaintext highlighter-rouge">init.el</code> (or wherever your Emacs config resides):</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">eval-after-load</span> <span class="s">"blitzmax-mode"</span>
+  <span class="o">'</span><span class="p">(</span><span class="nv">define-key</span> <span class="nv">blitzmax-mode-map</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">"C-c C-c"</span><span class="p">)</span> <span class="ss">'quickrun</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>To add quickrun support to <code class="language-plaintext highlighter-rouge">blitzmax-mode</code> via <code class="language-plaintext highlighter-rouge">use-package</code>, use the following:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">use-package</span> <span class="nv">blitzmax-mode</span>
+  <span class="ss">:mode</span> <span class="s">"\\.bmx\\'"</span>
+  <span class="ss">:bind</span>
+  <span class="p">((</span><span class="s">"C-c C-c"</span> <span class="o">.</span> <span class="nv">quickrun</span><span class="p">))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nv">blitzmax-mode-quickrun-integration</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>When called, quickrun will compile and execute the current buffer with debug and
+threading enabled. Once the process has finished running the executable file
+will be deleted.</p>
+
+<h2 id="compiling-projects-with-projectile">Compiling Projects with Projectile</h2>
+
+<p><a href="https://github.com/bbatsov/projectile">Projectile</a> is a great Emacs package for
+organizing and navigating large projects. It can be configured to build a
+BlitzMax application by setting <code class="language-plaintext highlighter-rouge">projectile-project-compilation-cmd</code> in the
+project’s <code class="language-plaintext highlighter-rouge">.dir-locals.el</code> file.</p>
+
+<p>For example, the following would go in <code class="language-plaintext highlighter-rouge">.dir-locals.el</code> in the projects
+folder. It would compile the contents of <code class="language-plaintext highlighter-rouge">src/my_app.bmx</code> in release + threaded
+mode and save the executable as <code class="language-plaintext highlighter-rouge">my_app</code>:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">((</span><span class="no">nil</span> <span class="o">.</span> <span class="p">((</span><span class="nv">projectile-project-compilation-cmd</span> <span class="o">.</span> <span class="s">"bmk makeapp -r -h -o my_app src/my_app.bmx"</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>The current project can then be compiled by running <code class="language-plaintext highlighter-rouge">projectile-compile-project</code>
+(bound to <code class="language-plaintext highlighter-rouge">C-c p c</code> by default).</p>
+
+<h2 id="current-features">Current Features</h2>
+
+<ul>
+  <li>Basic syntax highlighting</li>
+  <li>Automatic indentation</li>
+  <li>Capitalizes keywords automatically</li>
+  <li>Quickrun support</li>
+</ul>
+
+<h2 id="planned-features">Planned Features</h2>
+
+<ul>
+  <li>Compile current buffer</li>
+  <li>Auto-completion</li>
+  <li>Integration with bmk</li>
+  <li>Integration with blam</li>
+</ul>
+
+<h2 id="licence">Licence</h2>
+
+<p>This file is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2, or (at your option) any later version.</p>
+
+<p>This file is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
+
+<p>You should have received a copy of the GNU General Public License along with GNU
+Emacs; see the file COPYING.  If not, write to the Free Software Foundation,
+Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.</p>
+:ET

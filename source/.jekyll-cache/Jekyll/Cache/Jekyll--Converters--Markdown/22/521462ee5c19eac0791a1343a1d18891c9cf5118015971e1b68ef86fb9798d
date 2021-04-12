@@ -1,0 +1,15 @@
+I"R<p>This is a really simple tweak to add a homepage file to <a href="https://github.com/EFLS/zetteldeft">zetteldeft</a>. Although I
+usually use the main search page, adding a homepage makes zetteldeft act more
+like a wiki.</p>
+
+<p>Once this code is added to the Emacs init, running <code class="language-plaintext highlighter-rouge">C-c z h</code> will open the home
+file. The <code class="language-plaintext highlighter-rouge">home.org</code> file can be any file in your deft notes directory. It
+should be the local filename within the deft directory, not the full path.</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/zd-homepage</span> <span class="p">()</span>
+  <span class="s">"Open Zetteldeft home file."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">zetteldeft-find-file</span> <span class="s">"home.org"</span><span class="p">))</span>
+<span class="p">(</span><span class="nv">global-set-key</span> <span class="p">(</span><span class="nv">kbd</span> <span class="s">"C-c z h"</span><span class="p">)</span> <span class="nf">#'</span><span class="nv">sodaware/zd-homepage</span><span class="p">)</span>
+</code></pre></div></div>
+:ET

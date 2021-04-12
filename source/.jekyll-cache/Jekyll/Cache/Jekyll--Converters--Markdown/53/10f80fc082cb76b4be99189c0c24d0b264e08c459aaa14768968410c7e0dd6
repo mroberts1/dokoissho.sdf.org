@@ -1,0 +1,59 @@
+I"�
+<p>I have a couple of different accounts for GitHub<sup id="fnref:1" role="doc-noteref"><a href="#fn:1" class="footnote" rel="footnote">1</a></sup> - one for my personal
+projects, and one for work. GitHub doesn’t allow the same SSH key to be used on
+different accounts which can make working with repositories difficult.</p>
+
+<p>For example, cloning a private repository from one account may not work, even if
+both keys are currently being used by the SSH agent.</p>
+
+<p>To workaround this limitation, the SSH agent can be configured to use a specific
+key when accessing a domain. In this case the same domain requires different
+keys, so an alias is used instead.</p>
+
+<p>This alias needs to be used when checking out repositories, but once the initial
+step is complete everything else happens automatically.</p>
+
+<p>Modifying <code class="language-plaintext highlighter-rouge">~/.ssh/config</code> with the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Work GitHub Account
+Host github.com-work
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/work_public_key
+</code></pre></div></div>
+
+<p>Will now tell the SSH agent to use <code class="language-plaintext highlighter-rouge">~/.ssh/work_public_key</code> when trying to
+access anything on <code class="language-plaintext highlighter-rouge">github.com-work</code>.</p>
+
+<h2 id="cloning-a-repository">Cloning a repository</h2>
+
+<p>To use the alias when cloning a reposiory, replace <code class="language-plaintext highlighter-rouge">github.com</code> with the
+configured alias.</p>
+
+<p>For example, cloning the <code class="language-plaintext highlighter-rouge">ruby</code> repository with the work alias from earlier
+looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com-work:ruby/ruby.git
+</code></pre></div></div>
+
+<p>Standard git commands like <code class="language-plaintext highlighter-rouge">git push</code> will work just the same as any other
+repository.</p>
+
+<h2 id="existing-repositories">Existing repositories</h2>
+
+<p>To update an existing repository to use a new alias, modify the <code class="language-plaintext highlighter-rouge">.git/config</code>
+file in the project’s working directory. It should look something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[remote "origin"]
+	url = git@github.com-work:ruby/ruby.git
+
+</code></pre></div></div>
+
+<div class="footnotes" role="doc-endnotes">
+  <ol>
+    <li id="fn:1" role="doc-endnote">
+      <p>This solution also works with BitBucket. <a href="#fnref:1" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+:ET

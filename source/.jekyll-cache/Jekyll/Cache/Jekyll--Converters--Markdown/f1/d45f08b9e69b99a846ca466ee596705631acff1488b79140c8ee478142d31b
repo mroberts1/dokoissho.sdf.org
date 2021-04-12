@@ -1,0 +1,9 @@
+I"Ñ<p>I wanted to automate a build step that used the current git branch name. Hereâ€™s
+how to get it from within a <code class="language-plaintext highlighter-rouge">Makefile</code>:</p>
+
+<div class="language-makefile highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">BRANCH</span> <span class="o">:=</span> <span class="nf">$(</span><span class="nb">shell</span> git rev-parse <span class="nt">--abbrev-ref</span> HEAD<span class="nf">)</span>
+</code></pre></div></div>
+
+<p><code class="language-plaintext highlighter-rouge">BRANCH</code> will then contain the branch name and can be used like a normal
+<code class="language-plaintext highlighter-rouge">Makefile</code> variable.</p>
+:ET

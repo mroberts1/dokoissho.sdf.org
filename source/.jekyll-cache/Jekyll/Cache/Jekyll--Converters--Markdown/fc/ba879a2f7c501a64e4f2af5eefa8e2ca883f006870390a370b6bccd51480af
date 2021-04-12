@@ -1,0 +1,21 @@
+I"�<p>I have a few pages online that I want to be protected, but ocassionally I might
+pass out a link to share. I didn’t really like having to remember a password, so
+I set up an IP whitelist. Anybody not on the list is denied.</p>
+
+<p>The problem is that I need to update the IP whitelist when someone new wants
+access, which isn’t always practical.</p>
+
+<p>This solution will check for a whitelisted IP first. If that fails, it will
+prompt for a username and password.</p>
+
+<div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">satisfy</span> <span class="s">any</span><span class="p">;</span>
+
+<span class="c1"># Authenticate via IP address.</span>
+<span class="k">allow</span> <span class="mi">127</span><span class="s">.0.0.1</span><span class="p">;</span> <span class="c1"># Should be an actual IP</span>
+<span class="k">deny</span> <span class="s">all</span><span class="p">;</span>
+
+<span class="c1"># Try a password if IP didn't match.</span>
+<span class="k">auth_basic</span>           <span class="s">"Private"</span><span class="p">;</span>
+<span class="k">auth_basic_user_file</span> <span class="n">/path/to/.htpasswd</span><span class="p">;</span>
+</code></pre></div></div>
+:ET

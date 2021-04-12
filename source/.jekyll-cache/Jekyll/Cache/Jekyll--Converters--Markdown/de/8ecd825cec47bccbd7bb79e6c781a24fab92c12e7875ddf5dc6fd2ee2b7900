@@ -1,0 +1,127 @@
+I"�<p>With the exception of numeric types (<code class="language-plaintext highlighter-rouge">Byte</code>, <code class="language-plaintext highlighter-rouge">Short</code>, <code class="language-plaintext highlighter-rouge">Int</code>, <code class="language-plaintext highlighter-rouge">Float</code>, <code class="language-plaintext highlighter-rouge">Double</code>
+and <code class="language-plaintext highlighter-rouge">Long</code>), all objects in BlitzMax extend the from base <code class="language-plaintext highlighter-rouge">Object</code> type. This
+comes in handy for passing around variables that can be different types, but
+there’s some overhead when converting (i.e. casting) an <code class="language-plaintext highlighter-rouge">Object</code> to a different
+type.</p>
+
+<p>For example:</p>
+
+<pre><code class="language-blitzmax">Type MyType
+    Field something:String
+     
+    Method New()
+         Self.something = "Hello, World!"
+    End Method
+End Type
+
+' Create a new MyType but assign it to an Object variable.
+Local o:Object = new MyType
+
+' The following code is invalid:
+' Print o.something
+
+' The variable needs to be cast first:
+Print MyType(o).something
+</code></pre>
+
+<p>There’s normally no need to use plain <code class="language-plaintext highlighter-rouge">Object</code> types, but collections like <code class="language-plaintext highlighter-rouge">TMap</code>
+and <code class="language-plaintext highlighter-rouge">TList</code> use them for storing generic objects. This makes it easier to create
+lists on the fly, but comes with some overhead.</p>
+
+<h2 id="summary">Summary</h2>
+
+<ol>
+  <li>Casting an object is approximately <strong>8x slower</strong> than not casting.</li>
+  <li>The size of the object (i.e. the number of fields and methods) <strong>does not</strong>
+affect performance.</li>
+  <li>Casting happens automatically when iterating over a collection (such as a
+TList). If possible, <strong>use arrays or a strongly-typed list</strong> if frequently
+iterating over the same collection.</li>
+</ol>
+
+<h2 id="casting-benchmarks">Casting benchmarks</h2>
+
+<p>All benchmarks are in release mode with threading enabled. Each test was
+executed 1,000,000,000 times.</p>
+
+<table class="table--striped table--fancy table--benchmark">
+  <thead>
+    <tr>
+      <th>Assignment Type</th>
+      <th>Execution Time (milliseconds)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No Cast</td>
+      <td>324</td>
+    </tr>
+    <tr>
+      <td>Cast</td>
+      <td>2849</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>The size of the object makes no difference. The same as the previous test, but
+with a type containing 2,000 fields:</p>
+
+<table class="table--striped table--fancy table--benchmark">
+  <thead>
+    <tr>
+      <th>Assignment Type</th>
+      <th>Execution Time (milliseconds)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>No Cast</td>
+      <td>328</td>
+    </tr>
+    <tr>
+      <td>Cast</td>
+      <td>2916</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="reducing-casting">Reducing casting</h2>
+
+<p>For collections that are large, or iterated over frequently, a strongly-typed
+collection will help with performance. If the size of the collection remains the
+same, an array will be fastest. A strongly-typed
+<a href="https://www.sodaware.net/dev/blitz/modules/sodaware.mod/">ObjectBag</a> is
+almost as fast but can also be resized on the fly.</p>
+
+<h2 id="test-code">Test code</h2>
+
+<pre><code class="language-blitzmax">SuperStrict
+Framework brl.basic
+
+Const ITERATIONS:Int = 1000000000
+Local startTime:Int
+Local counter:int
+
+' -- No Casting
+Local result1:Object
+Local o:Object = new MyType
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+	result1 = o
+Next
+Print "No Cast: " + (millisecs() - startTime) 
+
+' -- Casting
+Local result2:MyType
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+	result2 = MyType(o)
+Next
+Print "Cast: " + (millisecs() - startTime) 
+
+Type MyType
+     Field something:String
+     Field something_else:Int
+End Type
+</code></pre>
+:ET

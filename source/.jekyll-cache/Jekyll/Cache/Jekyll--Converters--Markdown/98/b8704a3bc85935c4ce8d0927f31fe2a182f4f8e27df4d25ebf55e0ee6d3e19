@@ -1,0 +1,51 @@
+I"?<p><strong>docgen</strong> is a quick and dirty tool I built to extract documentation tags from
+BlitzMax files.</p>
+
+<p>It turns something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>''' &lt;summary&gt;My cool function&lt;/summary&gt;
+''' &lt;param name="name"&gt;Who is cool?&lt;/param&gt;
+''' &lt;return&gt;You are cool&lt;/return&gt;
+Function whoIsCool:String(name:String)
+    Return name + " is cool"
+End Function
+</code></pre></div></div>
+
+<p>Into this:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"files"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"example.bmx"</span><span class="p">,</span><span class="w">
+            </span><span class="nl">"functions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="p">{</span><span class="w">
+                    </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"whoIsCool"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My cool function."</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"returnType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"returnDescription"</span><span class="p">:</span><span class="w"> </span><span class="s2">"You are cool"</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                        </span><span class="p">{</span><span class="w">
+                            </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"String"</span><span class="p">,</span><span class="w">
+                            </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Who is cool?"</span><span class="w">
+                        </span><span class="p">}</span><span class="w">
+                    </span><span class="p">],</span><span class="w">
+                    </span><span class="nl">"line"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+                    </span><span class="nl">"column"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+                </span><span class="p">}</span><span class="w">
+            </span><span class="p">]</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Which can then be turned into this:</p>
+
+<p><img src="/assets/images/docgen-output.png" alt="docgen-output" class="bordered" /></p>
+
+<p>Exciting, right? The example above was converted from json to docbook XML, and
+then from XML to HTML.</p>
+
+<p>More examples of what it can do can be seen at
+<a href="https://docs.sodaware.net/">docs.sodaware.net</a>.</p>
+:ET

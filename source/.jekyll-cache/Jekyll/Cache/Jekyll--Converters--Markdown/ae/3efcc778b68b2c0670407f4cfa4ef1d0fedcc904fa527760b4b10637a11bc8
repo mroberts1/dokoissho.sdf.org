@@ -1,0 +1,13 @@
+I"<p>Even though I’ve used BlitzMax for years, I only just realized that it doesn’t
+care about case when it comes to variables. I knew that local and global
+variables didn’t matter, but constant names are also case-insensitive.</p>
+
+<p>For example, the following will output “ONE”:</p>
+
+<pre><code class="language-blitzmax">Const my_constant:Int = 1
+
+If MY_CONSTANT = 1 Then Print "ONE"
+</code></pre>
+
+<p>The same result occurs even in <code class="language-plaintext highlighter-rouge">SuperStrict</code> mode.</p>
+:ET

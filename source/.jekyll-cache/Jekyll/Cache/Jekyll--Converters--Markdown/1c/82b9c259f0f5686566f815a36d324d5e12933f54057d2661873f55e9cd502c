@@ -1,0 +1,33 @@
+I"8<p>Sometimes the JSON that’s received from a web service is hard to read. Ruby’s
+JSON module comes with a function to help:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'json'</span>
+
+<span class="n">json</span> <span class="o">=</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">parse</span><span class="p">(</span><span class="n">raw_text</span><span class="p">)</span>
+<span class="nb">puts</span> <span class="no">JSON</span><span class="p">.</span><span class="nf">pretty_generate</span><span class="p">(</span><span class="n">json</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">pretty_generate</code> function will add line breaks where needed and fix any
+alignment issues.</p>
+
+<p>Adding in syntax highlighting using <a href="https://github.com/jneen/rouge">rouge</a>
+requires only a few more steps:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>require 'json''
+require 'rouge'
+
+def prettify_json(raw_text)
+  json = JSON.parse(raw_text)
+  JSON.pretty_generate(json)
+end
+
+def highlight_json(text)
+  formatter = Rouge::Formatters::HTML.new(css_class: 'highlight')
+  lexer = Rouge::Lexer.find('json')
+  formatter.format(lexer.lex(text))
+end
+</code></pre></div></div>
+
+<p>Calling <code class="language-plaintext highlighter-rouge">highlight_json</code> will return HTML markup to display json with syntax
+highlighting.</p>
+:ET

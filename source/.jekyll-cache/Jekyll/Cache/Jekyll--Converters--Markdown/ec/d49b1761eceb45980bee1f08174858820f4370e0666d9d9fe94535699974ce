@@ -1,0 +1,33 @@
+I"�<p><a href="https://guardgem.org/">Guard</a> is one of my favourite Ruby tools, especially
+when working on Rails projects.</p>
+
+<p>One of the most helpful features of Guard is the display of notifications to
+indicate a test’s success (or failure). There are a few different types
+available, but I find the popup ones to be a little annoying after a
+while.</p>
+
+<p>However, Guard comes with an Emacs notifier that changes the colour of the
+modeline depending on the result of the latest test. This makes getting feedback
+from tests extremely quick, and also means I don’t have to leave the editor.</p>
+
+<p>Adding the following to <code class="language-plaintext highlighter-rouge">.guard.rb</code> in your home directory will enable the Emacs
+notifier on the local machine.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">notification</span> <span class="ss">:emacs</span>
+</code></pre></div></div>
+
+<p>The default colours didn’t work so well for my current theme
+(<a href="https://emacsthemes.com/themes/aurora-theme.html">aurora</a>), but thankfully
+Guard supports configuring colours:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">notification</span> <span class="ss">:emacs</span><span class="p">,</span>
+  <span class="ss">fontcolor: </span><span class="s1">'#263238'</span><span class="p">,</span>
+  <span class="ss">default:   </span><span class="s1">'#546d7a'</span><span class="p">,</span>
+  <span class="ss">success:   </span><span class="s1">'#396c00'</span><span class="p">,</span>
+  <span class="ss">failed:    </span><span class="s1">'#640900'</span><span class="p">,</span>
+  <span class="ss">pending:   </span><span class="s1">'#776600'</span>
+</code></pre></div></div>
+
+<p>Alternatively these can go in a <code class="language-plaintext highlighter-rouge">Guardfile</code>, but I prefer to leave notification
+settings up to individuals.</p>
+:ET

@@ -1,0 +1,33 @@
+I"®<p>This is a quick one-liner for sorting a list of directories by size, largest
+first:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">du</span> <span class="nt">--max-depth</span><span class="o">=</span>1 <span class="nb">.</span> | <span class="nb">sort</span> <span class="nt">-nr</span>
+</code></pre></div></div>
+
+<p>Which will return a list something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>8204	./.cache
+1829	./.git
+1416	./_site
+785	./source
+384	./.sass-cache
+8	./plugins
+4	./raw
+0	./images
+</code></pre></div></div>
+
+<p>There are two parts to the command:</p>
+
+<h4 id="du-max-depth1-">du â€“max-depth=1 .</h4>
+
+<p><code class="language-plaintext highlighter-rouge">du</code> displays a list of directory sizes. The <code class="language-plaintext highlighter-rouge">--max-depth=1</code> parameter limits
+the list to top-level directories. Their size will still include files in their
+sub-directories, but these sub-directories will not be included in the results
+list.</p>
+
+<h4 id="sort--nr">sort -nr</h4>
+
+<p>Sorts the results. The <code class="language-plaintext highlighter-rouge">n</code> parameter sorts by numerical data (in this case size
+rather than the name) and <code class="language-plaintext highlighter-rouge">r</code> reverses the list so newer smallest items show at
+the bottom.</p>
+:ET

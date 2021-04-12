@@ -1,0 +1,17 @@
+I"�<p><a href="https://github.com/blitz-research/blitzmax">BlitzMax</a> has been fast enough for
+my needs, but it’s always fun to squeeze a little more out of code.</p>
+
+<p>This post will act as a hub for optimizations I’ve used. Not all of them are
+worth implementing, but sometimes it’s useful to see benchmarks when deciding on
+a solution.</p>
+
+<h2 id="optimizations">Optimizations</h2>
+
+<ul>
+  <li><a href="/blog/blitzmax-optimization-casting/">BlitzMax optimization - Object casting</a></li>
+  <li><a href="/blog/blitzmax-optimization-arrays/">BlitzMax optimization - Resizing arrays</a></li>
+  <li><a href="/blog/blitzmax-optimization-null-checks/">BlitzMax optimization - Null checks</a></li>
+  <li><a href="/blog/blitzmax-optimization-loops/">BlitzMax optimization - Loops</a></li>
+  <li><a href="/blog/blitzmax-optimization-comparisons/">BlitzMax optimization - Variable comparisons</a></li>
+</ul>
+:ET

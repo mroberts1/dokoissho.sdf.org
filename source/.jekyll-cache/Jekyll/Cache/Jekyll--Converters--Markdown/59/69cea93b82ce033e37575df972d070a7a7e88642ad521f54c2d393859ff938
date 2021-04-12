@@ -1,0 +1,41 @@
+I"�<p>I’ve started using <code class="language-plaintext highlighter-rouge">lsp-mode</code> in Emacs to add some smarter auto-completion and
+tooltips. I wanted to try and activate <code class="language-plaintext highlighter-rouge">lsp-mode</code> automatically when editing
+files in a Rails project, but only if solargraph is in the <code class="language-plaintext highlighter-rouge">Gemfile</code>.</p>
+
+<p>I’m not sure this is actually something I’ll keep using, but it was a fun
+exercise.</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'enh-ruby-mode-hook</span> <span class="nf">#'</span><span class="nv">sodaware/enable-lsp-for-solargraph-projects</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/enable-lsp-for-solargraph-projects</span> <span class="p">()</span>
+  <span class="s">"Enable lsp-mode if the current project has solargraph installed."</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">sodaware/has-solargraph-p</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">lsp</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/has-solargraph-p</span> <span class="p">()</span>
+  <span class="s">"Check if the current Rails project has solargraph installed."</span>
+  <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">root</span>    <span class="p">(</span><span class="nv">sodaware/get-closest-gemfile-root</span><span class="p">))</span>
+         <span class="p">(</span><span class="nv">gemfile</span> <span class="p">(</span><span class="nv">concat</span> <span class="nv">root</span> <span class="s">"/Gemfile"</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="no">nil</span>
+      <span class="p">(</span><span class="nv">with-temp-buffer</span>
+        <span class="p">(</span><span class="nv">insert-file-contents</span> <span class="nv">gemfile</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">search-forward</span> <span class="s">"solargraph"</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)))))</span>
+
+<span class="p">(</span><span class="nv">defun*</span> <span class="nv">sodaware/get-closest-gemfile-root</span> <span class="p">(</span><span class="k">&amp;optional</span> <span class="p">(</span><span class="nv">file</span> <span class="s">"Gemfile"</span><span class="p">))</span>
+  <span class="s">"Determine the pathname of the first instance of FILE starting from the current directory towards root.
+
+This may not do the correct thing in presence of links. If it does not find
+FILE, then it shall return the name of FILE in the current directory, suitable
+for creation."</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">root</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">"/"</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">loop</span>
+     <span class="nv">for</span> <span class="nv">d</span> <span class="nb">=</span> <span class="nv">default-directory</span> <span class="nv">then</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="s">".."</span> <span class="nv">d</span><span class="p">)</span>
+     <span class="k">if</span> <span class="p">(</span><span class="nv">file-exists-p</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="nv">file</span> <span class="nv">d</span><span class="p">))</span>
+     <span class="nb">return</span> <span class="nv">d</span>
+     <span class="k">if</span> <span class="p">(</span><span class="nb">equal</span> <span class="nv">d</span> <span class="nv">root</span><span class="p">)</span>
+     <span class="nb">return</span> <span class="no">nil</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>It’s not particularly elegant, and I think there will be performance problems
+for with larger <code class="language-plaintext highlighter-rouge">Gemfile</code>s.</p>
+:ET

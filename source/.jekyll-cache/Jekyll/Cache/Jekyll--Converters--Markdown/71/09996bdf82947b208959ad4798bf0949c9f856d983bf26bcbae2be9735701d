@@ -1,0 +1,158 @@
+I"¿<p><strong>dogechain-api</strong> is a Common Lisp library for working with the
+<a href="https://dogechain.info/">dogechain.info</a> API. It can be used to query
+<a href="http://dogecoin.com/">dogecoin</a> addresses and fetch general information about
+the dogecoin network.</p>
+
+<p>Itâ€™s unit tested using <a href="https://github.com/fukamachi/prove">prove</a> and uses
+<a href="http://weitz.de/drakma/">drakma</a> for making http requests.</p>
+
+<h1 id="simple-query-api---function-reference">Simple Query API - Function Reference</h1>
+
+<p><strong>dogechain-api</strong> currently supports all endpoints for the
+<a href="https://dogechain.info/api/simple">simple api</a> which are mapped as follows:</p>
+
+<table class="table--striped table--fancy table--function-map">
+  <thead>
+    <tr>
+      <th>API Method</th>
+      <th>Local Function</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>addressbalance</td>
+      <td>dogechain-api:get-address-balance</td>
+    </tr>
+    <tr>
+      <td>addresstohash</td>
+      <td>dogechain-api:address-to-hash</td>
+    </tr>
+    <tr>
+      <td>checkaddress</td>
+      <td>dogechain-api:valid-address-p</td>
+    </tr>
+    <tr>
+      <td>decode_address</td>
+      <td>dogechain-api:decode-address</td>
+    </tr>
+    <tr>
+      <td>getblockcount</td>
+      <td>dogechain-api:get-block-count</td>
+    </tr>
+    <tr>
+      <td>getdifficulty</td>
+      <td>dogechain-api:get-difficulty</td>
+    </tr>
+    <tr>
+      <td>getreceivedbyaddress</td>
+      <td>dogechain-api:get-address-received</td>
+    </tr>
+    <tr>
+      <td>getsentbyaddress</td>
+      <td>dogechain-api:get-address-sent</td>
+    </tr>
+    <tr>
+      <td>totalbc</td>
+      <td>dogechain-api:get-total-mined</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="functions">Functions</h2>
+
+<h3 id="dogechain-apiget-address-balance-address">dogechain-api:get-address-balance <em>address</em></h3>
+
+<p>Get the total amount ever received, minus the total amount ever sent for
+<em>address</em>.</p>
+
+<p>Raises an <code class="language-plaintext code--cl-error highlighter-rouge">invalid-address-error</code> if the address is
+invalid.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:get-address-balance</span> <span class="s">"DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e"</span><span class="p">)</span>
+<span class="mf">12345.6789</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apiaddress-to-hash-address">dogechain-api:address-to-hash <em>address</em></h3>
+
+<p>Get the public key hash for a valid Dogecoin <em>address</em>.</p>
+
+<p>Raises an <code class="language-plaintext code--cl-error highlighter-rouge">invalid-address-error</code> if the address is
+invalid.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:address-to-hash</span> <span class="s">"DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e"</span><span class="p">)</span>
+<span class="s">"F8783344AF8532A73DFA97EBDDFCC7527A2C6E5A"</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apivalid-address-p-address">dogechain-api:valid-address-p <em>address</em></h3>
+
+<p>Check <em>address</em> for validity. An invalid address will return <code class="language-plaintext highlighter-rouge">NIL</code> rather than
+raising an error like other API functions.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:valid-address-p</span> <span class="s">"DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e"</span><span class="p">)</span>
+<span class="nv">T</span>
+</code></pre></div></div>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:valid-address-p</span> <span class="s">"INVALID"</span><span class="p">)</span>
+<span class="nv">NIL</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apidecode-address-address">dogechain-api:decode-address <em>address</em></h3>
+
+<p>Get the version prefix and hash encoded in <em>address</em>. Returns an association
+list containing <code class="language-plaintext highlighter-rouge">:version</code> and <code class="language-plaintext highlighter-rouge">:hash</code> keys.</p>
+
+<p>Raises an <code class="language-plaintext code--cl-error highlighter-rouge">invalid-address-error</code> if the address is
+invalid.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:decode-address</span> <span class="s">"DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e"</span><span class="p">)</span>
+<span class="p">((</span><span class="ss">:version</span> <span class="o">.</span> <span class="s">"1E"</span><span class="p">)</span>
+ <span class="p">(</span><span class="ss">:hash</span> <span class="o">.</span> <span class="s">"F8783344AF8532A73DFA97EBDDFCC7527A2C6E5A"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apiget-block-count">dogechain-api:get-block-count</h3>
+
+<p>Get the current block number. This is the total number of blocks that have been
+mined.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:get-block-count</span><span class="p">)</span>
+<span class="mi">123456</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apiget-difficulty">dogechain-api:get-difficulty</h3>
+
+<p>Get the difficulty of the most recently solved block.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:get-difficulty</span><span class="p">)</span>
+<span class="mi">123456</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apiget-address-received-address">dogechain-api:get-address-received <em>address</em></h3>
+
+<p>Get the total amount ever received by <em>address</em>.</p>
+
+<p>Raises an <code class="language-plaintext code--cl-error highlighter-rouge">invalid-address-error</code> if the address is
+invalid.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:get-received-by-address</span> <span class="s">"DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e"</span><span class="p">)</span>
+<span class="mf">123456.7890</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apiget-address-sent-address">dogechain-api:get-address-sent <em>address</em></h3>
+
+<p>Get the total amount ever sent by <em>address</em>.</p>
+
+<p>Raises an <code class="language-plaintext code--cl-error highlighter-rouge">invalid-address-error</code> if the address is
+invalid.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:get-sent-by-address</span> <span class="s">"DTnt7VZqR5ofHhAxZuDy4m3PhSjKFXpw3e"</span><span class="p">)</span>
+<span class="mf">123456.7890</span>
+</code></pre></div></div>
+
+<h3 id="dogechain-apiget-total-mined">dogechain-api:get-total-mined</h3>
+
+<p>Get the total amount of currency ever mined.</p>
+
+<div class="language-common-lisp has-cl-prompt highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">CL-USER&gt;</span> <span class="p">(</span><span class="nv">dogechain-api:get-total-mined</span><span class="p">)</span>
+<span class="mf">123456.7890</span>
+</code></pre></div></div>
+:ET

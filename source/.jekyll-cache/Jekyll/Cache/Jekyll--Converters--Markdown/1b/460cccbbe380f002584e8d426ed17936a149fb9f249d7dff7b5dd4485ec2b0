@@ -1,0 +1,101 @@
+I"�<p>This is a very simple bash script that downloads a copy of a remote MySQL
+database to a temporary file, and then imports that into a local database.</p>
+
+<p>It can’t be used to import the local contents into the remote one (deliberately
+to prevent me from making mistakes). I use it to keep my local development copy
+of a site up-to-date with the production version.</p>
+
+<p><strong>Important:</strong> Running this script will OVERWRITE the contents of the local
+database.</p>
+
+<h2 id="configuration">Configuration</h2>
+
+<p>To use the script, replace the variables in the “Configuration” section with
+your own values.</p>
+
+<table class="table--striped table--fancy table--function-map">
+  <thead>
+    <tr>
+      <th>Variable</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SSH_USER</td>
+      <td>The username to login to the remote site with.</td>
+    </tr>
+    <tr>
+      <td>SSH_HOST</td>
+      <td>The remote machine to connect to.</td>
+    </tr>
+    <tr>
+      <td>REMOTE_DB_HOST</td>
+      <td>The database host on the remote machine. Usually <code class="language-plaintext highlighter-rouge">localhost</code>.</td>
+    </tr>
+    <tr>
+      <td>REMOTE_DB_NAME</td>
+      <td>The remote database name.</td>
+    </tr>
+    <tr>
+      <td>REMOTE_DB_USER</td>
+      <td>The user to connect to the database as.</td>
+    </tr>
+    <tr>
+      <td>REMOTE_DB_PW</td>
+      <td>The remote database user’s password.</td>
+    </tr>
+    <tr>
+      <td>LOCAL_DB_HOST</td>
+      <td>The local database post. Usually <code class="language-plaintext highlighter-rouge">localhost</code>.`</td>
+    </tr>
+    <tr>
+      <td>LOCAL_DB_NAME</td>
+      <td>The local database name.</td>
+    </tr>
+    <tr>
+      <td>LOCAL_DB_USER</td>
+      <td>The local database user.</td>
+    </tr>
+    <tr>
+      <td>LOCAL_DB_PW</td>
+      <td>Password for the local database user.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="code">Code</h2>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
+
+<span class="c"># ------------------------------</span>
+<span class="c"># -- Configuration.</span>
+
+<span class="nv">SSH_USER</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+<span class="nv">SSH_HOST</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+
+<span class="nv">REMOTE_DB_HOST</span><span class="o">=</span><span class="s2">"localhost"</span>
+<span class="nv">REMOTE_DB_NAME</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+<span class="nv">REMOTE_DB_USER</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+<span class="nv">REMOTE_DB_PW</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+
+<span class="nv">LOCAL_DB_HOST</span><span class="o">=</span><span class="s2">"localhost"</span>
+<span class="nv">LOCAL_DB_NAME</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+<span class="nv">LOCAL_DB_USER</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+<span class="nv">LOCAL_DB_PW</span><span class="o">=</span><span class="s2">"&lt;value goes here&gt;"</span>
+
+<span class="c"># ------------------------------</span>
+<span class="c"># -- Syncing.</span>
+
+<span class="c"># Remove any existing dumps.</span>
+<span class="nb">rm</span> /tmp/<span class="nv">$REMOTE_DB_NAME</span>.sql
+
+<span class="c"># Fetch the remote database.</span>
+<span class="nb">echo</span> <span class="s1">'Fetching remote database'</span>
+ssh <span class="nv">$SSH_USER</span>@<span class="nv">$SSH_HOST</span> <span class="s2">"mysqldump -u</span><span class="nv">$REMOTE_DB_USER</span><span class="s2"> --password='</span><span class="nv">$REMOTE_DB_PW</span><span class="s2">' -h </span><span class="nv">$REMOTE_DB_HOST</span><span class="s2"> </span><span class="nv">$REMOTE_DB_NAME</span><span class="s2">"</span> <span class="o">&gt;</span> /tmp/<span class="nv">$REMOTE_DB_NAME</span>.sql
+
+<span class="c"># Load it into the local database.</span>
+<span class="nb">echo</span> <span class="s1">'Importing database dump'</span>
+mysql <span class="nt">-u</span><span class="nv">$LOCAL_DB_USER</span> <span class="nt">--password</span><span class="o">=</span><span class="nv">$LOCAL_DB_PW</span> <span class="nt">-h</span> <span class="nv">$LOCAL_DB_HOST</span> <span class="nv">$LOCAL_DB_NAME</span> &lt; /tmp/<span class="nv">$REMOTE_DB_NAME</span>.sql
+</code></pre></div></div>
+:ET

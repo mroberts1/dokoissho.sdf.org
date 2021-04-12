@@ -1,0 +1,21 @@
+I"<p><a href="https://seagle0128.github.io/doom-modeline/">doom-modeline</a> disables modeline
+icons when running Emacs in daemon mode. This caused me much head-scratching,
+but I came across two solutions:</p>
+
+<p>The quickest is to set <code class="language-plaintext highlighter-rouge">doom-modeline-icon</code> to <code class="language-plaintext highlighter-rouge">t</code> during initialization. This
+works fine, but if you connect emacs from the terminal using <code class="language-plaintext highlighter-rouge">emacsclient -nw</code>
+things can look a little weird.</p>
+
+<p>Adding the following to my “init.el” file does the same thing, but only enables
+icons the first time a window frame is opened:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">enable-doom-modeline-icons</span> <span class="p">(</span><span class="nv">_frame</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">setq</span> <span class="nv">doom-modeline-icon</span> <span class="no">t</span><span class="p">))</span>
+  
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'after-make-frame-functions</span> 
+          <span class="nf">#'</span><span class="nv">enable-doom-modeline-icons</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I’m still looking for a way to switching icons on and off when switching between
+a terminal and windowed session. This does things well enough for now.</p>
+:ET

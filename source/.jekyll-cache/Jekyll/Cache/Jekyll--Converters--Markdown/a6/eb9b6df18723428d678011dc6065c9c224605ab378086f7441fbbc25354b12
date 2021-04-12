@@ -1,0 +1,33 @@
+I"�<p>Byte-compiled Elisp files run faster. This snippet will automatically recompile
+<code class="language-plaintext highlighter-rouge">~/.emacs</code> when it’s saved in the editor.</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/autocompile-emacs-configuration</span> <span class="p">()</span>
+  <span class="s">"Automatically compile changes to ~/.emacs"</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">eq</span> <span class="nv">major-mode</span> <span class="ss">'emacs-lisp-mode</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">sodaware/compile-elisp-file</span> <span class="s">"~/emacs"</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/compile-elisp-file</span> <span class="p">(</span><span class="nv">file-name</span><span class="p">)</span>
+  <span class="s">"Byte-compile FILE-NAME if it exists."</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">elisp-file</span> <span class="p">(</span><span class="nv">expand-file-name</span> <span class="nv">file-name</span><span class="p">)))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">string=</span> <span class="p">(</span><span class="nv">buffer-file-name</span><span class="p">)</span> <span class="p">(</span><span class="nv">file-chase-links</span> <span class="nv">elisp-file</span><span class="p">))</span>
+        <span class="p">(</span><span class="nv">byte-compile-file</span> <span class="nv">elisp-file</span><span class="p">))))</span>
+
+<span class="c1">;; Run the auto-compile function when an Elisp file is saved</span>
+<span class="p">(</span><span class="nv">add-hook</span> <span class="ss">'after-save-hook</span> <span class="nf">#'</span><span class="nv">sodaware/autocompile-emacs-configuration</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I have a couple of different files in my <code class="language-plaintext highlighter-rouge">~/.emacs.d/</code> directory, but it’s easy
+to modify the <code class="language-plaintext highlighter-rouge">sodaware/autocompile-emacs-configuration</code> function to support
+multiple files:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/autocompile-emacs-configuration</span> <span class="p">()</span>
+  <span class="s">"Automatically compile changes to ~/.emacs"</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">eq</span> <span class="nv">major-mode</span> <span class="ss">'emacs-lisp-mode</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">mapc</span> <span class="nf">#'</span><span class="nv">sodaware/compile-elisp-file</span>
+          <span class="p">(</span><span class="nb">list</span> <span class="s">"~/.emacs"</span>
+                <span class="s">"~/.emacs.d/init.el"</span>
+                <span class="s">"~/.emacs.d/my-email.el"</span>
+                <span class="c1">;; ... and more</span>
+                <span class="s">"~/.emacs.d/my-news.el"</span><span class="p">))))</span>
+</code></pre></div></div>
+:ET

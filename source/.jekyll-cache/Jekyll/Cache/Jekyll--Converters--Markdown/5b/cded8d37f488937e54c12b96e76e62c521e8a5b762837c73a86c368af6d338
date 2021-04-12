@@ -1,0 +1,104 @@
+I"B<p>This is a little script I wrote to send my logged
+<a href="https://getharvest.com/">Harvest</a> hours to a <a href="https://beeminder.com">Beeminder</a>
+goal. It’s possible to do this via IFTTT or Zapier, but I had a couple of
+additional requirements:</p>
+
+<ol>
+  <li>Should only submit data at the end of the day</li>
+  <li>Only wanted a single data-point in my Beeminder graph</li>
+  <li>Wanted each entry to be rounded up to the nearest 15 minutes</li>
+</ol>
+
+<p>Let’s take them in order.</p>
+
+<h3 id="1---only-submit-data-at-the-end-of-the-day">1 - Only submit data at the end of the day</h3>
+
+<p>I use cron to run the script every night at 10:55pm. I thought about running it at
+midnight, but the deadline stops me from working too late.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>55 22 * * * cd &lt;script directory&gt; &amp;&amp; ./log_time &gt; /&lt;script directory&gt;/bee.log
+</code></pre></div></div>
+
+<h3 id="2---only-want-a-single-data-point-in-my-graph">2 - Only want a single data point in my graph</h3>
+
+<p>Nothing too complex here, the script fetches all individual entries for the day
+and adds them together.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">client</span> <span class="o">=</span> <span class="no">Harvest</span><span class="p">.</span><span class="nf">client</span><span class="p">(</span>
+  <span class="ss">subdomain: </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HARVEST_SUBDOMAIN'</span><span class="p">],</span>
+  <span class="ss">username:  </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HARVEST_USERNAME'</span><span class="p">],</span>
+  <span class="ss">password:  </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HARVEST_PASSWORD'</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">todays_entries</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">time</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">total_time</span>     <span class="o">=</span> <span class="mi">0</span>
+
+<span class="n">todays_entries</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">entry</span><span class="o">|</span>
+  <span class="n">total_time</span> <span class="o">+=</span> <span class="n">entry</span><span class="p">.</span><span class="nf">hours</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>I’d like to replace the <code class="language-plaintext highlighter-rouge">each</code> loop with something more Ruby-ish, but for now it works.</p>
+
+<h3 id="3---round-all-entries-up-to-the-nearest-15-minutes">3 - Round all entries up to the nearest 15 minutes</h3>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Round up a floating point time value to the nearest quarter hour.</span>
+<span class="k">def</span> <span class="nf">round_to_quarter_hour</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="mi">4</span><span class="p">).</span><span class="nf">ceil</span> <span class="o">/</span> <span class="mf">4.0</span>
+<span class="k">end</span>
+
+<span class="c1"># Update the sum loop</span>
+<span class="n">todays_entries</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">entry</span><span class="o">|</span>
+  <span class="n">total_time</span> <span class="o">+=</span> <span class="n">round_to_quarter_hour</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="nf">hours</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h3 id="the-finished-script">The finished script</h3>
+
+<p>All configuration details are stored in a <code class="language-plaintext highlighter-rouge">.env</code> file in the script directory.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># frozen_string_literal: true</span>
+
+<span class="nb">require</span> <span class="s1">'beeminder'</span>
+<span class="nb">require</span> <span class="s1">'dotenv/load'</span>
+<span class="nb">require</span> <span class="s1">'harvested'</span>
+
+<span class="c1"># Round up a floating point time value to the nearest quarter hour.</span>
+<span class="k">def</span> <span class="nf">round_to_quarter_hour</span><span class="p">(</span><span class="n">time</span><span class="p">)</span>
+  <span class="p">(</span><span class="n">time</span> <span class="o">*</span> <span class="mi">4</span><span class="p">).</span><span class="nf">ceil</span> <span class="o">/</span> <span class="mf">4.0</span>
+<span class="k">end</span>
+
+<span class="nb">puts</span> <span class="s1">'Fetching data...'</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="no">Harvest</span><span class="p">.</span><span class="nf">client</span><span class="p">(</span>
+  <span class="ss">subdomain: </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HARVEST_SUBDOMAIN'</span><span class="p">],</span>
+  <span class="ss">username:  </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HARVEST_USERNAME'</span><span class="p">],</span>
+  <span class="ss">password:  </span><span class="no">ENV</span><span class="p">[</span><span class="s1">'HARVEST_PASSWORD'</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="c1"># Get all entries for today.</span>
+<span class="n">todays_entries</span> <span class="o">=</span> <span class="n">client</span><span class="p">.</span><span class="nf">time</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">total_time</span>     <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Round up each entry to nearest 0.25.</span>
+<span class="n">todays_entries</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">entry</span><span class="o">|</span>
+  <span class="n">total_time</span> <span class="o">+=</span> <span class="n">round_to_quarter_hour</span><span class="p">(</span><span class="n">entry</span><span class="p">.</span><span class="nf">hours</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="c1"># Submit the value to beeminder.</span>
+<span class="n">beeminder</span> <span class="o">=</span> <span class="no">Beeminder</span><span class="o">::</span><span class="no">User</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span>
+  <span class="no">ENV</span><span class="p">[</span><span class="s1">'BEEMINDER_TOKEN'</span><span class="p">],</span>
+  <span class="ss">auth_type: :personal</span>
+<span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s1">'Sending data...'</span>
+
+<span class="n">beeminder</span><span class="p">.</span><span class="nf">send</span><span class="p">(</span>
+  <span class="no">ENV</span><span class="p">[</span><span class="s1">'BEEMINDER_GOAL'</span><span class="p">],</span>
+  <span class="n">total_time</span><span class="p">,</span>
+  <span class="s2">"AUTO: </span><span class="si">#{</span><span class="n">total_time</span><span class="si">}</span><span class="s2"> hours billed for day"</span>
+<span class="p">)</span>
+
+<span class="nb">puts</span> <span class="s1">'Done'</span>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,24 @@
+I"�<p>This is my first attempt at writing a major mode for Emacs. I’m pretty sure I’m
+the only person that will ever use it, but it may be useful when learning how to
+build major modes.</p>
+
+<p>Here’s an example <code class="language-plaintext highlighter-rouge">soda</code> file, as used in <a href="http://www.shiningonline.org/">Shining Online</a>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[t:template,n:equipment_silver_ring] {
+    doc               = "Silver Ring";
+    specializes       = base_equipment_ring;
+
+    equipment:defence = 2;
+    equipment:luck    = 1;
+
+    [item] {
+        display_name  = "Silver Ring";
+        icon          = "demo5.icons.equipment.silver_ring";
+        description   = "A silver ring";
+        base_price    = 3000;
+    }
+}
+</code></pre></div></div>
+
+<p>It’s sort of a cross between an ini file and json. But not as good as either.</p>
+:ET

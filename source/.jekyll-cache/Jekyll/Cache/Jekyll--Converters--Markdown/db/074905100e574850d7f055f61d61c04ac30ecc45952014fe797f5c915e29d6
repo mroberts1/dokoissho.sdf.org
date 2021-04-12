@@ -1,0 +1,37 @@
+I"�	<p>This snippet moves the currently selected region to a new function and replaces
+it with a call to that function. It’s not meant for heavy refactoring but it’s
+ok for quick bits of code cleanup.</p>
+
+<p><img src="/assets/images/php-extract-function.gif" alt="Terrible Example" class="centered bordered" /></p>
+
+<p>A little bit of work needs to be done after extracting code, but it’s slightly
+quicker than doing the whole thing manually.</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">php-extract-function</span> <span class="p">(</span><span class="nv">start</span> <span class="nv">end</span> <span class="nv">name</span><span class="p">)</span>
+  <span class="s">"Moves the currently marked text to a new function"</span>
+
+  <span class="c1">;; Prompt for new method name</span>
+  <span class="p">(</span><span class="nv">interactive</span> <span class="s">"r\nsNew Function Name: "</span><span class="p">)</span>
+
+  <span class="c1">;; Kill selected region</span>
+  <span class="p">(</span><span class="nv">kill-region</span> <span class="nv">start</span> <span class="nv">end</span><span class="p">)</span>
+
+  <span class="c1">;; Insert call to new function</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="s">"\n"</span> <span class="nv">name</span> <span class="s">"();\n"</span><span class="p">)</span>
+
+  <span class="c1">;; Set a marker so we can jump back to this line</span>
+  <span class="p">(</span><span class="nv">point-to-register</span> <span class="mi">1</span><span class="p">)</span>
+
+  <span class="c1">;; Move to end of current function</span>
+  <span class="p">(</span><span class="nv">php-end-of-defun</span><span class="p">)</span>
+
+  <span class="c1">;; Insert new function</span>
+  <span class="p">(</span><span class="nv">insert</span> <span class="s">"\n\nfunction "</span> <span class="nv">name</span> <span class="s">"() {\n"</span>
+	  <span class="p">(</span><span class="nb">car</span> <span class="nv">kill-ring-yank-pointer</span><span class="p">)</span>
+	  <span class="s">"\n}\n"</span><span class="p">)</span>
+
+  <span class="c1">;; Jump back to where function was snipped from</span>
+  <span class="p">(</span><span class="nv">jump-to-register</span> <span class="mi">1</span><span class="p">))</span>
+</code></pre></div></div>
+
+:ET

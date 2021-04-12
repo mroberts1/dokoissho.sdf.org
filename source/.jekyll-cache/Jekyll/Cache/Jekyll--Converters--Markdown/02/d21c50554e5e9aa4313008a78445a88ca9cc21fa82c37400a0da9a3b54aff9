@@ -1,0 +1,118 @@
+I"=<p><a href="https://github.com/akicho8/string-inflection">string-inflection</a> is a neat
+Emacs package that adds functionality to quickly switch text between <code class="language-plaintext highlighter-rouge">CamelCase</code>,
+<code class="language-plaintext highlighter-rouge">snake_case</code> and <code class="language-plaintext highlighter-rouge">kebab-case</code>.</p>
+
+<p>It adds functions that can be called using <code class="language-plaintext highlighter-rouge">M-x</code> or bound to a shortcut. All of
+them can select the word at the current point, so no region needs to be marked
+before using them.</p>
+
+<h2 id="conversion-functions">Conversion Functions</h2>
+
+<h3 id="string-inflection-upcase"><code class="language-plaintext highlighter-rouge">string-inflection-upcase</code></h3>
+
+<p>Converts text to <code class="language-plaintext highlighter-rouge">UPPER_SNAKE_CASE</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ExampleName</code> becomes <code class="language-plaintext highlighter-rouge">EXAMPLE_NAME</code></li>
+  <li><code class="language-plaintext highlighter-rouge">another-name</code> becomes <code class="language-plaintext highlighter-rouge">ANOTHER_NAME</code></li>
+</ul>
+
+<h3 id="string-inflection-camelcase"><code class="language-plaintext highlighter-rouge">string-inflection-camelcase</code></h3>
+
+<p>Converts text to <code class="language-plaintext highlighter-rouge">CamelCase</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">EXAMPLE_NAME</code> becomes <code class="language-plaintext highlighter-rouge">ExampleName</code></li>
+  <li><code class="language-plaintext highlighter-rouge">another-name</code> becomes <code class="language-plaintext highlighter-rouge">AnotherName</code></li>
+</ul>
+
+<h3 id="string-inflection-underscore"><code class="language-plaintext highlighter-rouge">string-inflection-underscore</code></h3>
+
+<p>Converts text to <code class="language-plaintext highlighter-rouge">underscore_case</code>. Pretty much the same as
+<code class="language-plaintext highlighter-rouge">string-inflection-upcase</code> but with lowercase letters.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ExampleName</code> becomes <code class="language-plaintext highlighter-rouge">example_name</code></li>
+  <li><code class="language-plaintext highlighter-rouge">another-name</code> becomes <code class="language-plaintext highlighter-rouge">another_name</code></li>
+</ul>
+
+<h3 id="string-inflection-kebab-case"><code class="language-plaintext highlighter-rouge">string-inflection-kebab-case</code></h3>
+
+<p>Converts text to <code class="language-plaintext highlighter-rouge">kebab-case</code>. Also known as <code class="language-plaintext highlighter-rouge">lisp-case</code> or <code class="language-plaintext highlighter-rouge">dash-case</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ExampleName</code> becomes <code class="language-plaintext highlighter-rouge">example-name</code></li>
+  <li><code class="language-plaintext highlighter-rouge">ANOTHER_NAME</code> becomes <code class="language-plaintext highlighter-rouge">another-name</code></li>
+</ul>
+
+<h3 id="string-inflection-lower-camelcase"><code class="language-plaintext highlighter-rouge">string-inflection-lower-camelcase</code></h3>
+
+<p>Converts to <code class="language-plaintext highlighter-rouge">lowerCamelCase</code>.</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">EXAMPLE_NAME</code> becomes <code class="language-plaintext highlighter-rouge">exampleName</code></li>
+  <li><code class="language-plaintext highlighter-rouge">another-name</code> becomes <code class="language-plaintext highlighter-rouge">anotherName</code></li>
+</ul>
+
+<h2 id="cycling-cases">Cycling Cases</h2>
+
+<p>There are a few additional functions that cycle between cases.</p>
+
+<h3 id="string-inflection-ruby-style-cycle"><code class="language-plaintext highlighter-rouge">string-inflection-ruby-style-cycle</code></h3>
+
+<p>Cycles between:</p>
+<ul>
+  <li>Lower snake case</li>
+  <li>Upper snake case</li>
+  <li>Upper camel case</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emacs_lisp =&gt; EMACS_LISP =&gt; EmacsLisp =&gt; emacs_lisp
+</code></pre></div></div>
+
+<h3 id="string-inflection-python-style-cycle"><code class="language-plaintext highlighter-rouge">string-inflection-python-style-cycle</code></h3>
+
+<p>Cycles between:</p>
+<ul>
+  <li>Lower snake case</li>
+  <li>Upper snake case</li>
+  <li>Upper camel case</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emacs_lisp =&gt; EMACS_LISP =&gt; EmacsLisp =&gt; emacs_lisp
+</code></pre></div></div>
+
+<h3 id="string-inflection-java-style-cycle"><code class="language-plaintext highlighter-rouge">string-inflection-java-style-cycle</code></h3>
+
+<p>Cycles between:</p>
+<ul>
+  <li>Lower camel case</li>
+  <li>Upper snake case</li>
+  <li>Upper camel case</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emacsLisp =&gt; EMACS_LISP =&gt; EmacsLisp =&gt; emacsLisp
+</code></pre></div></div>
+
+<h3 id="string-inflection-all-cycle"><code class="language-plaintext highlighter-rouge">string-inflection-all-cycle</code></h3>
+
+<p>Cycles between all available cases:</p>
+<ul>
+  <li>Lower snake case</li>
+  <li>Upper snake case</li>
+  <li>Upper camel case</li>
+  <li>Lower camel case</li>
+  <li>Kebab case</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emacs_lisp =&gt; EMACS_LISP =&gt; EmacsLisp =&gt; emacsLisp =&gt; emacs-lisp =&gt; emacs_lisp
+</code></pre></div></div>
+
+<hr />
+
+<p class="project-information">
+    <a href="https://github.com/akicho8/string-inflection" class="button">
+        View string-inflection on GitHub
+    </a>
+</p>
+:ET

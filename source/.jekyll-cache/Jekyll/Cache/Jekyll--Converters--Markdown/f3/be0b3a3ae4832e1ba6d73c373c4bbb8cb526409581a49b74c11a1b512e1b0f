@@ -1,0 +1,113 @@
+I"t<p>The <a href="/log/">logs section</a> of this site uses some simple markdown for
+entries. An example looks like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>---
+title: 2019
+layout: log
+---
+
+## 2019-04-15
+
+* This is a log entry.
+</code></pre></div></div>
+
+<p>I wanted to try writing a little bit of elisp code to streamline the process of
+adding new entries. It’s not exactly time-consuming to add a few new lines by
+hand, but reducing friction means I’m more likely to keep things updated.</p>
+
+<p>Each log file is stored in <code class="language-plaintext highlighter-rouge">_logs</code> inside the jekyll source directory:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- src
+  - _posts
+  - _notes
+  - _logs
+    - 2019.md
+</code></pre></div></div>
+
+<p>In the end I came up with the following code:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defvar</span> <span class="nv">sodaware/sdf-logs-path</span> <span class="s">"/path/to/jekyll/src/_logs/"</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/sdf-log</span> <span class="p">()</span>
+  <span class="s">"Add a new entry to the current sodaware.sdf.org log."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="k">let*</span> <span class="p">((</span><span class="nv">current-year</span> <span class="p">(</span><span class="nv">format-time-string</span> <span class="s">"%Y"</span><span class="p">))</span>
+         <span class="p">(</span><span class="nv">current-date</span> <span class="p">(</span><span class="nv">format-time-string</span> <span class="s">"%Y-%m-%d"</span><span class="p">))</span>
+         <span class="p">(</span><span class="nv">log-file</span>     <span class="p">(</span><span class="nb">format</span> <span class="s">"%s%s.md"</span> <span class="nv">sodaware/sdf-logs-path</span> <span class="nv">current-year</span><span class="p">)))</span>
+    <span class="c1">;; Find the log file.</span>
+    <span class="p">(</span><span class="nv">find-file</span> <span class="nv">log-file</span><span class="p">)</span>
+
+    <span class="c1">;; Add Jekyll markup if file is empty.</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">=</span> <span class="mi">0</span> <span class="p">(</span><span class="nv">buffer-size</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">insert</span> <span class="s">"---"</span> <span class="s">"\n"</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">insert</span> <span class="s">"title: "</span> <span class="nv">current-year</span> <span class="s">"\n"</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">insert</span> <span class="s">"layout: log\n"</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">insert</span> <span class="s">"---"</span> <span class="s">"\n\n"</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">insert</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"## %s\n\n"</span> <span class="nv">current-date</span><span class="p">)))</span>
+
+    <span class="c1">;; Attempt to find the current heading. If not found, insert it.</span>
+    <span class="p">(</span><span class="nv">sodaware/find-or-insert-heading</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"## %s"</span> <span class="nv">current-date</span><span class="p">)</span> <span class="s">"## "</span><span class="p">)</span>
+
+    <span class="c1">;; Insert after.</span>
+    <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">insert</span> <span class="s">"* \n"</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">move-end-of-line</span> <span class="mi">1</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/find-or-insert-heading</span> <span class="p">(</span><span class="nv">heading</span> <span class="nv">start-of-heading</span><span class="p">)</span>
+  <span class="s">"Find or insert HEADING before START-OF-HEADING in the current buffer."</span>
+  <span class="c1">;; Go to the start of the file.</span>
+  <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">))</span>
+
+  <span class="c1">;; Search for the heading. If not found, find the start of the first heading</span>
+  <span class="c1">;; and insert before that.</span>
+  <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nv">search-forward</span> <span class="nv">heading</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">search-forward</span> <span class="nv">start-of-heading</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">move-beginning-of-line</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">insert</span> <span class="s">"\n\n"</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-2</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">insert</span> <span class="nv">heading</span> <span class="s">"\n"</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">forward-line</span> <span class="mi">-1</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="nv">move-beginning-of-line</span> <span class="mi">1</span><span class="p">))</span>
+
+</code></pre></div></div>
+
+<h2 id="notes">Notes</h2>
+
+<ul>
+  <li>
+    <dl>
+      <dt><code class="language-plaintext highlighter-rouge">sodaware/sdf-logs-path</code></dt>
+      <dd>The full path of the log directory.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><code class="language-plaintext highlighter-rouge">sodaware/find-or-insert-heading</code></dt>
+      <dd>A utility function function that searches for a headline in the current buffer. If the
+headline is not found, it will be inserted above the first headline in the
+file. It’s not Markdown specific, so something like
+<code class="language-plaintext highlighter-rouge">(sodaware/find-or-insert-heading "** heading" "** ")</code> would work for org-mode
+headlines.</dd>
+    </dl>
+  </li>
+  <li>
+    <dl>
+      <dt><code class="language-plaintext highlighter-rouge">sodaware/sdf-log</code></dt>
+      <dd>The main function to call when adding a new entry. It opens the log file for
+the current year and inserts a timestamp heading before the first headline. If
+the file does not exist, it is created and filled with Jekyll markup and the
+first headline.</dd>
+    </dl>
+  </li>
+</ul>
+
+<h2 id="future-improvements">Future improvements</h2>
+
+<p>I’m not 100% happy with how things currently work. I’d like to split things up
+further so I can reuse the main note creation function for other projects. I
+often keep project development logs in markdown format and it would be handy to
+use the same skeleton code for adding entries to them.</p>
+:ET

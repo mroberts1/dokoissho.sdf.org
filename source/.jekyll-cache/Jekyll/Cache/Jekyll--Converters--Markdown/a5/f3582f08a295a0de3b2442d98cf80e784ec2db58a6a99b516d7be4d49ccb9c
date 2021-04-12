@@ -1,0 +1,10 @@
+I"�<p>MaxCop is a simple command-line tool for finding BlitzMax formatting
+issues. It’s similar to tools like <a href="https://www.rubocop.org/">RuboCop</a>, but not
+as good.</p>
+
+<p><img src="/assets/images/maxcop-screenshot.png" alt="MaxCop" class="centered" /></p>
+
+<p>It can currently scan for 15 different rule violations, mostly around Type
+sizing and member names. Eventually I’d like to integrate it into Emacs so code
+issues can be underlined.</p>
+:ET

@@ -1,0 +1,19 @@
+I"¸<p>Thereâ€™s a couple of ways to do this. <code class="language-plaintext highlighter-rouge">with-open-file</code> takes care of opening and
+closing the stream:</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">file-get-contents</span> <span class="p">(</span><span class="nv">filename</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">with-open-file</span> <span class="p">(</span><span class="nc">stream</span> <span class="nv">filename</span><span class="p">)</span>
+    <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">contents</span> <span class="p">(</span><span class="nb">make-string</span> <span class="p">(</span><span class="nb">file-length</span> <span class="nc">stream</span><span class="p">))))</span>
+      <span class="p">(</span><span class="nb">read-sequence</span> <span class="nv">contents</span> <span class="nc">stream</span><span class="p">)</span>
+      <span class="nv">contents</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>To return the file as a list of lines instead, the <code class="language-plaintext highlighter-rouge">loop</code> macro can be used:</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">file-get-lines</span> <span class="p">(</span><span class="nv">filename</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">with-open-file</span> <span class="p">(</span><span class="nc">stream</span> <span class="nv">filename</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">loop</span> <span class="nv">for</span> <span class="nv">line</span> <span class="nb">=</span> <span class="p">(</span><span class="nb">read-line</span> <span class="nc">stream</span> <span class="no">nil</span><span class="p">)</span>
+          <span class="nv">while</span> <span class="nv">line</span>
+          <span class="nv">collect</span> <span class="nv">line</span><span class="p">)))</span>
+</code></pre></div></div>
+:ET

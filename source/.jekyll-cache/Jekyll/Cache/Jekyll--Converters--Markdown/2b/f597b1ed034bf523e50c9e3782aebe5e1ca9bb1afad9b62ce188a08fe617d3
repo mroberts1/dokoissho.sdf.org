@@ -1,0 +1,28 @@
+I"H<p>PHP doesn’t require arrays to be aligned in a specific way, but certain coding
+standards will raise a warning if they’re aren’t aligned correctly. Doing this
+by hand can be a pain.</p>
+
+<p><a href="https://github.com/tetsujin/emacs-php-align">emacs-php-align</a> is a small
+extension that can automatically align arrays. It’s not available on Melpa, but
+it’s fairly quick to setup.</p>
+
+<p>Once it’s installed, calling <code class="language-plaintext highlighter-rouge">M-x align-current</code> will align an array and turn this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$my_array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'key_two'</span> <span class="o">=&gt;</span> <span class="s1">'Another value'</span><span class="p">,</span>
+    <span class="s1">'really_long_key'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'k'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>into this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$my_array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'key'</span>             <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'key_two'</span>         <span class="o">=&gt;</span> <span class="s1">'Another value'</span><span class="p">,</span>
+    <span class="s1">'really_long_key'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'k'</span>               <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+<span class="p">);</span>
+</code></pre></div></div>
+:ET

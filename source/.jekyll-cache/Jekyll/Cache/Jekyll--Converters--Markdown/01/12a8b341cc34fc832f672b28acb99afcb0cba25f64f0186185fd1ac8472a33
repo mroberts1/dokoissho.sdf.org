@@ -1,0 +1,19 @@
+I"©<p>Add the following to the <code class="language-plaintext highlighter-rouge">Application</code> class in <code class="language-plaintext highlighter-rouge">config/application.rb</code>:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">default_url_options</span><span class="p">[</span><span class="ss">:trailing_slash</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
+</code></pre></div></div>
+
+<p>For example, the application <code class="language-plaintext highlighter-rouge">MyApplicationName</code> will look something like this:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">module</span> <span class="nn">MyApplicationName</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="no">Rails</span><span class="o">::</span><span class="no">Application</span>
+    <span class="n">default_url_options</span><span class="p">[</span><span class="ss">:trailing_slash</span><span class="p">]</span> <span class="o">=</span> <span class="kp">true</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>The Rails server will need restarting for the new settings to take effect.</p>
+
+<p>This solution works for Rails 5 and will add a trailing slash to all urls
+automatically.</p>
+:ET

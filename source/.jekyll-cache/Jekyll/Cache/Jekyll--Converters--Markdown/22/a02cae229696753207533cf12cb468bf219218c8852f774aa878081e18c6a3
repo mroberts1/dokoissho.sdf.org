@@ -1,0 +1,47 @@
+I"*<p><a href="https://github.com/roswell/roswell">Roswell</a> is a command line tool used to
+install and manage Common Lisp implementations. It’s similar to Ruby’s
+<a href="https://rvm.io/">rvm</a> and Python’s <a href="https://github.com/yyuu/pyenv">pyenv</a>.</p>
+
+<p>There are some binaries available, but none for CentOS. The following will get
+Roswell up and running on a fresh CentOS 7.2 installation:</p>
+
+<h2 id="setting-up-centos">Setting up CentOS</h2>
+
+<p>Run the following as <code class="language-plaintext highlighter-rouge">root</code> to install dependencies required for building
+Roswell:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum <span class="nb">install </span>git automake gcc gcc-c++ make openssl-devel curl-devel bzip2
+</code></pre></div></div>
+
+<h2 id="fetching-and-installing-roswell">Fetching and installing Roswell</h2>
+
+<p>These can be run as any user:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone <span class="nt">-b</span> release https://github.com/roswell/roswell.git
+<span class="nb">cd </span>roswell
+sh bootstrap
+./configure
+make
+</code></pre></div></div>
+
+<p>And as <code class="language-plaintext highlighter-rouge">root</code></p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>make <span class="nb">install</span>
+</code></pre></div></div>
+
+<p>And finally (as the original user)…</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros setup
+</code></pre></div></div>
+
+<p>Roswell will now be installed and available globally.</p>
+
+<h2 id="installing-and-running-a-lisp">Installing and running a Lisp</h2>
+
+<p>To install a Lisp binary, such as SBCL, run:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ros install sbcl-bin
+</code></pre></div></div>
+
+<p>SBCL can then be started using <code class="language-plaintext highlighter-rouge">ros run</code>.</p>
+:ET

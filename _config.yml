@@ -2,10 +2,10 @@
 permalink: /blog/:title/
 
 # Site config
-name: sodaware.sdf.org
-description: Project Dump
+name: dokoissho.sdf.org
+description: Martin website
 google_verification: null
-url: http://sodaware.sdf.org
+url: http://dokoissho.sdf.org
 
 source:      ./source
 plugins_dir: ./plugins

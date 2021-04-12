@@ -1,0 +1,108 @@
+I"g<p>A few days ago I was trying to track down a performance issue in a project that
+loads and parses JSON. I wrote a couple of benchmarks in different languages to
+see if it was a language issue, a library issue, or something else entirely.</p>
+
+<p>One thing that stood out was my BlitzMax test was parsing quickly, but it took
+an age to load the initial data.</p>
+
+<p>Naturally I had to drop everything to try and figure out what was happening.</p>
+
+<h2 id="the-problem">The problem</h2>
+
+<p>The file to be loaded was around 900KB, and the following function was used to
+load it into memory:</p>
+
+<pre><code class="language-blitzmax">Function LoadFileAsString:String(url:Object)
+    Local streamIn:TStream = ReadFile(url)
+    Local contents:String  = ""
+
+    While Not(file.Eof())
+        contents:+ file.ReadLine() + "~n"
+    Wend
+
+    Return contents
+End Function
+</code></pre>
+
+<p>Reading the file byte-by-byte (using <code class="language-plaintext highlighter-rouge">ReadByte</code>) is far slower than using
+<code class="language-plaintext highlighter-rouge">ReadLine</code>. This approach works well enough on small files (&lt; 20kB), but gets
+very slow as they get larger.</p>
+
+<h2 id="the-solution">The solution</h2>
+
+<p>I figured loading everything into a bank and converting that to a string would
+be quicker. After all, a string is just a collection of bytes with a null
+terminator, and a BlitzMax bank is a collection of bytes.</p>
+
+<p>The first approach was to read the bank using <code class="language-plaintext highlighter-rouge">LoadBank</code> and then building a
+string using <code class="language-plaintext highlighter-rouge">PeekByte</code> for each character.</p>
+
+<p>The results were disappointing.</p>
+
+<p>After reading the documentation, I found a few functions that looked to do
+exactly what I needed.</p>
+
+<p>The built-in <code class="language-plaintext highlighter-rouge">String</code> type comes with <code class="language-plaintext highlighter-rouge">FromCString</code>, a function that can convert
+a C-style string into a BlitzMax one. C-style strings are passed around in
+BlitzMax as a <code class="language-plaintext highlighter-rouge">Byte Ptr</code> type.</p>
+
+<p>Even better, BlitzMax banks can use <code class="language-plaintext highlighter-rouge">LockBank</code> to return a pointer to their
+contents as a <code class="language-plaintext highlighter-rouge">Byte Ptr</code>.</p>
+
+<p>The new code looked something like this:</p>
+
+<pre><code class="language-blitzmax">Function LoadFileAsString:String(url:Object)
+
+    ' Create a bank and load the file contents.
+    Local bank:TBank = LoadBank(url)
+
+    ' Ensure bank finishes with a 0 byte.
+    ' This prevents the string from having junk bytes at the end.
+    Local size:Int = BankSize(bank)
+    ResizeBank(bank, size + 1)
+    PokeByte(bank, size, 0)
+
+    ' Get bank contents and convert to a string
+    Local buffer:Byte Ptr = LockBank(bank)
+    Local content:String  = String.FromCString(buffer)
+
+    ' Cleanup.
+    UnlockBank(bank)
+    bank = null
+
+    Return content
+
+End Function
+</code></pre>
+
+<p>One important addition is adding a null terminator to the end of the loaded
+content. Because <code class="language-plaintext highlighter-rouge">FromCString</code> expects a null byte terminator, it will continue
+to read from memory until it finds one. This can lead to junk data at the end of
+the string.</p>
+
+<h2 id="performance">Performance</h2>
+
+<p>The following benchmark is for a 900KB text file.</p>
+
+<table class="table--striped table--fancy table--function-map">
+  <thead>
+    <tr>
+      <th>Method</th>
+      <th>Average Time (ms)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Method 1 (ReadLine)</td>
+      <td>933.18</td>
+    </tr>
+    <tr>
+      <td>Method 2 (LoadBank)</td>
+      <td>2.8</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Sometimes <a href="http://catb.org/jargon/html/Y/yak-shaving.html">yak shaving</a> comes in
+handy.</p>
+:ET

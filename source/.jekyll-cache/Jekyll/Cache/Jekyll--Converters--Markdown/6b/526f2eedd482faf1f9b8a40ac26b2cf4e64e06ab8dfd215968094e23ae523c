@@ -1,0 +1,45 @@
+I"�<h2 id="2018-04-13">2018-04-13</h2>
+
+<ul>
+  <li>Released an updated version of
+<a href="https://github.com/sodaware/beeminder.el/">beeminder.el</a>. Much cleaner
+internals and the groundwork is laid for some new features.</li>
+</ul>
+
+<h2 id="2018-04-07">2018-04-07</h2>
+
+<ul>
+  <li>Finally added filter chains to <a href="https://www.sodaware.net/blam/">blam</a> which
+make it possible to modify the contents of a file during copy operations. They
+can be used to insert the current date into a source file, or to strip
+whitespace etc.</li>
+</ul>
+
+<h2 id="2018-04-05">2018-04-05</h2>
+
+<ul>
+  <li>Made some big improvements to <a href="/projects/blitzmax-mode/">blitzmax-mode</a>. Now
+supports automatic indentation, syntax highlighting, multi-line comments and
+more.</li>
+</ul>
+
+<hr />
+
+<h2 id="2018-03-12">2018-03-12</h2>
+
+<ul>
+  <li>Published <a href="https://www.philnewton.net/blog/php-mode-project-indentation/">Per-project indentation with
+php-mode</a> on
+philnewton.net.</li>
+</ul>
+
+<hr />
+
+<h2 id="2018-02-15">2018-02-15</h2>
+
+<ul>
+  <li>Released “<a href="https://garlicspy.com/">garlic_spy</a>”, a really simple API for
+querying the garlicoin blockchain. Tried out two new pieces of tech - ansible
+and mina. Worked pretty well.</li>
+</ul>
+:ET

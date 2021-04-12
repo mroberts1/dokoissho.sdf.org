@@ -1,0 +1,49 @@
+I"*<p>sodaware.mod is a whole bunch of modules I’ve created for BlitzMax. It’s a bit
+of a mixed bag; there are modules for working with the console, an attempt at
+dependency injection and even a custom file format (that nobody should ever
+use).</p>
+
+<p>Enjoy!</p>
+
+<h2 id="module-list">Module List</h2>
+
+<dl>
+  <dt><strong>blitzmax_array.mod</strong></dt>
+  <dd>Merge and filter commands for arrays and linked lists.</dd>
+  <dt><strong>blitzmax_ascii</strong></dt>
+  <dd>Handy constants for working with ASCII values.</dd>
+  <dt><strong>blitzmax_injection</strong></dt>
+  <dd>Dependency injection framework.</dd>
+  <dt><strong>console_color</strong></dt>
+  <dd>Add coloured text to terminal output.</dd>
+  <dt><strong>console_commandline</strong></dt>
+  <dd>Parse command line arguments and load them into an object.</dd>
+  <dt><strong>console_progressbar</strong></dt>
+  <dd>Add a progress bar to terminal applications.</dd>
+  <dt><strong>console_rainbow</strong></dt>
+  <dd>Rainbow text on terminal.</dd>
+  <dt><strong>file_config</strong></dt>
+  <dd>General purpose configuration object.</dd>
+  <dt><strong>file_config_iniserializer</strong></dt>
+  <dd>Load configuration from an INI file.</dd>
+  <dt><strong>file_config_sodaserializer</strong></dt>
+  <dd>Load configuration from a SODA file.</dd>
+  <dt><strong>file_fnmatch</strong></dt>
+  <dd>File name pattern matcher.</dd>
+  <dt><strong>file_ini</strong></dt>
+  <dd>Load and save INI files.</dd>
+  <dt><strong>file_soda</strong></dt>
+  <dd>Custom file format that supports nested groups.</dd>
+  <dt><strong>file_util</strong></dt>
+  <dd>Utility functions for working with files. Includes fast reading and directory
+listing.</dd>
+  <dt><strong>file_ziphelper</strong></dt>
+  <dd>Helper functions for working with ZIP files.</dd>
+  <dt><strong>objectbag</strong></dt>
+  <dd>Fast storage of objects in a flexible array.</dd>
+  <dt><strong>simple_expressions</strong></dt>
+  <dd>Parse and execute simple expressions in strings.</dd>
+  <dt><strong>stringtable</strong></dt>
+  <dd>Strongly-typed TMap for working with strings.</dd>
+</dl>
+:ET

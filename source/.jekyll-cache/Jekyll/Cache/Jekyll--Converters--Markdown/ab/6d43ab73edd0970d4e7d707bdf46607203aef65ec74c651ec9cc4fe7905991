@@ -1,0 +1,49 @@
+I"[<p><a href="http://www.craftroulette.com/">Craft Roulette</a> needed some simple data caching
+and this is what I came up with. It’s not great, but it does the trick.</p>
+
+<p>It lives in a single file and is targeted towards quick and simple apps that
+just need a little caching. There are much, much better PHP caching libraries
+out there (like <a href="http://www.stashphp.com/">Stash</a> or
+<a href="https://github.com/desarrolla2/Cache">Cache</a>) for heavy duty caching
+requirements.</p>
+
+<h2 id="example-usage">Example usage</h2>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">require_once</span> <span class="s1">'vault.php'</span><span class="p">;</span>
+
+<span class="c1">// Setup vault with APC as the storage engine.</span>
+<span class="nc">Vault</span><span class="o">::</span><span class="nf">setup</span><span class="p">(</span> <span class="s1">'APC'</span> <span class="p">);</span>
+
+<span class="c1">// Store something with a default lifespan (3600 seconds).</span>
+<span class="nc">Vault</span><span class="o">::</span><span class="nf">store</span><span class="p">(</span> <span class="s1">'my_key'</span><span class="p">,</span> <span class="s1">'hello, world'</span> <span class="p">);</span>
+
+<span class="c1">// Fetch it.</span>
+<span class="k">echo</span> <span class="nc">Vault</span><span class="o">::</span><span class="nf">fetch</span><span class="p">(</span> <span class="s1">'my_key'</span> <span class="p">);</span>
+
+<span class="c1">// Clear the cache.</span>
+<span class="nc">Vault</span><span class="o">::</span><span class="nf">clear</span><span class="p">();</span>
+
+</code></pre></div></div>
+
+<p>Items stored with Vault will expire after 1 hour, but this can be altered when
+storing items in the cache.</p>
+
+<h2 id="example-usage-with-expiration-times">Example usage with expiration times</h2>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+
+<span class="c1">// Store something for a couple of seconds.</span>
+<span class="nc">Vault</span><span class="o">::</span><span class="nf">store</span><span class="p">(</span> <span class="s1">'short_lived_key'</span><span class="p">,</span> <span class="s1">'I will be gone soon'</span><span class="p">,</span> <span class="mi">3</span> <span class="p">);</span>
+
+<span class="c1">// Show it exists.</span>
+<span class="k">echo</span> <span class="nc">Vault</span><span class="o">::</span><span class="nf">fetch</span><span class="p">(</span> <span class="s1">'short_lived_key'</span> <span class="p">);</span>
+<span class="c1"># =&gt; "I will be gone soon"</span>
+
+<span class="c1">// Wait until this item has expired.</span>
+<span class="nb">sleep</span><span class="p">(</span> <span class="mi">4</span> <span class="p">);</span>
+
+<span class="k">echo</span> <span class="nc">Vault</span><span class="o">::</span><span class="nf">fetch</span><span class="p">(</span> <span class="s1">'short_lived_key'</span> <span class="p">);</span>
+<span class="c1"># =&gt; null</span>
+</code></pre></div></div>
+:ET

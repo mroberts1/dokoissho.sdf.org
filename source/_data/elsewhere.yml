@@ -1,37 +1,14 @@
 -
   title: twitter
-  url: 'https://twitter.com/sodaware'
+  url: 'https://twitter.com/dokoissho'
   rel: me
-  description: I tweet once a month, if that.
+  description:
 -
   title: github
-  url: 'https://github.com/sodaware/'
-  description: Most of my projects end up here.
-
+  url: 'https://github.com/mroberts1/'
+  description: 
 -
-  title: sodaware.net
-  url: 'https://www.sodaware.net/blog/'
-  description: My blog about game development.
-
--
-  title: lab.sodaware.net
-  url: 'https://lab.sodaware.net/'
-  description: "Experimental stuff I've made. Mostly weird games from game jams."
-
--
-  title: philnewton.net
-  url: 'https://www.philnewton.net/'
-  description: >-
-    My personal blog, where I write about productivity, Emacs, my goals and my
-    achievements.
-
--
-  title: itch.io
-  url: 'https://sodaware.itch.io/'
-  description: "Games I've written that are actually playable."
-
--
-  title: mastodon
-  url: 'https://mastodon.sdf.org/@sodaware'
+  title: merveilles.town
+  url: 'https://merveilles.town/web/accounts/6363'
   rel: me
   description: I toot even less than I tweet.

@@ -1,0 +1,34 @@
+I"�
+<p>I use <a href="https://github.com/rejeep/ert-runner.el">ert-runner</a> for running unit
+tests in my Emacs packages. It’s a handy way to run all unit tests in a single
+go, and it works nicely with <a href="https://github.com/cask/cask">Cask</a> to make
+repeatable runs easier.</p>
+
+<p>One thing I missed was automatic testing when files are saved. I use
+<a href="https://github.com/guard/guard">Guard</a> when developing Rails projects and
+wanted to hook it into my Emacs setup.</p>
+
+<p>The following <code class="language-plaintext highlighter-rouge">Guardfile</code> uses <code class="language-plaintext highlighter-rouge">guard-shell</code> to run ert-runner whenever an <code class="language-plaintext highlighter-rouge">.el</code>
+file is modified. I added a workaround for ignoring flycheck files, which Emacs
+saves when a file is modified and can trigger a huge amount of builds.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">guard</span> <span class="ss">:shell</span> <span class="k">do</span>
+  <span class="n">watch</span> <span class="p">(</span><span class="sr">/(.*)\.el$/</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">file</span><span class="o">|</span>
+    <span class="c1"># Ugly fix but I couldn't spend time messing around with regex.</span>
+    <span class="k">unless</span> <span class="n">file</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nf">to_s</span><span class="p">.</span><span class="nf">include?</span> <span class="s1">'flycheck'</span>
+      <span class="k">if</span> <span class="nb">system</span><span class="p">(</span><span class="s1">'cask exec ert-runner'</span><span class="p">)</span>
+        <span class="n">n</span> <span class="s1">'Tests succeeded'</span><span class="p">,</span> <span class="s1">'ERT'</span><span class="p">,</span> <span class="ss">:success</span>
+      <span class="k">else</span>
+        <span class="n">n</span> <span class="s1">'Tests failed'</span><span class="p">,</span> <span class="s1">'ERT'</span><span class="p">,</span> <span class="ss">:failed</span>
+      <span class="k">end</span>
+
+      <span class="s1">''</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Using <code class="language-plaintext highlighter-rouge">:success</code> and <code class="language-plaintext highlighter-rouge">:failed</code> with the process result also means Guard’s
+notifier works correctly, so it’s possible to use the Emacs notifier to get
+realtime test pass &amp; fail colours whenever a file is saved. Pretty neat!</p>
+:ET

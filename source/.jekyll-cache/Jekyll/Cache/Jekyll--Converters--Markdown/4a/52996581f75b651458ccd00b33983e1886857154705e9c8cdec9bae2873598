@@ -1,0 +1,28 @@
+I" 	<p>I’ll preface this note with the disclaimer that you probably shouldn’t do
+this.</p>
+
+<p>I use org-mode to track time worked on projects, and I’ve been using
+<a href="https://github.com/bdewey/org-ruby">org-ruby</a> to extract the data to make
+graphs and things.</p>
+
+<p>One issue I’ve bumped into is that org-ruby hard-codes the list of keywords that
+can start a headline and only supports <code class="language-plaintext highlighter-rouge">TODO</code> and <code class="language-plaintext highlighter-rouge">DONE</code>. This meant some
+headlines got ignored and didn’t show up in reports.</p>
+
+<p>To get around this I needed to override the constants org-ruby uses. In the end I
+went with the following approach:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">##</span>
+<span class="c1"># Monkey patch</span>
+<span class="k">module</span> <span class="nn">Orgmode</span>
+  <span class="k">class</span> <span class="nc">Headline</span>
+    <span class="n">remove_const</span><span class="p">(</span><span class="ss">:Keywords</span><span class="p">)</span> <span class="k">if</span> <span class="k">defined?</span><span class="p">(</span><span class="no">Keywords</span><span class="p">)</span>
+    <span class="n">remove_const</span><span class="p">(</span><span class="ss">:KeywordsRegexp</span><span class="p">)</span> <span class="k">if</span> <span class="k">defined?</span><span class="p">(</span><span class="no">KeywordsRegexp</span><span class="p">)</span>
+
+    <span class="no">Keywords</span>       <span class="o">=</span> <span class="sx">%w[TODO IN-PROGRESS TESTING DONE CANCELLED]</span><span class="p">.</span><span class="nf">freeze</span>
+    <span class="no">KeywordsRegexp</span> <span class="o">=</span> <span class="no">Regexp</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="s2">"^(</span><span class="si">#{</span><span class="no">Keywords</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="s1">'|'</span><span class="p">)</span><span class="si">}</span><span class="s2">)</span><span class="se">\$</span><span class="s2">"</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+:ET

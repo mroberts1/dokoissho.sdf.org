@@ -1,0 +1,58 @@
+I"�<h2 id="2020-12-21">2020-12-21</h2>
+
+<ul>
+  <li>Released version 0.2.0 of <a href="https://www.sodaware.net/maxcop">MaxCop</a>. This
+fixes a couple of minor bugs and adds rules to check for empty control
+structures.</li>
+</ul>
+
+<h2 id="2020-11-30">2020-11-30</h2>
+
+<ul>
+  <li>Released version 0.1.1 of <a href="https://www.sodaware.net/blam">blam</a>. Allows <code class="language-plaintext highlighter-rouge">blam</code>
+to load configuraion files from a variety of places.</li>
+</ul>
+
+<h2 id="2020-05-10">2020-05-10</h2>
+
+<ul>
+  <li>Published the first version of “<a href="https://www.philnewton.net/books/php-with-emacs/">Writing PHP with Emacs</a>”.</li>
+</ul>
+
+<h2 id="2020-04-15">2020-04-15</h2>
+
+<ul>
+  <li>Added comment support to blitzmax-mode, so it can now use <code class="language-plaintext highlighter-rouge">comment-region</code>
+etc.</li>
+</ul>
+
+<h2 id="2020-03-10">2020-03-10</h2>
+
+<ul>
+  <li>blitzmax-mode is now on Melpa.</li>
+</ul>
+
+<h2 id="2020-01-23">2020-01-23</h2>
+
+<ul>
+  <li>Added schema.org markup to <a href="https://www.sodaware.net/">sodaware.net</a> game
+pages.</li>
+</ul>
+
+<h2 id="2020-01-12">2020-01-12</h2>
+
+<ul>
+  <li>Rebuilt all of the <a href="https://www.sodaware.net/">sodaware.net</a> game pages to use
+yaml data instead of manualy adding html to the page. Should make adding new
+games easier, assuming I ever get around to doing that.</li>
+</ul>
+
+<h2 id="2020-01-06">2020-01-06</h2>
+
+<ul>
+  <li>Wrote a little tool in Ruby using <a href="http://watir.com/">Watir</a> to scrape game
+info from BMT Micro. Couldn’t use my usual method of curl as the pages are
+built using JS. Watir can call a headless browser and then save the content as
+a html file. Pretty neat.</li>
+</ul>
+:ET

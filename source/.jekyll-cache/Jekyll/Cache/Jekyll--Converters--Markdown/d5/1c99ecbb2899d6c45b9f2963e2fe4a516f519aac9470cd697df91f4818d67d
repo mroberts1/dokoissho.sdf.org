@@ -1,0 +1,42 @@
+I"�<p>The BlitzMax compiler (<code class="language-plaintext highlighter-rouge">bmk</code>) supports a number of compilation options, but
+it just outputs “Command line error” instead of a help message.</p>
+
+<p>A compilation command is make up of three parts:</p>
+<ul>
+  <li>The action to take</li>
+  <li>Optional flags</li>
+  <li>The file or module to compile</li>
+</ul>
+
+<p>Allowed actions are:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">makeapp</code> : Create an application (e.g. an <code class="language-plaintext highlighter-rouge">exe</code> file on Windows)</li>
+  <li><code class="language-plaintext highlighter-rouge">makemods</code> : Compile a BlitzMax module</li>
+</ul>
+
+<p>The following flags are supported:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">-h</code> : Compile in threaded mode.</li>
+  <li><code class="language-plaintext highlighter-rouge">-d</code> : Compile in debug mode.</li>
+  <li><code class="language-plaintext highlighter-rouge">-r</code> : Compile in release mode.</li>
+  <li><code class="language-plaintext highlighter-rouge">-a</code> : Rebuild all files during compilation.</li>
+  <li><code class="language-plaintext highlighter-rouge">-t gui</code> : Compile in GUI mode. Applications compiled with this argument will
+not display a console window when run.</li>
+  <li><code class="language-plaintext highlighter-rouge">-o &lt;file&gt;</code> : Write the compiled application to <code class="language-plaintext highlighter-rouge">&lt;file&gt;</code></li>
+</ul>
+
+<p>The final argument should be the file or module to compile.</p>
+
+<h2 id="examples">Examples:</h2>
+
+<h3 id="1-compile-a-module-in-release-mode">1. Compile a module in release mode</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bmk makemods <span class="nt">-r</span> my_module
+</code></pre></div></div>
+
+<h3 id="2-compile-a-threaded-non-console-application">2. Compile a threaded, non-console application</h3>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>bmk makeapp <span class="nt">-h</span> <span class="nt">-t</span> gui <span class="nt">-o</span> output.exe src/my_file.bmx
+</code></pre></div></div>
+:ET

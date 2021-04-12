@@ -1,0 +1,18 @@
+I"%<p>This came up during the rebuild of a very old legacy application. The previous
+app used <code class="language-plaintext highlighter-rouge">varchar(255)</code> for most columns, but this seemed a bit wasteful.</p>
+
+<p>To get a better idea of how large things needed to be in the new design, I
+wanted to know the the longest value stored for each column.</p>
+
+<p>Thankfully MySQL has the <code class="language-plaintext highlighter-rouge">length</code> function that can be used for this. The
+following query qill return a single result containing the longest value, as
+well as its length:</p>
+
+<div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span> <span class="o">&lt;</span><span class="k">column</span><span class="o">&gt;</span><span class="p">,</span> <span class="k">LENGTH</span><span class="p">(</span><span class="o">&lt;</span><span class="k">column</span><span class="o">&gt;</span><span class="p">)</span> <span class="k">as</span> <span class="n">col_length</span> 
+<span class="k">FROM</span> <span class="o">&lt;</span><span class="k">table</span><span class="o">&gt;</span> 
+<span class="k">ORDER</span> <span class="k">BY</span> <span class="n">col_length</span> <span class="k">DESC</span>
+<span class="k">LIMIT</span> <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>Just replace <code class="language-plaintext highlighter-rouge">&lt;column&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;table&gt;</code> with the column and table name to query.</p>
+:ET

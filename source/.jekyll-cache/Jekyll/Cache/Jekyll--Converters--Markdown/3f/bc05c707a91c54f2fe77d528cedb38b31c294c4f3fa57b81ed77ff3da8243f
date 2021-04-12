@@ -1,0 +1,40 @@
+I"�<p>PHP has a couple of functions for converting between formats (such as
+<code class="language-plaintext highlighter-rouge">hex2bin</code>).</p>
+
+<p>The following function converts a binary string (i.e. a string made up of “0”
+and “1” characters) into a regular PHP string:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">bin_to_ascii</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$output</span> <span class="o">=</span> <span class="s1">''</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span> <span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="nb">strlen</span><span class="p">(</span> <span class="nv">$data</span> <span class="p">);</span> <span class="nv">$i</span> <span class="o">+=</span> <span class="mi">8</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="nv">$chunk</span> <span class="o">=</span> <span class="nb">substr</span><span class="p">(</span> <span class="nv">$data</span><span class="p">,</span> <span class="nv">$i</span><span class="p">,</span> <span class="mi">8</span> <span class="p">);</span>
+        <span class="nv">$output</span> <span class="mf">.</span><span class="o">=</span> <span class="nb">pack</span><span class="p">(</span><span class="s1">'H*'</span><span class="p">,</span> <span class="nb">base_convert</span><span class="p">(</span><span class="nv">$chunk</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">16</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nv">$output</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Example:</span>
+<span class="nv">$data</span>  <span class="o">=</span> <span class="s1">'01001000011001010110110001101100011011110010110000100000'</span><span class="p">;</span>
+<span class="nv">$data</span> <span class="mf">.</span><span class="o">=</span> <span class="s1">'010101110110111101110010011011000110010000100001'</span><span class="p">;</span>
+
+<span class="c1">// Prints "Hello, World!"</span>
+<span class="k">echo</span> <span class="nf">bin_to_ascii</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+
+</code></pre></div></div>
+
+<p>The function slices the input string into chunks of 8 characters, because each
+ASCII character is 8 bits long.</p>
+
+<p><a href="https://secure.php.net/manual/en/function.pack.php">pack</a> is a nifty PHP
+function for converting binary data into other forms.</p>
+
+<p>In this example, the chunk of data is converted into actual binary data using
+<code class="language-plaintext highlighter-rouge">base_convert</code>. <code class="language-plaintext highlighter-rouge">base_convert</code> is used to convert a base 2 (i.e. binary) number
+into base 16 (hexadecimal). <code class="language-plaintext highlighter-rouge">pack</code> then converts the hex value into a readable
+string. Each character is converted before being returned in one string.</p>
+
+<p><strong>Important</strong>:</p>
+
+<p>The input string should be valid binary - it should only contain 1s and 0s, and
+the length should be a multiple of 8. Weird things will happen otherwise.</p>
+:ET

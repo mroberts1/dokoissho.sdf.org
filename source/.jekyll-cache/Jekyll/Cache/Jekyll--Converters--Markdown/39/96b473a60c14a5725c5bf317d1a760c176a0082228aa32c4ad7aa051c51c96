@@ -1,0 +1,59 @@
+I"�<p><a href="https://github.com/bdewey/org-ruby"><strong>org-ruby</strong></a> is a Ruby gem that can be
+used to parse <code class="language-plaintext highlighter-rouge">org-mode</code> files. It’s not as robust as using Emacs itself, but
+sometimes a quick script is all that’s needed to extract a couple of bits of
+data</p>
+
+<p>The following code will read an <code class="language-plaintext highlighter-rouge">org-mode</code> file and list all major headlines:</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'org-ruby'</span>
+<span class="n">document</span> <span class="o">=</span> <span class="no">Orgmode</span><span class="o">::</span><span class="no">Parser</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s1">'TODO.org'</span><span class="p">))</span>
+
+<span class="n">document</span><span class="p">.</span><span class="nf">headlines</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">headline</span><span class="o">|</span>
+  <span class="nb">puts</span> <span class="n">headline</span><span class="p">.</span><span class="nf">headline_text</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Here’s a more advanced example. This will read all headlines that are marked as
+“DONE” along with any list items they contain.</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">require</span> <span class="s1">'org-ruby'</span>
+<span class="n">document</span> <span class="o">=</span> <span class="no">Orgmode</span><span class="o">::</span><span class="no">Parser</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="no">File</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="s1">'TODO.org'</span><span class="p">))</span>
+
+<span class="n">doc</span><span class="p">.</span><span class="nf">headlines</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">headline</span><span class="o">|</span>
+  <span class="k">next</span> <span class="k">unless</span> <span class="n">headline</span><span class="p">.</span><span class="nf">keyword</span> <span class="o">==</span> <span class="s1">'DONE'</span>
+
+  <span class="nb">puts</span> <span class="n">headline</span><span class="p">.</span><span class="nf">headline_text</span>
+
+  <span class="n">headline</span><span class="p">.</span><span class="nf">body_lines</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
+    <span class="k">next</span> <span class="k">if</span> <span class="n">line</span><span class="p">.</span><span class="nf">nil?</span>
+    <span class="k">next</span> <span class="k">unless</span> <span class="n">line</span><span class="p">.</span><span class="nf">paragraph_type</span> <span class="o">==</span> <span class="ss">:list_item</span>
+
+    <span class="n">task_line</span> <span class="o">=</span> <span class="n">line</span><span class="p">.</span><span class="nf">output_text</span><span class="p">.</span><span class="nf">strip</span>
+    <span class="nb">puts</span> <span class="s1">' -&gt; '</span> <span class="o">+</span> <span class="n">task_line</span><span class="p">[</span><span class="mi">4</span><span class="o">..-</span><span class="mi">1</span><span class="p">]</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Using this file:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#+TITLE: TODO.org
+DONE Top Level Task 1
+  - [X] Checkbox one
+  - [X] Checkbox two
+TODO Top Level Task 2
+  - [ ] Checkbox three
+</code></pre></div></div>
+
+<p>will output:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Top Level Task 1
+ -&gt; Checkbox one
+ -&gt; Checkbox two
+</code></pre></div></div>
+
+<hr />
+
+<p>The <a href="https://www.sodaware.net/1gam-2017/01-mini-shinobi/">Mini Shinobi development page</a>
+is a good example of what this can be used to create. The “daily activity” and
+“milestones” sections are both built entirely using org data.</p>
+:ET

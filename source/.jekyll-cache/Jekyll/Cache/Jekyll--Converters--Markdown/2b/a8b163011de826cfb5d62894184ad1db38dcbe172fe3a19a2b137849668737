@@ -1,0 +1,42 @@
+I":<p>This code searches a directory for a filename. If the file is not found, the
+parent directory is searched. It continues searching upwards until the file is
+found or there are no more directories to search.</p>
+
+<p>If the file is found its full path is returned, otherwise <code class="language-plaintext highlighter-rouge">NIL</code> is returned.</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/file-search-upward</span> <span class="p">(</span><span class="nb">directory</span> <span class="nv">file</span><span class="p">)</span>
+  <span class="s">"Search DIRECTORY for FILE and return its full path if found, or NIL if not.
+
+If FILE is not found in DIRECTORY, the parent of DIRECTORY will be searched."</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">parent-dir</span> <span class="p">(</span><span class="nv">file-truename</span> <span class="p">(</span><span class="nv">concat</span> <span class="p">(</span><span class="nv">file-name-directory</span> <span class="nb">directory</span><span class="p">)</span> <span class="s">"../"</span><span class="p">)))</span>
+        <span class="p">(</span><span class="nv">current-path</span> <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nb">string=</span> <span class="p">(</span><span class="nv">substring</span> <span class="nb">directory</span> <span class="p">(</span><span class="nb">-</span> <span class="p">(</span><span class="nb">length</span> <span class="nb">directory</span><span class="p">)</span> <span class="mi">1</span><span class="p">))</span> <span class="s">"/"</span><span class="p">))</span>
+                         <span class="p">(</span><span class="nv">concat</span> <span class="nb">directory</span> <span class="s">"/"</span> <span class="nv">file</span><span class="p">)</span>
+                         <span class="p">(</span><span class="nv">concat</span> <span class="nb">directory</span> <span class="nv">file</span><span class="p">))))</span>
+    <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">file-exists-p</span> <span class="nv">current-path</span><span class="p">)</span>
+        <span class="nv">current-path</span>
+        <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="p">(</span><span class="nb">not</span> <span class="p">(</span><span class="nb">string=</span> <span class="p">(</span><span class="nv">file-truename</span> <span class="nb">directory</span><span class="p">)</span> <span class="nv">parent-dir</span><span class="p">))</span>
+                   <span class="p">(</span><span class="nb">&lt;</span> <span class="p">(</span><span class="nb">length</span> <span class="nv">parent-dir</span><span class="p">)</span> <span class="p">(</span><span class="nb">length</span> <span class="p">(</span><span class="nv">file-truename</span> <span class="nb">directory</span><span class="p">))))</span>
+          <span class="p">(</span><span class="nv">sodaware/file-search-upward</span> <span class="nv">parent-dir</span> <span class="nv">file</span><span class="p">)))))</span>
+</code></pre></div></div>
+
+<h2 id="example-usage">Example usage</h2>
+
+<p>Given the following directory structure:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|-- dir1
+    |-- my_file.txt
+    |-- dir2
+        |-- dir3
+</code></pre></div></div>
+
+<p>Searching <code class="language-plaintext highlighter-rouge">dir3</code> will also search <code class="language-plaintext highlighter-rouge">dir2</code> and <code class="language-plaintext highlighter-rouge">dir1</code>:</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Finding a file that exists in a parent directory.</span>
+<span class="p">(</span><span class="nv">sodaware/file-search-upward</span> <span class="s">"/dir1/dir2/dir3/"</span> <span class="s">"my_file.txt"</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="s">"/dir1/my_file.txt"</span>
+
+<span class="c1">;; Failing to find a file.</span>
+<span class="p">(</span><span class="nv">sodaware/file-search-upward</span> <span class="s">"/dir1/dir2/dir3/"</span> <span class="s">"not_found.txt"</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="nv">NIL</span>
+</code></pre></div></div>
+:ET

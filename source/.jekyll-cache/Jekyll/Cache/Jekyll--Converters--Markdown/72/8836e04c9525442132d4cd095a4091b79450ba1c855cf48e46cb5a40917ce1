@@ -1,0 +1,11 @@
+I"Ä<p>The following function will write <code class="language-plaintext highlighter-rouge">$text</code> to STDERR instead of STDOUT like
+<code class="language-plaintext highlighter-rouge">print</code> and <code class="language-plaintext highlighter-rouge">echo</code>.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">print_error</span><span class="p">(</span><span class="nv">$text</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">fwrite</span><span class="p">(</span><span class="no">STDERR</span><span class="p">,</span> <span class="nv">$text</span> <span class="mf">.</span> <span class="kc">PHP_EOL</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>Itâ€™s handy for scripts that output things to STDOUT that may be redirected or
+saved to a file (e.g. a script that outputs CSV or JSON data).</p>
+:ET

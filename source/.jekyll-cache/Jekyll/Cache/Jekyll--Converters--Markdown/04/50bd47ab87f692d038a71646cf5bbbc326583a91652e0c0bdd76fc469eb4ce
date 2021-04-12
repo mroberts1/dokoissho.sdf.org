@@ -1,0 +1,6 @@
+I"4<p>Sometimes an XFCE panel will stop responding to mouse clicks. It’s frustrating
+to have to logout or restart just to get it working again.</p>
+
+<p>Running <code class="language-plaintext highlighter-rouge">xfce4-panel -r</code> from the terminal will restart all XFCE panels and fix
+any frozen ones.</p>
+:ET

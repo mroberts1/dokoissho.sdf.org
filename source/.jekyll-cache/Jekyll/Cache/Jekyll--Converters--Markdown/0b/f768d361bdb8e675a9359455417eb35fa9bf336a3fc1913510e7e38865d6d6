@@ -1,0 +1,32 @@
+I"�<p>Linux systems come with <code class="language-plaintext highlighter-rouge">wc</code>, a useful command for counting words that gives
+output something like this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 39 141 853 sorting-directories-by-size.md
+</code></pre></div></div>
+
+<p>This gives 3 values: The number of lines, the number of words and the number of
+bytes. <code class="language-plaintext highlighter-rouge">wc</code> also supports flags for getting just one of these values.</p>
+
+<p>For example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">wc</span> <span class="nt">-w</span> my-file.md
+123 my-file.md
+</code></pre></div></div>
+
+<p>However, that still includes the filename. To get <strong>just</strong> the word count (or
+byte count/line count) without parsing the file takes an extra step:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>my-file.md | <span class="nb">wc</span> <span class="nt">-w</span>
+</code></pre></div></div>
+
+<p>Which will echo the number of words without any extra data.</p>
+
+<p>I’ve used this to keep track of a text file’s wordcount over time with the
+following snippet:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">date</span> <span class="s1">'+%Y-%m-%d %H:%M:%S'</span><span class="si">)</span><span class="s2">,file.org,</span><span class="si">$(</span><span class="nb">cat </span>file.org | <span class="nb">wc</span> <span class="nt">-w</span><span class="si">)</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> wordcount.csv
+</code></pre></div></div>
+
+<p>This appends a line to “wordcount.csv” containing the current time and date, the
+file name and the number of words.</p>
+:ET

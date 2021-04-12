@@ -1,0 +1,176 @@
+I"�<p>BlitzMax supports function pointers, but they can be a bit tricky at times.</p>
+
+<pre><code class="language-blitzmax">Function my_callback_function:String(name:String)
+    Return name + " was called!"
+End Function
+
+Local function_pointer:String(name:String) = my_callback_function
+Print function_pointer("callback")
+</code></pre>
+
+<p>The example above will print “callback was called” when run.</p>
+
+<p>This approach works well enough, but what if you’d like to call a method on an
+object? You need to work around it a little bit:</p>
+
+<pre><code class="language-blitzmax">Type MyType
+    Function MyCallback:String(obj:MyType, name:String)
+        return MyType(obj).myActualCallback(name)
+    End Function
+    
+    Method myActualCallback:String(name:String)
+        return name + " was called!"
+    End Method
+End Type
+
+Local callback:String(obj:MyType, name:String) = MyType.MyCallback
+Local instance:MyType = new MyType
+Print callback(instance, "callback")
+</code></pre>
+
+<p>This isn’t ideal, as it means all methods need wrapping by another function as
+well as have the object passed in.</p>
+
+<h2 id="using-blitzmax-reflection">Using BlitzMax reflection</h2>
+
+<p>BlitzMax has a nice reflection system, which makes it possible to get
+information about a variety of things at runtime. This can be used to query a
+type and its variables, methods and functions.</p>
+
+<p>Type method information is returned in a <code class="language-plaintext highlighter-rouge">TMethod</code> object which contains the
+method name, parameters and return type. It also has a method called <code class="language-plaintext highlighter-rouge">invoke</code>,
+which calls the method on an object instance.</p>
+
+<p>Using the example <code class="language-plaintext highlighter-rouge">MyType</code> above, we could get information on <code class="language-plaintext highlighter-rouge">myActualCallback</code>
+using the following:</p>
+
+<pre><code class="language-blitzmax">Local objectInfo:TTypeId = TTypeId.ForName("MyType")
+Local methodInfo:TMethod = objectInfo.FindMethod("myActualCallback")
+</code></pre>
+
+<p>When combined with <code class="language-plaintext highlighter-rouge">invoke</code>, a method on <code class="language-plaintext highlighter-rouge">instance</code> can be executed without
+explicitly calling it.</p>
+
+<pre><code class="language-blitzmax">' Executes the 'myActualCallback' method on our instance.
+Print String(methodInfo.invoke(instance, ["invoked callback"]))
+</code></pre>
+
+<p>The <code class="language-plaintext highlighter-rouge">invoke</code> method takes two arguments: an object instance, and an array of
+objects that are passed as parameters to the method.</p>
+
+<h2 id="wrapping-it-all-up">Wrapping it all up</h2>
+
+<p>With a little wrapper class we can call a method on any object instance.</p>
+
+<pre><code class="language-blitzmax">SuperStrict
+
+Import brl.reflection
+
+Type CallbackWrapper
+
+    Field _caller:Object
+    Field _method:TMethod
+
+    Method execute:Object(args:Object[])
+        Return Self._method.Invoke(Self._caller, args)
+    End Method
+
+    Function Create:CallbackWrapper(caller:Object, methodName:String)
+
+        Local this:CallbackWrapper = New CallbackWrapper
+
+        this._caller = caller
+        this._method = TTypeId.ForObject(caller).FindMethod(methodName)
+
+        ' Must be a valid method
+        If this._method = Null Then
+            Throw "Cannot create a callback for missing method: " + methodName
+        EndIf
+
+        Return this
+
+    End Function
+
+End Type
+</code></pre>
+
+<p>This allows us to do the following using the <code class="language-plaintext highlighter-rouge">MyType</code> object from earlier:</p>
+
+<pre><code class="language-blitzmax">Local instance:MyType         = new MyType
+Local wrapper:CallbackWrapper = CallbackWrapper.create(instance, "myActualCallback")
+
+Print String(callbackInstance.execute("wrapped callback"))
+</code></pre>
+
+<p>Hooray!</p>
+
+<p>One nice thing about this approach is it can be used on any object, so you don’t
+have to worry about extending a base class. Also, because the callbacks are
+BlitzMax objects they can be stored in data structures like <code class="language-plaintext highlighter-rouge">TMap</code> or
+<code class="language-plaintext highlighter-rouge">TList</code>. Function pointers cannot.</p>
+
+<p>This approach is not without its drawbacks. Because <code class="language-plaintext highlighter-rouge">invoke</code> uses <code class="language-plaintext highlighter-rouge">Object</code> for
+its arguments and return values, there usually needs to be a little data
+massaging to get it working.</p>
+
+<p>To get around this I’ll usually write an <code class="language-plaintext highlighter-rouge">execute</code> method for specific method
+signatures I want:</p>
+
+<pre><code class="language-blitzmax">' Wrapping the `execute` method with something nicer.
+Method execute_callback:String(name:String)
+    Return String(self._method.invoke(self._caller, [name]))
+End Method
+</code></pre>
+
+<h2 id="performance">Performance</h2>
+
+<p>There is a performance hit to using this approach. Testing each approach
+10,000,000 times gave the following results on a Linux machine:</p>
+
+<table class="table--striped table--fancy table--benchmark">
+  <thead>
+    <tr>
+      <th>Method Used</th>
+      <th>Total Time (Milliseconds)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Function Pointer</td>
+      <td>525</td>
+    </tr>
+    <tr>
+      <td>Type Function Pointer</td>
+      <td>570</td>
+    </tr>
+    <tr>
+      <td>Reflection-based Callback</td>
+      <td>2898</td>
+    </tr>
+    <tr>
+      <td>Reflection-based Callback (wrapped)</td>
+      <td>3878</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Wrapping the callback with casting slows things down considerably, so there is a
+trade-off between readability and speed.</p>
+
+<h2 id="example-usages">Example Usages</h2>
+
+<p>I’ve used this approach in a couple of places in my own projects:</p>
+
+<ol>
+  <li>The pangolin.events module uses it for <a href="https://github.com/sodaware/pangolin.mod/blob/master/events.mod/src/event_handler.bmx">event handlers</a>.
+Using this system allows events to have handler objects or methods added
+and removed dynamically at runtime.</li>
+  <li>The pangolin <a href="https://github.com/sodaware/pangolin.mod/blob/master/contentdb.mod/src/entity_factory.bmx#L116">entity factory</a>
+uses it to check if an object has an <code class="language-plaintext highlighter-rouge">initializeFromTemplate</code> method. If it
+does, the method is called. Otherwise a warning is signalled and the object
+is created using reflection.</li>
+  <li>A couple of tools use it to provide some very basic scripting. For example,
+something like <code class="language-plaintext highlighter-rouge">addCommand("command_name", MyCallback.create(object,
+"exec_command_name"))</code> can be used to dynamically add commands.</li>
+</ol>
+:ET

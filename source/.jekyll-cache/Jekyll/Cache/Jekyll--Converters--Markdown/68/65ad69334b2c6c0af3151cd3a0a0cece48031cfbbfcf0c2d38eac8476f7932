@@ -1,0 +1,122 @@
+I"�<p><strong>dogecoind-api</strong> is a Common Lisp library for working with a <code class="language-plaintext highlighter-rouge">dogecoind</code> server
+via its RPC interface.</p>
+
+<h1 id="client-documentation">Client Documentation</h1>
+
+<p>A <code class="language-plaintext highlighter-rouge">client</code> object must be created before any RPC methods can be called. This
+should then be passed to any of the RPC methods.</p>
+
+<h2 id="creation">Creation</h2>
+
+<p>By default the client connects to <code class="language-plaintext highlighter-rouge">http://127.0.0.1:8334</code>, but this can be
+overridden by passing the following values to <code class="language-plaintext highlighter-rouge">make-client</code>:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">:host</code> - The host to connect to.</li>
+  <li><code class="language-plaintext highlighter-rouge">:port</code> - The port to connect to.</li>
+  <li><code class="language-plaintext highlighter-rouge">:protocol</code> - Connection protocol. Either “http” or “https”.</li>
+</ul>
+
+<h2 id="authorization">Authorization</h2>
+
+<p>Call <code class="language-plaintext highlighter-rouge">authorize</code> with a username and password if the RPC requires authentication.</p>
+
+<h2 id="client-functions">Client Functions</h2>
+
+<h3 id="dogecoind-apimake-client-keys-host-port-protocol">dogecoind-api:make-client &amp;keys host port protocol</h3>
+
+<p>Create a new RPC client.</p>
+
+<h3 id="dogecoind-apiauthorize-client-username-password">dogecoind-api:authorize client username password</h3>
+
+<p>Set the username and password required by the server.</p>
+
+<h3 id="dogecoind-apiauthorizep-client">dogecoind-api:authorizep client</h3>
+
+<p>Check if the client has authorization details set.</p>
+
+<h1 id="function-documentation">Function Documentation</h1>
+
+<p>RPC documentation for each method can be found on the
+<a href="https://en.bitcoin.it/wiki/Original_Bitcoin_client/API_calls_list">Bitcoin wiki</a>.</p>
+
+<p>The API functions are mapped as follows:</p>
+
+<table class="table--striped table--fancy table--function-map">
+  <thead>
+    <tr>
+      <th>API Method</th>
+      <th>Local Method</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>addmultisigaddress</td>
+      <td>dogecoind-api:add-multisig-address</td>
+    </tr>
+    <tr>
+      <td>backupwallet</td>
+      <td>dogecoind-api:backup-wallet</td>
+    </tr>
+    <tr>
+      <td>getbalance</td>
+      <td>dogecoind-api:account-balance</td>
+    </tr>
+    <tr>
+      <td> </td>
+      <td>dogecoind-api:server-balance</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Some RPC methods are wrapped with several helper methods.</p>
+
+<h3 id="dogecoind-apiadd-multisig-address-client-keys-optional-account">dogecoind-api:add-multisig-address <em>client</em> <em>keys</em> &amp;optional <em>account</em></h3>
+
+<p>Add a multisignature address to the wallet that requires <em>keys</em> in order to
+spend and return the newly-created dogecoin address.</p>
+
+<p>Each <em>key</em> in <em>keys</em> is a dogecoin address or hex-encoded public key.</p>
+
+<p>If <em>account</em> is specified, the address with be assigned to that account.</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Create a new multisignature address that will require "address1" and</span>
+<span class="c1">;; "address2" to spend.</span>
+<span class="p">(</span><span class="nv">dogecoind-api:add-multisig-address</span> <span class="vg">*client*</span> <span class="p">(</span><span class="nb">list</span> <span class="s">"address1"</span> <span class="s">"address2"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h3 id="dogecoind-apibackup-wallet-client-destination">dogecoind-api:backup-wallet <em>client</em> <em>destination</em></h3>
+
+<p>Safely copy wallet.dat to <em>destination</em>.</p>
+
+<p><em>destination</em> can either be a directory or a path with filename.</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Copy the wallet to "/home/doger/my-new-wallet.wallet"</span>
+<span class="p">(</span><span class="nv">dogecoind-api:backup-wallet</span> <span class="vg">*client*</span> <span class="s">"/home/doger/my-new-wallet.wallet"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="dogecoind-apiaccount-balance-client-account-minimum-confirmations-watch-only-p">dogecoind-api:account-balance <em>client</em> <em>account</em> <em>minimum-confirmations</em> <em>watch-only-p</em></h3>
+
+<p>Get the available balance for <em>account</em>.</p>
+
+<p><em>minimum-confirmations</em> is the minimum number of confirmations an
+externally-generated transaction must have before it is counted towards the
+balance.</p>
+
+<p>If <em>watch-only-p</em> is true, watch-only addresses will be included in details and
+calculations as if they were regular addresses belonging to the wallet.</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Get the balance for the "my_account" account</span>
+<span class="p">(</span><span class="nv">dogecoind-api:account-balance</span> <span class="vg">*client*</span> <span class="s">"my_account"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="dogecoind-apiserver-balance-client-minimum-confirmations-watch-only-p">dogecoind-api:server-balance <em>client</em> <em>minimum-confirmations</em> <em>watch-only-p</em></h3>
+
+<p>Get the total balance of all accounts on the server.</p>
+
+<p>Works the the same as <code class="language-plaintext highlighter-rouge">dogecoind-api:account-balance</code>.</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Get the total balance for all accounts on the server.</span>
+<span class="p">(</span><span class="nv">dogecoind-api:server-balance</span> <span class="vg">*client*</span><span class="p">)</span>
+</code></pre></div></div>
+:ET

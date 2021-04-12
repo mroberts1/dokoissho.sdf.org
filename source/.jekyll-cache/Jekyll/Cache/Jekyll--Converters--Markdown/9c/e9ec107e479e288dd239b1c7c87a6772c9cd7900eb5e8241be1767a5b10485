@@ -1,0 +1,65 @@
+I"�<p><code class="language-plaintext highlighter-rouge">.dir-locals.el</code> is a great way to store directory-specific configuration
+values. However you don’t always want to clog it up when writing a custom
+extension.</p>
+
+<p>This function searches a directory (and its parents) for a named file. The file
+is loaded if found. An error is raised if the file is not found.</p>
+
+<p>For the <code class="language-plaintext highlighter-rouge">sodaware/file-search-upward</code> function see
+“<a href="/notes/emacs-lisp-find-file-upwards/">Emacs Lisp - Searching parent folders for a file</a>”.</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/load-custom-config</span> <span class="p">(</span><span class="nv">filename</span> <span class="nb">directory</span><span class="p">)</span>
+  <span class="s">"Loads a configuration FILENAME from DIRECTORY.
+
+If not found in the current directory, will search upwards until one is found."</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">config-file-path</span> <span class="p">(</span><span class="nv">sodaware/file-search-upward</span> <span class="nb">directory</span> <span class="nv">filename</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">unless</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">config-file-path</span>
+                 <span class="p">(</span><span class="nv">file-exists-p</span> <span class="nv">config-file-path</span><span class="p">))</span>
+      <span class="p">(</span><span class="nb">error</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"Could not find configuration file '%s'"</span> <span class="nv">filename</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">message</span> <span class="p">(</span><span class="nb">format</span> <span class="s">"Loading configuration file: %s"</span> <span class="nv">config-file-path</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">load-file</span> <span class="nv">config-file-path</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h2 id="example-usage">Example usage</h2>
+
+<h3 id="1-loading-a-configuration">1. Loading a configuration</h3>
+
+<p>Assuming <code class="language-plaintext highlighter-rouge">.config.el</code> exists in <code class="language-plaintext highlighter-rouge">/some/dir/</code>:</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">sodaware/load-custom-config</span> <span class="s">".config.el"</span> <span class="s">"/some/dir/"</span><span class="p">)</span>
+<span class="nv">=&gt;</span> <span class="no">t</span>
+</code></pre></div></div>
+
+<p>Assuming <code class="language-plaintext highlighter-rouge">.invalid.el</code> does not exist in <code class="language-plaintext highlighter-rouge">/some/dir/</code>:</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">sodaware/load-custom-config</span> <span class="s">".invalid.el"</span> <span class="s">"/some/dir/"</span><span class="p">)</span>
+<span class="c1">;; =&gt; Could not find configuration file '.bad.el'</span>
+</code></pre></div></div>
+
+<h3 id="2-loading-a-configuration-based-on-the-current-file">2. Loading a configuration based on the current file</h3>
+
+<p>Emacs provides the variable <code class="language-plaintext highlighter-rouge">buffer-file-name</code> which contains the full path of
+the currently edited buffer.</p>
+
+<p>This example searches for a configuration file using the current buffer’s path:</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">sodaware/load-custom-config</span> <span class="s">".config.el"</span> <span class="p">(</span><span class="nv">file-name-directory</span> <span class="nv">buffer-file-name</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="without-error-raising">Without error raising</h2>
+
+<p>This is a modified version of the original function. It still searches parent
+directories for the configuration file, but will return <code class="language-plaintext highlighter-rouge">NIL</code> if the file is not
+found instead of raising an error.</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/load-custom-config</span> <span class="p">(</span><span class="nv">filename</span> <span class="nb">directory</span><span class="p">)</span>
+  <span class="s">"Loads a configuration FILENAME from DIRECTORY.
+
+If not found in the current directory, will search upwards until one is found."</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">config-file-path</span> <span class="p">(</span><span class="nv">sodaware/file-search-upward</span> <span class="nb">directory</span> <span class="nv">filename</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">and</span> <span class="nv">config-file-path</span>
+               <span class="p">(</span><span class="nv">file-exists-p</span> <span class="nv">config-file-path</span><span class="p">))</span>
+      <span class="p">(</span><span class="nv">load-file</span> <span class="nv">config-file-path</span><span class="p">))))</span>
+</code></pre></div></div>
+
+:ET

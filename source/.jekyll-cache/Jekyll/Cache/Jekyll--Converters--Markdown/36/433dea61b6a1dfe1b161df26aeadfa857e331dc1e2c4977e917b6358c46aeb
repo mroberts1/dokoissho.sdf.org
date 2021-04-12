@@ -1,0 +1,9 @@
+I"L<p><a href="https://github.com/skeeto/elfeed">elfeed</a> is a really neat RSS reader for
+Emacs. By default, the reading buffer uses the full width of the window. This
+can make articles difficult to read on a large, widescreen monitor.</p>
+
+<p>Adding the following to the Emacs config limits the reading with to 80 columns:</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">setq</span> <span class="nv">shr-width</span> <span class="mi">80</span><span class="p">)</span>
+</code></pre></div></div>
+:ET

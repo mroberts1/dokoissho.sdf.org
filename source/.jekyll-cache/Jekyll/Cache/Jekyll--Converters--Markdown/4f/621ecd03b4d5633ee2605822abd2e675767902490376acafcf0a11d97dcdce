@@ -1,0 +1,26 @@
+I"¼<p>The following snippet of code will automatically switch between themes if OSX is
+using light or dark mode.</p>
+
+<p>Call using <code class="language-plaintext highlighter-rouge">M-x match-emacs-theme-to-system</code>. Replace <code class="language-plaintext highlighter-rouge">'dark-theme</code> and
+<code class="language-plaintext highlighter-rouge">'light-theme</code> with appropriate theme names.</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">match-emacs-theme-to-system</span> <span class="p">()</span>
+  <span class="s">"Automatically set the theme to match if OSX is in dark mode."</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nv">system-dark-mode-enabled-p</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">load-theme</span> <span class="ss">'dark-theme</span>  <span class="no">t</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">load-theme</span> <span class="ss">'light-theme</span> <span class="no">t</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">system-dark-mode-enabled-p</span> <span class="p">()</span>
+  <span class="s">"Check if dark mode is currently enabled on OSX."</span>
+  <span class="p">(</span><span class="k">if</span> <span class="p">(</span><span class="nb">string=</span> <span class="nv">system-type</span> <span class="s">"darwin"</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">string=</span>
+       <span class="p">(</span><span class="nv">shell-command-to-string</span> <span class="s">"printf %s \"$( osascript -e \'tell application \"System Events\" to tell appearance preferences to return dark mode\' )\""</span><span class="p">)</span>
+       <span class="s">"true"</span><span class="p">)</span>
+      <span class="no">nil</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">match-emacs-theme-to-system</span><span class="p">)</span>
+</code></pre></div></div>
+
+:ET

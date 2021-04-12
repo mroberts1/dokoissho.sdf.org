@@ -1,0 +1,62 @@
+I"<p>I’ve recently started using <a href="www.harukizaemon.com/simian/">simian</a> to track down
+duplicate code blocks in my BlitzMax projects. Although simian doesn’t come with
+BlitzMax support built-in, it’s possible to use some of the other settings to
+work with bmx code.</p>
+
+<h2 id="examples">Examples</h2>
+
+<p>I have <code class="language-plaintext highlighter-rouge">java -jar simian.jar</code> aliased to just <code class="language-plaintext highlighter-rouge">simian</code> so it’s easier to read.</p>
+
+<p>An example run looks a little like this (scanning
+<a href="https://github.com/Sodaware/pangolin.mod/tree/master/contentdb.mod">pangolin/contentdb</a>):</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>simian <span class="nt">-excludes</span><span class="o">=</span><span class="s2">"**/*.tests.bmx"</span> <span class="nt">-language</span><span class="o">=</span>vb <span class="nt">-threshold</span><span class="o">=</span>5 <span class="k">**</span>/<span class="k">*</span>.bmx
+
+Similarity Analyser 2.5.10 - http://www.harukizaemon.com/simian
+Copyright <span class="o">(</span>c<span class="o">)</span> 2003-2018 Simon Harris.  All rights reserved.
+Simian is not free unless used solely <span class="k">for </span>non-commercial or evaluation purposes.
+<span class="o">{</span><span class="nv">failOnDuplication</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">ignoreCharacterCase</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">ignoreCurlyBraces</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">ignoreIdentifierCase</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">ignoreModifiers</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">ignoreStringCase</span><span class="o">=</span><span class="nb">true</span>, <span class="nv">language</span><span class="o">=</span>VB, <span class="nv">threshold</span><span class="o">=</span>5<span class="o">}</span>
+Found 5 duplicate lines with fingerprint 58349a293c079cddfe30357e667a5aa4 <span class="k">in </span>the following files:
+ Between lines 193 and 206 <span class="k">in </span>pangolin.mod/contentdb.mod/src/entity_template.bmx
+ Between lines 151 and 163 <span class="k">in </span>pangolin.mod/contentdb.mod/src/component_schema.bmx
+Found 7 duplicate lines with fingerprint 285244b124a3a29e5c65d4106d0aba7d <span class="k">in </span>the following files:
+ Between lines 57 and 70 <span class="k">in </span>pangolin.mod/contentdb.mod/src/component_schema.bmx
+ Between lines 81 and 96 <span class="k">in </span>pangolin.mod/contentdb.mod/src/component_field.bmx
+Found 24 duplicate lines <span class="k">in </span>4 blocks <span class="k">in </span>3 files
+Processed a total of 748 significant <span class="o">(</span>1598 raw<span class="o">)</span> lines <span class="k">in </span>9 files
+Processing <span class="nb">time</span>: 0.099sec
+</code></pre></div></div>
+
+<p>Analysis is quick; the entire pangolin project takes under a second to check.</p>
+
+<h3 id="treating-blitzmax-code-as-plaintext">Treating BlitzMax code as plaintext</h3>
+
+<p>By default simian treats files with unknown extensions as plaintext.</p>
+
+<p>The following will find files in the “src” directory that have more than 6 lines
+duplicated:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>simian src/<span class="k">**</span>/<span class="k">*</span>.bmx
+</code></pre></div></div>
+
+<h3 id="ignoring-blitzmax-comments">Ignoring BlitzMax comments</h3>
+
+<p>Plaintext is enough for most use cases, but it also includes comments in
+duplication checks. To exclude comments, we can set the language to Visual Basic
+as it uses the same <code class="language-plaintext highlighter-rouge">'</code> comment syntax as BlitzMax.</p>
+
+<p>The adjusted version will now ignore duplicated comments:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>simian <span class="nt">-language</span><span class="o">=</span>vb src/<span class="k">**</span>/<span class="k">*</span>.bmx
+</code></pre></div></div>
+
+<h3 id="adjusting-the-threshold">Adjusting the threshold</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">-threshold</code> parameter can be used to adjust the number of copied lines that
+trigger a copy warning.</p>
+
+<p>The following will trigger a warning if 5 lines or more match in separate files:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>simian <span class="nt">-language</span><span class="o">=</span>vb <span class="nt">-threshold</span><span class="o">=</span>5 src/<span class="k">**</span>/<span class="k">*</span>.bmx
+</code></pre></div></div>
+:ET

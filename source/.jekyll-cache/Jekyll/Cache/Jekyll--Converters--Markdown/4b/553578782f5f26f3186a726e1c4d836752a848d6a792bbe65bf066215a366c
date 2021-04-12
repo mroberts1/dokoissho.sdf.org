@@ -1,0 +1,34 @@
+I"q<p><strong>Apollo</strong> is an entity/component framework for ActionScript. Instead of building
+your game objects from class heirarchies, Apollo lets you build them with
+components and systems.</p>
+
+<p>I was too lazy to write an examples when it was first released. Lesson learned.</p>
+
+<h2 id="what-it-isnt">What it isn’t</h2>
+
+<p>It’s not a replacement for things like Flixel or Flashpunk. They take care of
+the stuff people see, Apollo does the “behind the scenes”.</p>
+
+<h2 id="further-reading">Further Reading</h2>
+
+<p>Entity systems are a big topic. The following places have lots of information on
+them:</p>
+
+<ul>
+  <li><a href="http://entity-systems.wikidot.com/">Entity Systems Wiki</a></li>
+  <li><a href="http://t-machine.org">Adam Martin’s Blog</a></li>
+  <li><a href="http://paulgestwicki.blogspot.com/2012/03/components-and-systems-of-morgans-raid.html">The Components and Systems of Morgan’s Raid</a></li>
+</ul>
+
+<p>Want some examples? Here are some open source projects (mostly written with
+Artemis) that you can learn from:</p>
+
+<ul>
+  <li><a href="https://github.com/artemis-esf/piemaster-jario">https://bitbucket.org/piemaster/jario/</a></li>
+</ul>
+
+<h2 id="thanks">Thanks</h2>
+
+<p>Apollo is based on the Artemis framework by <a href="http://gamadu.com">Gamadu</a>, along
+with improvements made by <a href="https://github.com/gemserk/artemis">GemSerk</a>.</p>
+:ET

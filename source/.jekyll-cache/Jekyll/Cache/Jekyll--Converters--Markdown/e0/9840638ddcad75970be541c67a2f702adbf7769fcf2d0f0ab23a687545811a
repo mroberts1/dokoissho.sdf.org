@@ -1,0 +1,27 @@
+I"¨<p>I wanted to write tests for <a href="/projects/blitzmax-mode/">blitzmax-mode</a>
+indentation to make sure everything worked correctly. The approach was something
+like this:</p>
+
+<ol>
+  <li>Load a properly-formatted file into a buffer</li>
+  <li>Enable the major mode for the buffer</li>
+  <li>Indent the entire file</li>
+  <li>Compare the indented buffer with the original file and fail the test if
+they donâ€™t match</li>
+</ol>
+
+<p>The problem with the above approach is that <code class="language-plaintext highlighter-rouge">buffer-string</code> also returns
+formatting information for the buffer. This causes all comparisons to fail as
+the indented buffer contains highlight information.</p>
+
+<p>Luckily the solution is quite simple:</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">cleaned-buffer-string</span> <span class="p">()</span>
+  <span class="s">"Get \"buffer-string\" without any fontification data."</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">buffer</span> <span class="p">(</span><span class="nv">buffer-string</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">set-text-properties</span> <span class="mi">0</span> <span class="p">(</span><span class="nb">length</span> <span class="nv">buffer</span><span class="p">)</span> <span class="no">nil</span> <span class="nv">buffer</span><span class="p">)</span>
+    <span class="nv">buffer</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>This returns the entire contents of the buffer as a clean string.</p>
+:ET

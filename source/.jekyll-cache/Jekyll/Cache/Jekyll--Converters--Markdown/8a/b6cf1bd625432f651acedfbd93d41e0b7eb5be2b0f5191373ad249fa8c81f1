@@ -1,0 +1,31 @@
+I"ó<p>After upgrading to Ubuntu 16.04 I noticed my usual middle-click behaviour on
+Firefox had changed - instead of enabling auto-scroll it was attempting to
+navigate to strange urls.</p>
+
+<p>Normally Ubuntu will try to paste the contents of the clipboard when you click
+your middle mouse button. If youâ€™re currently in Firefox and you do this it will
+try to open what you pasted as a URL.</p>
+
+<p>To revert to middle-click scrolling:</p>
+
+<ol>
+  <li>
+    <p>Go the the advanced preferences page. To get there, type <code class="language-plaintext highlighter-rouge">about:config</code> in
+the Address Bar and hit enter.</p>
+  </li>
+  <li>In the preferences search bar type <code class="language-plaintext highlighter-rouge">middlemouse</code>
+    <ol>
+      <li>Change <code class="language-plaintext highlighter-rouge">middlemouse.contentLoadURL</code> to <code class="language-plaintext highlighter-rouge">false</code>.</li>
+      <li>Change <code class="language-plaintext highlighter-rouge">middlemouse.paste</code> to <code class="language-plaintext highlighter-rouge">false</code>.</li>
+    </ol>
+  </li>
+  <li>Type <code class="language-plaintext highlighter-rouge">autoScroll</code> into the preferences search bar.
+    <ol>
+      <li>Change <code class="language-plaintext highlighter-rouge">general.autoScroll</code> to <code class="language-plaintext highlighter-rouge">true</code>.</li>
+    </ol>
+  </li>
+  <li>Close the browser and restart.</li>
+</ol>
+
+<p>Middle-click scrolling will now be enabled again.</p>
+:ET

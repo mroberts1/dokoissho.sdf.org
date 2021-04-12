@@ -1,0 +1,10 @@
+I"„<p><a href="https://github.com/emacs-dashboard/emacs-dashboard">Emacs dashboard</a> creates a
+startup page for Emacs that gives quick access to projects, recent files and
+even org-mode agenda items.</p>
+
+<p>The following code configures Emacs to show the <code class="language-plaintext highlighter-rouge">*dashboard*</code> buffer after
+launch. It works with <code class="language-plaintext highlighter-rouge">emacsclient</code> as well.</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="k">setq</span> <span class="nv">initial-buffer-choice</span> <span class="nf">#'</span><span class="p">(</span><span class="k">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">get-buffer-create</span> <span class="s">"*dashboard*"</span><span class="p">)))</span>
+</code></pre></div></div>
+:ET

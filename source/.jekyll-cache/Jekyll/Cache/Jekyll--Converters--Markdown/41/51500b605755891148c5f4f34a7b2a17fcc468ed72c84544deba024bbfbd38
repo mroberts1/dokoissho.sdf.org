@@ -1,0 +1,19 @@
+I"	<p><a href="https://github.com/IvanMalison/org-projectile/">org-projectile</a> is a small
+Emacs package that makes it easy to associate org-mode TODO items with
+projectile projects.</p>
+
+<p>Each projectile project can have its own <code class="language-plaintext highlighter-rouge">TODO.org</code>, but sometimes projects
+don’t have one (or don’t need one) and these empty files are still added to the
+agenda.</p>
+
+<p>The following function filters the <code class="language-plaintext highlighter-rouge">org-projectile</code> list of TODO files and
+removes any file that doesn’t actually exist.</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/org-projectile-todo-files</span> <span class="p">()</span> 
+  <span class="s">"Fetch a list of org TODO files for projects that actually exist."</span>
+  <span class="p">(</span><span class="nv">seq-filter</span> <span class="nf">#'</span><span class="nv">file-exists-p</span> <span class="p">(</span><span class="nv">org-projectile-todo-files</span><span class="p">)))</span>
+
+<span class="c1">;; Add org-projectile files to org.</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">org-agenda-files</span> <span class="p">(</span><span class="nb">append</span> <span class="nv">org-agenda-files</span> <span class="p">(</span><span class="nv">sodaware/org-projectile-todo-files</span><span class="p">)))</span>
+</code></pre></div></div>
+:ET

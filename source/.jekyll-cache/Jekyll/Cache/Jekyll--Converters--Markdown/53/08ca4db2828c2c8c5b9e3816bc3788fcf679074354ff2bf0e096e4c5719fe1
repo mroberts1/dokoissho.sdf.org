@@ -1,0 +1,54 @@
+I"`<p>In the past I’ve used <a href="/notes/aligning-php-arrays-with-emacs/">emacs-php-align</a>
+to align PHP arrays. However, there’s a more flexible alternative built into
+Emacs - <code class="language-plaintext highlighter-rouge">align-regexp</code>.</p>
+
+<p>Here’s the original example I used.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$my_array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'key'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'key_two'</span> <span class="o">=&gt;</span> <span class="s1">'Another value'</span><span class="p">,</span>
+    <span class="s1">'really_long_key'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'k'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>To align this with <code class="language-plaintext highlighter-rouge">align-regexp</code>, highlight the contents of the array and then:</p>
+
+<ol>
+  <li>Run the <code class="language-plaintext highlighter-rouge">align-regexp</code> command (i.e. <code class="language-plaintext highlighter-rouge">M-x align-regexp</code>)</li>
+  <li>Enter <code class="language-plaintext highlighter-rouge">=&gt;</code> at the “Align regexp” prompt</li>
+</ol>
+
+<p>Which converts it into this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$my_array</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'key'</span>             <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'key_two'</span>         <span class="o">=&gt;</span> <span class="s1">'Another value'</span><span class="p">,</span>
+    <span class="s1">'really_long_key'</span> <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+    <span class="s1">'k'</span>               <span class="o">=&gt;</span> <span class="s1">'Value'</span><span class="p">,</span>
+<span class="p">);</span>
+</code></pre></div></div>
+
+<p>As the name suggests, <code class="language-plaintext highlighter-rouge">align-regexp</code> takes a regular expression for
+alignment. This means it can also be used to align pretty much anything.</p>
+
+<p>e.g.</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"key_two"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Another value"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"really_long_key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"k"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>With <code class="language-plaintext highlighter-rouge">align-regexp</code> using <code class="language-plaintext highlighter-rouge">:</code> becomes:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"key"</span><span class="w">             </span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"key_two"</span><span class="w">         </span><span class="p">:</span><span class="w"> </span><span class="s2">"Another value"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"really_long_key"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">200</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"k"</span><span class="w">               </span><span class="p">:</span><span class="w"> </span><span class="s2">"Value"</span><span class="p">,</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+:ET

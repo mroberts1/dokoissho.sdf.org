@@ -1,0 +1,20 @@
+I"1<p>This is the first game I ever wrote by myself. It’s a text adventure starring
+Sonic the Hedgehog.</p>
+
+<p>It was written in Power Basic for the Atari ST. The source code is extremely
+scrappy and has some wonderfully useless comments and variable names.</p>
+
+<p>For example, the code to handle the “TALK” command looks like this:</p>
+
+<div class="language-visualbasic highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">'IT'S GOOD TO TALK!</span>
+<span class="mi">6000</span> <span class="n">FOR</span> <span class="n">T</span><span class="o">=</span><span class="mi">1</span> <span class="n">TO</span> <span class="mi">6</span>
+<span class="mi">6010</span> <span class="n">IF</span> <span class="n">BLOKEPOS</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="o">=</span><span class="n">H</span> <span class="n">THEN</span> <span class="n">GOTO</span> <span class="mi">6040</span>
+<span class="mi">6020</span> <span class="n">NEXT</span> <span class="n">T</span>
+<span class="mi">6030</span> <span class="n">PRINT</span> <span class="s">"THERE'S NO-ONE TO TALK TO!"</span><span class="p">:</span><span class="n">GOTO</span> <span class="mi">2100</span>
+<span class="mi">6040</span> <span class="n">PRINT</span> <span class="n">BLOKE</span><span class="err">$</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="err">;</span><span class="s">" SAYS"</span>
+<span class="mi">6045</span> <span class="err">?</span> <span class="n">CHR</span><span class="err">$</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span><span class="err">;</span><span class="n">SPEECH</span><span class="err">$</span><span class="p">(</span><span class="n">T</span><span class="p">)</span><span class="err">;</span><span class="n">CHR</span><span class="err">$</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span>
+<span class="mi">6430</span> <span class="n">GOTO</span> <span class="mi">2100</span>
+</code></pre></div></div>
+
+<p>Oh dear…</p>
+:ET

@@ -1,0 +1,8 @@
+I"—<p><strong>beeminder.el</strong> is a really simple Emacs extension for working with
+<a href="https://beeminder.com/">Beeminder</a>. It has two main purposes:</p>
+
+<ol>
+  <li>Submitting data directly from Emacs using the <code class="language-plaintext highlighter-rouge">beeminder-add-data</code> command</li>
+  <li>Automatically submitting data to a goal when an org-mode TODO item is finished</li>
+</ol>
+:ET

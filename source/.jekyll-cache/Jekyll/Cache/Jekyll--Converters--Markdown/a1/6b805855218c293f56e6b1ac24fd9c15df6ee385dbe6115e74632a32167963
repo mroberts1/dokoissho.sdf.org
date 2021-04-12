@@ -1,0 +1,16 @@
+I"\<p><a href="https://github.com/skeeto/elfeed">Elfeed</a> is an excellent RSS reader for
+Emacs. Recently
+<a href="https://github.com/skeeto/elfeed/issues/197">this issue on GitHub</a> asked how to
+add a yes/no prompt before marking all items as read.</p>
+
+<p>Here’s a simple function that marks all RSS items as read before fetching new
+posts:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">sodaware/elfeed-all-read-refresh</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nv">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">y-or-n-p</span> <span class="s">"Really mark all items as read?"</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">elfeed-mark-all-as-read</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">elfeed-search-fetch</span> <span class="no">nil</span><span class="p">)))</span>
+</code></pre></div></div>
+
+:ET

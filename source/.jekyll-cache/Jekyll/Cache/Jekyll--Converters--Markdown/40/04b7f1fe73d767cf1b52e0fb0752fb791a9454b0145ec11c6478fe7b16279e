@@ -1,0 +1,218 @@
+I"�<h2 id="2019-12-31">2019-12-31</h2>
+
+<ul>
+  <li>Updated <a href="https://www.sodaware.net">sodaware.net</a> to be rebuilt via git and a
+cron job. Uses a similar system as philnewton.net. Had to fix a few broken
+org-mode files to get everything publishing, but it works now.</li>
+</ul>
+
+<h2 id="2019-12-24">2019-12-24</h2>
+
+<ul>
+  <li>Updated <a href="https://www.shiningsource.org/">shiningsource.org</a> to use HTTPS. I’ve
+been meaning to do it for years but never got around to it. Only did it
+because Derek had linked to the non-existant https version in his article on
+<a href="https://coil.com/p/whydoitweet/Starting-Your-Own-Town-2-Gameworld-6-/CHFoDgBy7">Briny Sword</a>.</li>
+</ul>
+
+<h2 id="2019-12-19">2019-12-19</h2>
+
+<ul>
+  <li>Finally got mu4e set up with multiple accounts. Took a couple of attempts to
+get contexts working, and I’ll probably tweak my workflow, but for now it works.</li>
+</ul>
+
+<h2 id="2019-12-05">2019-12-05</h2>
+
+<ul>
+  <li>Released <a href="https://www.sodaware.net/lispmax/">lispmax.mod</a></li>
+  <li>Started using <a href="https://github.com/davep/pinboard.el">pinboard.el</a> to manage my
+<a href="https://pinboard.in/">pinboard</a> links</li>
+</ul>
+
+<h2 id="2019-12-05-1">2019-12-05</h2>
+
+<ul>
+  <li>Set up my personal accounts in <a href="https://ledger-cli.org/">ledger</a>. Next step is
+to automate converting and importing data from different institutions.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-11-08">2019-11-08</h2>
+
+<ul>
+  <li>Released <a href="https://www.sodaware.net/6502-max/">6502-max</a>.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-10-10">2019-10-10</h2>
+
+<ul>
+  <li>Released <a href="https://www.sodaware.net/docgen/">docgen</a> version 0.1.0.</li>
+</ul>
+
+<h2 id="2019-10-01">2019-10-01</h2>
+
+<ul>
+  <li>Released <a href="https://www.sodaware.net/blam/">blam</a> version 0.1.0.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-09-16">2019-09-16</h2>
+
+<ul>
+  <li>Move LispMax’s <code class="language-plaintext highlighter-rouge">list</code> function into the core (BitzMax part). Was previously
+using one written in lispmax itself <code class="language-plaintext highlighter-rouge">(foldr cons nil items)</code>, which is over
+100 times slower than doing it within BlitzMax. There’s always overhead when
+using a scripting language vs native, but <code class="language-plaintext highlighter-rouge">list</code> is a pretty fundamental
+function so it needs to be as fast as possible.</li>
+</ul>
+
+<h2 id="2019-09-15">2019-09-15</h2>
+
+<ul>
+  <li>Updated security headers on philnewton.net to include <code class="language-plaintext highlighter-rouge">Feature-Policy</code>,
+<code class="language-plaintext highlighter-rouge">Referrer-Policy</code> and <code class="language-plaintext highlighter-rouge">Content-Security-Policy</code>. The CSP took the longest to
+get working as the syntax highlighting library I’m using was packed and used
+<code class="language-plaintext highlighter-rouge">eval</code> to unpack (which I have blocked). There’s also few inline scripts that
+needed hashes generating - thankfully Chrome will show these in the dev
+console.</li>
+</ul>
+
+<h2 id="2019-09-02">2019-09-02</h2>
+
+<ul>
+  <li>Switched <a href="https://www.philnewton.net/">philnewton.net</a> to a new server. The
+site is now rebuilt on the server every hour or when files are pushed to git.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-05-30">2019-05-30</h2>
+
+<ul>
+  <li>Rebuilt <code class="language-plaintext highlighter-rouge">sodaware.blitzmax_array</code> to use array slices instead of copying
+things with a <code class="language-plaintext highlighter-rouge">for...next</code> loop. Much faster and shortens the code
+considerably. Refactoring is much, much simpler with unit tests.</li>
+</ul>
+
+<h2 id="2019-05-27">2019-05-27</h2>
+
+<ul>
+  <li>Fixed bug in blam when creating zip files. Added files did not have the
+correct date info set, so were always showing as being created in 1970.</li>
+</ul>
+
+<h2 id="2019-05-24">2019-05-24</h2>
+
+<ul>
+  <li>Released <a href="https://www.sodaware.net/maxcop/">maxcop</a> version 0.1.0.</li>
+</ul>
+
+<h2 id="2019-05-23">2019-05-23</h2>
+
+<ul>
+  <li>Fixed another security hole in TSS. Wasn’t escaping search queries so it was
+vulnerable to XSS attacks.</li>
+</ul>
+
+<h2 id="2019-05-21">2019-05-21</h2>
+
+<ul>
+  <li>Fixed a bug with blitzmax-mode indentation. Was not indenting
+<code class="language-plaintext highlighter-rouge">Repeat...Forever</code> loops correctly. And it was treating <code class="language-plaintext highlighter-rouge">Forever</code> keyword as
+the start of a <code class="language-plaintext highlighter-rouge">For...Next</code> loop. Oops.</li>
+</ul>
+
+<h2 id="2019-05-02">2019-05-02</h2>
+
+<ul>
+  <li>Fixed a tiny bug in <a href="https://github.com/sodaware/jekyll-archive-page">jekyll-archive-page</a>.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-04-25">2019-04-25</h2>
+
+<ul>
+  <li>Set up borg using <a href="https://torsion.org/borgmatic/">borgmatic</a>. Backups are run
+hourly using cron.</li>
+</ul>
+
+<h2 id="2019-04-22">2019-04-22</h2>
+
+<ul>
+  <li>Started work on setting up my PC with automated backups using borg. Using
+<a href="https://borgbase.com/">borgbase</a> for storage. Backblaze b2 is cheaper for
+storage, but borgbase is tailored to work with borg and was a bit smoother to
+set up.</li>
+</ul>
+
+<h2 id="2019-04-17">2019-04-17</h2>
+
+<ul>
+  <li>Added missing “<a href="https://www.philnewton.net/blog/the-printable-ceo/">The Printable CEO</a>” post to
+philnewton.net.</li>
+</ul>
+
+<h2 id="2019-04-15">2019-04-15</h2>
+
+<ul>
+  <li>Created an elisp function to insert new log entries into these files. <a href="/notes/elisp-log-entries/">See
+note</a>.</li>
+</ul>
+
+<h2 id="2019-04-14">2019-04-14</h2>
+
+<ul>
+  <li>Converted <a href="http://www.shining-online.co.uk/">shining-online.co.uk</a> to be
+provisioned and setup using Ansible. It’s far, far too much for a single site
+like this, but it’s good practice.</li>
+</ul>
+
+<h2 id="2019-04-13">2019-04-13</h2>
+
+<ul>
+  <li>Created some simple elisp for creating new notes for this site. Probably won’t
+save me time in the long-run, but it was fun to implement.</li>
+</ul>
+
+<h2 id="2019-04-11">2019-04-11</h2>
+
+<ul>
+  <li>Rewrote scm_log plugin to meet WordPress standards (and actually escape data)</li>
+  <li>Fixed a pretty serious security flaw when sending a <code class="language-plaintext highlighter-rouge">Location</code> header but not
+exiting the script, so non-authenticated users could still submit data. Pretty
+embarassing.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-03-03">2019-03-03</h2>
+
+<ul>
+  <li>Released new version of <a href="https://garlicspy.com/">garlic_spy</a> with IFTTT.com
+integration.</li>
+  <li>Created a status page for Garlic Spy. Ugly code, but it checks for running
+processes and validates the chain state.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-02-16">2019-02-16</h2>
+
+<ul>
+  <li>Fixed a really (<em>really</em>) <a href="https://github.com/bmx-ng/bmk/pull/63">small bug in bmk</a>.</li>
+</ul>
+
+<hr />
+
+<h2 id="2019-01-09">2019-01-09</h2>
+
+<ul>
+  <li>Created a hub for my <a href="https://www.philnewton.net/bits/2019/">2019 Groundhog Day</a> resolutions.</li>
+</ul>
+:ET

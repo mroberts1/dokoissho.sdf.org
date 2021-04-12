@@ -1,0 +1,135 @@
+I"�<h2 id="2017-12-31">2017-12-31</h2>
+
+<ul>
+  <li>Finally finished cleaning up the code that runs <a href="http://www.shiningsource.org/">The Shining
+Source</a>. It was a total mess but it’s looking
+much better now.</li>
+</ul>
+
+<hr />
+
+<h2 id="2017-11-28">2017-11-28</h2>
+
+<ul>
+  <li>Finished upgrading <a href="http://www.shiningonline.org/">shiningonline.org</a> from
+Rails 4 to Rails 5. There were a few sticking points, mostly from deprecated
+gems (<code class="language-plaintext highlighter-rouge">mysql</code>) and from deploying things.</li>
+</ul>
+
+<hr />
+
+<h2 id="2017-04-08">2017-04-08</h2>
+
+<ul>
+  <li>Published
+<a href="https://www.sodaware.net/blog/march-1gam-zap-2000/">#1GAM 2017 - March’s Entry: ZAP 2000</a>
+on sodaware.net</li>
+</ul>
+
+<h2 id="2017-04-02">2017-04-02</h2>
+
+<ul>
+  <li>Released <a href="https://www.sodaware.net/1gam-2017/03-zap-2000/">Zap 2000</a> as part
+of <a href="http://onegameamonth.com/">#1GAM 2017</a>.</li>
+</ul>
+
+<hr />
+
+<h2 id="2017-03-30">2017-03-30</h2>
+
+<ul>
+  <li>Rewrote some JavaScript and removed jQuery from philnewton.net. Seemed
+overkill to load a whole library for a small amount of functionality.</li>
+</ul>
+
+<h2 id="2017-03-29">2017-03-29</h2>
+
+<ul>
+  <li>Published
+<a href="https://www.philnewton.net/blog/formatting-php-code-with-emacs/">Formatting PHP code with Emacs</a>
+on philnewton.net</li>
+</ul>
+
+<h2 id="2017-03-28">2017-03-28</h2>
+
+<ul>
+  <li>Created
+<a href="https://www.philnewton.net/code/php-beautifier-el/">php-beautifier.el</a>, an
+Emacs extension for prettifying PHP code.</li>
+</ul>
+
+<h2 id="2017-03-27">2017-03-27</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">sodaware.file_config</code> to git</li>
+  <li>Started converting <code class="language-plaintext highlighter-rouge">sodaware.mod</code> documentation from DocBook to AsciiDoc. It’s
+a little bit different but there’s a lot less markup.</li>
+  <li><strong>Mini Shinobi</strong> made it onto Jupiter Hadley’s
+<a href="http://fireside.gamejolt.com/post/jam-favorites-finally-finish-something-jam-raqd4rbf">favourite #FFSJam games</a> list</li>
+</ul>
+
+<h2 id="2017-03-26">2017-03-26</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">pangolin.console</code> to git and cleaned it up</li>
+</ul>
+
+<h2 id="2017-03-25">2017-03-25</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">sodaware.file_soda</code> to git and made some decent perfomance improvements
+to it.</li>
+</ul>
+
+<h2 id="2017-03-24">2017-03-24</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">pangolin.gfx</code> to git</li>
+</ul>
+
+<h2 id="2017-03-23">2017-03-23</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">docgen</code> and <code class="language-plaintext highlighter-rouge">blam</code> to git</li>
+</ul>
+
+<h2 id="2017-03-22">2017-03-22</h2>
+
+<ul>
+  <li>Fixed the
+<a href="https://www.philnewton.net/guides/personal-development-blogs/">personal development blogs list</a>
+on philnewton.net</li>
+</ul>
+
+<h2 id="2017-03-21">2017-03-21</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">sodaware.console_commandline</code> to git</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">pangolin.tilemap</code> to git</li>
+  <li>Published
+<a href="https://www.philnewton.net/blog/exploring-emacs-skewer-mode/">Exploring my Emacs packages - skewer-mode</a>
+on philnewton.net</li>
+</ul>
+
+<h2 id="2017-03-19">2017-03-19</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">pangolin.entities</code> and <code class="language-plaintext highlighter-rouge">pangolion.contentdb</code> to git</li>
+  <li>Published
+<a href="http://sodaware.sdf.org/blog/roguelike-development-tips/">Roguelike development tips</a>
+on sodaware.sdf.org</li>
+</ul>
+
+<h2 id="2017-03-18">2017-03-18</h2>
+
+<ul>
+  <li>Added <code class="language-plaintext highlighter-rouge">pangolin.resources</code> to git</li>
+</ul>
+
+<h2 id="2017-03-17">2017-03-17</h2>
+
+<ul>
+  <li>Updated <code class="language-plaintext highlighter-rouge">docs.sodaware.net</code> and <code class="language-plaintext highlighter-rouge">downloads.sodaware.net</code> to use ssl</li>
+  <li>Added <code class="language-plaintext highlighter-rouge">pangolin</code> to sodaware documentation site</li>
+</ul>
+:ET

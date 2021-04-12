@@ -1,0 +1,38 @@
+I"i	<p>The following snippet will list all modules that a source file (or files) depend
+on. Replace <code class="language-plaintext highlighter-rouge">&lt;SOURCE FILE&gt;</code> with a file name or directory to search:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">--include</span><span class="o">=</span><span class="s2">"*.bmx"</span> <span class="nt">-hri</span> <span class="s2">"^import [^</span><span class="se">\"</span><span class="s2">]"</span> &lt;SOURCE FILE&gt; |
+    <span class="nb">sort</span> |
+    <span class="nb">uniq</span> |
+    <span class="nb">sed</span> <span class="s1">'s/[Ii]mport //g'</span>
+</code></pre></div></div>
+
+<p>This will give output something like the following:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brl.linkedlist
+brl.map
+brl.reflection
+brl.retro
+sodaware.blitzmax_array
+sodaware.blitzmax_ascii
+sodaware.file_fnmatch
+</code></pre></div></div>
+
+<p>The snippet is broken into a couple of parts:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">grep --include="*.bmx" -hri "^import [^\"]" &lt;SOURCE FILE&gt;</code>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">--include="*.bmx*"</code> Instructs grep to search only <code class="language-plaintext highlighter-rouge">bmx</code> files.</li>
+      <li><code class="language-plaintext highlighter-rouge">-h</code> Removes the file name from results</li>
+      <li><code class="language-plaintext highlighter-rouge">-r</code> is a recursive search</li>
+      <li><code class="language-plaintext highlighter-rouge">-i</code> ignores case</li>
+      <li><code class="language-plaintext highlighter-rouge">"^import [^\"]"</code> will search for lines that start with “import” that are
+not followed by a <code class="language-plaintext highlighter-rouge">"</code> character (i.e. a file import).</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">sort</code> - Sorts lines A to Z</li>
+  <li><code class="language-plaintext highlighter-rouge">uniq</code> - Removes duplicate lines from the results</li>
+  <li><code class="language-plaintext highlighter-rouge">sed 's/[Ii]mport//g'</code> strips the starting <code class="language-plaintext highlighter-rouge">Import </code>.</li>
+</ul>
+:ET

@@ -1,0 +1,23 @@
+I"]<p>Synchronising Emacs configuration files between machines usually works well, but
+sometimes there need to be different settings for different operating system.</p>
+
+<p>Thankfully, Emacs lisp provides the variable <code class="language-plaintext highlighter-rouge">system-type</code>.</p>
+
+<p>For example, it can be used to set a different font depending on the os:</p>
+
+<div class="language-emacs-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; Windows only font</span>
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">string=</span> <span class="s">"windows-nt"</span> <span class="nv">system-type</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">set-face-font</span> <span class="ss">'default</span> <span class="s">"Consolas"</span><span class="p">))</span>
+
+<span class="c1">;; Mac OS only font</span>
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">string=</span> <span class="s">"darwin"</span> <span class="nv">system-type</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">set-face-font</span> <span class="ss">'default</span> <span class="s">"Monaco"</span><span class="p">))</span>
+  
+<span class="c1">;; Linux only font</span>
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nb">string=</span> <span class="s">"gnu/linux"</span> <span class="nv">system-type</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">set-face-font</span> <span class="ss">'default</span> <span class="s">"Ubuntu"</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p><strong>More info</strong>:
+<a href="https://www.gnu.org/software/emacs/manual/html%5Fnode/elisp/System-Environment.html">Gnu Emacs: Operating System Environment</a></p>
+:ET

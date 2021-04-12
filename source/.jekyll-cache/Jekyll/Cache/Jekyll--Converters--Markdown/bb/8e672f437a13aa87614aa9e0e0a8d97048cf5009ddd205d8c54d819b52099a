@@ -1,0 +1,43 @@
+I"R<p><code class="language-plaintext highlighter-rouge">lispmax</code> is a module for BlitzMax that can parse and execute a lispy scripting
+language.</p>
+
+<h2 id="a-quick-example">A quick example</h2>
+
+<p>The following lisp expression adds two numbers together:</p>
+
+<div class="language-scheme highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">+</span> <span class="mi">10</span> <span class="mi">20</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>To run this within BlitzMax using lispmax, we need to do the following:</p>
+
+<ol>
+  <li>Create and initialize a LispMax object - this contains the environment
+(functions, variables etc)</li>
+  <li>Parse the expression - this converts a string containing lisp code into
+something LispMax can use</li>
+  <li>Evaluate the expression - this is where the magic happens</li>
+</ol>
+
+<p>In practice, it looks a little like this:</p>
+
+<pre><code class="language-blitzmax">Framework brl.basic
+Import sodaware.lispmax
+
+' Create a new LispMax instance.
+Local lisp:LispMax = New LispMax
+
+' Load built-in and library functions.
+lisp.initializeEnvironment()
+
+' Parse and evaluate the expression.
+Local expression:LispMax_Atom = lisp.parseExpression("(+ 10 20)")
+Local result:LispMax_Atom     = lisp.evaluateExpression(expression)
+
+' Print the result.
+lisp.printExpression(result)
+</code></pre>
+
+<p>Running the above example will print <code class="language-plaintext highlighter-rouge">30</code>.</p>
+
+<p>-&gt; Read more on the <a href="https://www.sodaware.net/lispmax/">lispmax.mod project homepage</a>.</p>
+:ET

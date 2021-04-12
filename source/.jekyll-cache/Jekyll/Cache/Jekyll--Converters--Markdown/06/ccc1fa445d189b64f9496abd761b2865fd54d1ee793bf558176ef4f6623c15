@@ -1,0 +1,23 @@
+I"<p>One of the first libraries I wrote for BlitzPlus. It has functionality for
+extracting files, as well as packing and unpacking banks.</p>
+
+<p>Here’s some example code:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Const TEST_STRING$ = "Repetition is good for compression."
+
+; Create a bank to be compressed
+Local testBank = CreateBank((Len(TEST_STRING) * 2) + 1)
+
+; Store our test string
+PokeString(testBank, 0, TEST_STRING + TEST_STRING)
+
+; Compress the data
+Local compressedBank = ZipApi_Compress(testBank)
+
+; Output statistics
+Print "Old Size: " + BankSize(testBank)
+Print "New Size: " + BankSize(compressedBank)
+</code></pre></div></div>
+
+<p>I don’t use BlitzPlus now, but I enjoyed building it.</p>
+:ET

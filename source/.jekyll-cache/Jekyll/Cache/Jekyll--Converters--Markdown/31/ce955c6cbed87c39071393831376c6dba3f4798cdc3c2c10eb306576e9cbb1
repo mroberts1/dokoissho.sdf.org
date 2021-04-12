@@ -1,0 +1,24 @@
+I"t<p>The following snippet of Emacs Lisp will fetch a remote URI and return the
+contents as a parsed JSON object.</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">get-json</span> <span class="p">(</span><span class="nv">uri</span><span class="p">)</span>
+  <span class="s">"Fetch the contents of URI and parse."</span>
+  <span class="p">(</span><span class="nv">with-current-buffer</span> <span class="p">(</span><span class="nv">url-retrieve-synchronously</span> <span class="nv">uri</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">goto-char</span> <span class="p">(</span><span class="nv">point-min</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">goto-char</span> <span class="nv">url-http-end-of-headers</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">prog1</span> <span class="p">(</span><span class="nv">json-read</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">kill-buffer</span><span class="p">))))</span>
+</code></pre></div></div>
+
+<p>Something like:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+   </span><span class="nl">"field"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>will return an object like this:</p>
+
+<div class="language-elisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">'</span><span class="p">((</span><span class="nv">field</span> <span class="o">.</span> <span class="s">"value"</span><span class="p">))</span>
+</code></pre></div></div>
+:ET

@@ -1,0 +1,126 @@
+I"�<p>BlitzMax has a couple of ways to check if a variable is <code class="language-plaintext highlighter-rouge">Null</code>:</p>
+
+<ul>
+  <li>Null - <code class="language-plaintext highlighter-rouge">If o = Null</code></li>
+  <li>Null (Yoda) - <code class="language-plaintext highlighter-rouge">If Null = o</code></li>
+  <li>Not - <code class="language-plaintext highlighter-rouge">If Not o</code></li>
+  <li>Not (brackets) - <code class="language-plaintext highlighter-rouge">If Not(o)</code></li>
+  <li>Not (explicit) - <code class="language-plaintext highlighter-rouge">If Not(o) = True</code></li>
+  <li>No check - <code class="language-plaintext highlighter-rouge">If o</code></li>
+</ul>
+
+<h2 id="summary">Summary</h2>
+
+<p>There’s not a huge amount of performance difference between most checks. Calling
+<code class="language-plaintext highlighter-rouge">Not</code> adds a very small amount of overhead, and explicit <code class="language-plaintext highlighter-rouge">Not</code> checks are about
+2x slower than everything else.</p>
+
+<p>It’s probably not worth rebuilding code unless it’s being run millions of times.</p>
+
+<h2 id="null-check-benchmarks">Null check benchmarks</h2>
+
+<p>All benchmarks are in release mode with threading enabled. 1,000,000,000
+iterations.</p>
+
+<table class="table--striped table--fancy table--benchmark">
+  <thead>
+    <tr>
+      <th>Check Type</th>
+      <th>Execution Time (milliseconds)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Null</td>
+      <td>754</td>
+    </tr>
+    <tr>
+      <td>Null (Yoda)</td>
+      <td>754</td>
+    </tr>
+    <tr>
+      <td>Not</td>
+      <td>889</td>
+    </tr>
+    <tr>
+      <td>Not (brackets)</td>
+      <td>885</td>
+    </tr>
+    <tr>
+      <td>Not (explicit)</td>
+      <td>2082</td>
+    </tr>
+    <tr>
+      <td>No check</td>
+      <td>752</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-code">Test code</h2>
+
+<pre><code class="language-blitzmax">SuperStrict
+Framework brl.basic
+
+Const ITERATIONS:Int = 1000000000
+
+Local startTime:Int
+Local counter:int
+
+Local result:int
+Local o:Object
+
+result = false
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    if o = Null then result = true
+Next
+print "Null: " + (millisecs() - startTime) 
+
+result = false
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    if Null = 0 then result = true
+Next
+print "Null (Yoda): " + (millisecs() - startTime) 
+
+result = false
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    if not o then result = true
+Next
+print "Not: " + (millisecs() - startTime) 
+
+result = false
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    if not(o) then result = true
+Next
+print "Not (brackets): " + (millisecs() - startTime) 
+
+result = false
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    if not(o) = true then result = true
+Next
+print "Not (explicit): " + (millisecs() - startTime) 
+
+' Opposite of a Null check
+
+o = "d"
+
+result = false
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    If o Then result = true
+Next
+Print "No check: " + (millisecs() - startTime) 
+
+result = false
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    if (Null = o) = false then result = true
+Next
+Print "No check (double check): " + (millisecs() - startTime) 
+</code></pre>
+:ET

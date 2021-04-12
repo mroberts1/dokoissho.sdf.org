@@ -1,0 +1,41 @@
+I"�<p>This is something I discovered during development of
+<a href="/projects/beeminder.el/">beeminder.el</a> version 1.2. I wanted to have some text
+in the buffer saying “View all data” that would perform an action when clicked
+or when the user pressed <kbd>RET</kbd> on it.</p>
+
+<p>I tried a couple of approaches, such as setting text properties in the buffer
+and then searching at the current point when <kbd>RET</kbd> was pressed. But
+those solutions didn’t feel right.</p>
+
+<p>Finally, I discovered the <code class="language-plaintext highlighter-rouge">insert-button</code> function which does what I wanted.</p>
+
+<p>The previous code looked a little like this:</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">insert</span> <span class="s">"View all data"</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">put-text-property</span> <span class="p">(</span><span class="nv">line-beginning-position</span><span class="p">)</span>
+                   <span class="p">(</span><span class="nv">line-end-position</span><span class="p">)</span>
+                   <span class="ss">'beeminder-is-read-more</span>
+                   <span class="no">t</span><span class="p">)</span>
+
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">beeminder-handle-view-all-data-link</span> <span class="p">()</span>
+  <span class="s">"Handle a click on the 'Read more data' text."</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">get-text-property</span> <span class="p">(</span><span class="nv">point</span><span class="p">)</span> <span class="ss">'beeminder-is-read-more</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">beeminder-view-data-for-current-goal</span><span class="p">)))</span>
+
+<span class="c1">;; Bind to &lt;RET&gt;</span>
+<span class="p">(</span><span class="nv">define-key</span> <span class="nv">beeminder-mode-map</span>
+            <span class="p">(</span><span class="nv">kbd</span> <span class="s">"&lt;RET&gt;"</span><span class="p">)</span>
+            <span class="nf">#'</span><span class="nv">beeminder-handle-view-all-data-link</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>It’s not the cleanest code ever, and it’s a lot of effort for a simple
+button. By using <code class="language-plaintext highlighter-rouge">insert-button</code>, it now looks like this:</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">insert-button</span> <span class="s">"View all data"</span>
+               <span class="ss">'action</span> <span class="p">(</span><span class="k">lambda</span> <span class="p">(</span><span class="nv">_arg</span><span class="p">)</span> <span class="p">(</span><span class="nv">beeminder-view-data-for-current-goal</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<p>Much better!</p>
+
+<p><strong>Read more</strong>: <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Buttons.html">Buttons - GNU Emacs Lisp Reference Manual</a>.</p>
+:ET

@@ -1,0 +1,21 @@
+I"<p>Every developer should build a terrible web framework at some point. This one is
+mine.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?php</span>
+<span class="k">require_once</span> <span class="s1">'hagfish/hagfish_core.php'</span><span class="p">;</span>
+
+<span class="c1">// Create a controller</span>
+<span class="nv">$app</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">HagfishController</span><span class="p">();</span>
+
+<span class="c1">// Add an action</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">addAction</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"hello world"</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="c1">// Dispatch</span>
+<span class="nv">$app</span><span class="o">-&gt;</span><span class="nf">dispatch</span><span class="p">();</span>
+</code></pre></div></div>
+
+<p>It’s not going to win any awards (and doesn’t deserve to), but it’s lightweight
+and is what I used to build <a href="http://www.craftroulette.com/">Craft Roulette</a>.</p>
+:ET

@@ -1,0 +1,191 @@
+I"û<p>BlitzMax comes with several built-in data types:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">Double</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Long</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Int</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Short</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Byte</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Float</code></li>
+  <li><code class="language-plaintext highlighter-rouge">String</code></li>
+  <li><code class="language-plaintext highlighter-rouge">Object</code></li>
+</ul>
+
+<p>How fast are comparisons for different types? Is using a <code class="language-plaintext highlighter-rouge">String</code> for a variable
+much faster or slower than an <code class="language-plaintext highlighter-rouge">Int</code>?</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Smaller data types such as <code class="language-plaintext highlighter-rouge">Byte</code> and <code class="language-plaintext highlighter-rouge">Short</code> are roughly twice as fast to
+directly compare than <code class="language-plaintext highlighter-rouge">Double</code> and <code class="language-plaintext highlighter-rouge">Long</code>.</p>
+
+<p><code class="language-plaintext highlighter-rouge">String</code> is the slowest comparison, but string length does not affect how long
+it takes to compare.</p>
+
+<h2 id="equality-benchmarks">Equality benchmarks</h2>
+
+<p>All benchmarks are in release mode with threading enabled. 1,000,000,000
+iterations.</p>
+
+<table class="table--striped table--fancy table--benchmark">
+  <thead>
+    <tr>
+      <th>Check Type</th>
+      <th>Execution Time (milliseconds)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Double</td>
+      <td>2462</td>
+    </tr>
+    <tr>
+      <td>Long</td>
+      <td>2771</td>
+    </tr>
+    <tr>
+      <td>Integer</td>
+      <td>1565</td>
+    </tr>
+    <tr>
+      <td>Short</td>
+      <td>1253</td>
+    </tr>
+    <tr>
+      <td>Byte</td>
+      <td>1247</td>
+    </tr>
+    <tr>
+      <td>Float</td>
+      <td>2493</td>
+    </tr>
+    <tr>
+      <td>String</td>
+      <td>4099</td>
+    </tr>
+    <tr>
+      <td>Long string</td>
+      <td>4102</td>
+    </tr>
+    <tr>
+      <td>Object</td>
+      <td>1549</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="test-code">Test code</h2>
+
+<pre><code class="language-blitzmax">SuperStrict
+Framework brl.basic
+
+SeedRnd(MilliSecs())
+
+Const ITERATIONS:Int = 1000000000
+
+Local startTime:Int
+Local result:Byte
+
+' ----------------------------------------
+' -- Equality Checks
+
+Local dval1:Double = Rand(0, 100), dval2:Double = Rand(0, 100)
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (dval1 = dval2)
+Next
+print "Double check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local lval1:Long = Rand(0, 100), lval2:Long = Rand(0, 100)
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (lval1 = lval2)
+Next
+print "Long check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local ival1:Int = Rand(0, 100), ival2:Int = Rand(0, 100)
+
+startTime = millisecs()
+For local i:int = 1 to ITERATIONS
+    result = (ival1 = ival2)
+Next
+print "Integer check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local sval1:Short = Rand(0, 100), sval2:Short = Rand(0, 100)
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (sval1 = sval2)
+Next
+print "Short check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local bval1:Byte = Rand(0, 100), bval2:Byte = Rand(0, 100)
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (bval1 = bval2)
+Next
+print "Byte check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local fval1:Float = Rand(0, 100), fval2:Float = Rand(0, 100)
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (fval1 = fval2)
+Next
+print "Float check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local stval1:String = Rand(0, 100), stval2:String = Rand(0, 100)
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (stval1 = stval2)
+Next
+print "String check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local lstval1:String = MakeRandomLongString()
+Local lstval2:String = MakeRandomLongString()
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (lstval1 = lstval2)
+Next
+print "Long string check: " + (millisecs() - startTime) 
+
+' ----------
+
+Local obval1:Object = String(Rand(0, 100)), obval2:Object = String(Rand(0, 100))
+
+startTime = millisecs()
+For local i:Int = 1 to ITERATIONS
+    result = (obval1 = obval2)
+Next
+print "Object check: " + (millisecs() - startTime) 
+
+Function MakeRandomLongString:String(length:Int = 255)
+    Local result:String = ""
+
+    For Local i:Int = 1 To length
+        result :+ Chr(Rand(32, 64))
+    Next
+
+    Return result
+End Function
+</code></pre>
+:ET

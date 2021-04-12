@@ -1,0 +1,5 @@
+I"9<p><strong>php-beautifier.el</strong> adds
+<a href="https://pear.php.net/package/PHP_Beautifier/">PHP_Beautifier</a> integration to
+Emacs. Once installed a region or buffer can be formatted using <code class="language-plaintext highlighter-rouge">PHP_Beautifier</code>
+without having to use the command line.</p>
+:ET

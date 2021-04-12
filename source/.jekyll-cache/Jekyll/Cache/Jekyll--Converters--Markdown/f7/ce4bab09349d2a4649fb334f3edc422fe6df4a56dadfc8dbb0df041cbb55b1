@@ -1,0 +1,105 @@
+I"�<p><a href="https://facilethings.com/">FacileThings</a> is a todo organizer that is heavily
+optimized for the Getting Things Done (GTD) methodology.</p>
+
+<p>It took me a while to find keyboard shortcuts for navigating the different
+areas.</p>
+
+<h2 id="navigating-main-sections">Navigating main sections</h2>
+
+<table class="table--fancy table--striped table--shortcuts">
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">1</code></td>
+      <td>Jump to “Capture” section</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">2</code></td>
+      <td>Jump to “Clarify” section</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">3</code></td>
+      <td>Open “Organize” menu</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">4</code></td>
+      <td>Open “Reflect” menu</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">5</code></td>
+      <td>Jump to “Engage” section</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="organize-menu-shortcuts">“Organize” menu shortcuts</h2>
+
+<p>Call these after opening the “organize” menu with <code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">3</code>:</p>
+
+<table class="table--fancy table--striped table--shortcuts">
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">L</code></td>
+      <td>Open “Lists”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">P</code></td>
+      <td>Open “Projects”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">R</code></td>
+      <td>Open “Routines”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">C</code></td>
+      <td>Open “Checklists”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">E</code></td>
+      <td>Open “People”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">L</code></td>
+      <td>Open “Lists”</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="reflect-menu-shortcuts">“Reflect” menu shortcuts</h2>
+
+<p>Call these after opening the “reflect” menu with <code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">4</code>:</p>
+
+<table class="table--fancy table--striped table--shortcuts">
+  <thead>
+    <tr>
+      <th>Shortcut</th>
+      <th>What it does</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">R</code></td>
+      <td>Open “Weekly review”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">P</code></td>
+      <td>Open “Perspective”</td>
+    </tr>
+    <tr>
+      <td><code class="language-plaintext code--keycode highlighter-rouge">CTRL</code>+<code class="language-plaintext code--keycode highlighter-rouge">A</code></td>
+      <td>Open “Analytics”</td>
+    </tr>
+  </tbody>
+</table>
+:ET

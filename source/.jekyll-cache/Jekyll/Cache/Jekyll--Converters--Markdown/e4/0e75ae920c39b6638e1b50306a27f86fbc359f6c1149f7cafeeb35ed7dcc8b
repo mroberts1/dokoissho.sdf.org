@@ -1,0 +1,23 @@
+I"<p>This is a really quick way to format JSON nicely. Calling <code class="language-plaintext highlighter-rouge">python -m json.tool</code>
+with a filename argument will fix any indentation issues in the file and output
+the result.</p>
+
+<p>For example, a file called <em>my_file.json</em> with the following contents:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"some_field"</span><span class="w"> </span><span class="p">:</span><span class="w">
+</span><span class="s2">"value"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+
+<p>When called like this:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python <span class="nt">-m</span> json.tool my_file.json
+</code></pre></div></div>
+
+<p>Will output:</p>
+
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nl">"some_field"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+:ET

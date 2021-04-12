@@ -1,0 +1,30 @@
+I"”<p>A piece of PHP code I use fairly often is wrapping a model or helper field in a
+function so the object is only instantiated when accessed. It looks like this:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">protected</span> <span class="k">function</span> <span class="n">my_helper</span><span class="p">()</span> <span class="p">{</span>
+	<span class="k">if</span> <span class="p">(</span> <span class="nb">empty</span><span class="p">(</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">my_helper</span> <span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$this</span><span class="o">-&gt;</span><span class="n">my_helper</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">MyHelper</span><span class="p">();</span>
+	<span class="p">}</span>
+
+	<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="n">my_helper</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>The following bit of YASnippet code expands <code class="language-plaintext highlighter-rouge">wrap_helper</code> into the above code
+and automatically sets the field name once the function name has been entered.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># -*- mode: snippet -*-
+# name: Wrap a helper or model
+# key: wrap_helper
+# group: templates
+# --
+protected function $1() {
+	if ( empty( $this-&gt;$1 ) ) {
+		$this-&gt;$1 = new ${2:ClassName}();
+	}
+
+	return $this-&gt;$1;
+}
+$0
+</code></pre></div></div>
+:ET

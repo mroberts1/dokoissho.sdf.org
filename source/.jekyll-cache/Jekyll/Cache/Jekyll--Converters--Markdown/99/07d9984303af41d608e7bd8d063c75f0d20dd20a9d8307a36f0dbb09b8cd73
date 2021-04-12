@@ -1,0 +1,27 @@
+I"Å
+<p>This function converts a list of values into an association list
+(alist).</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">list-&gt;alist</span> <span class="p">(</span><span class="nv">items</span><span class="p">)</span>
+  <span class="s">"Convert a list into an alist."</span>
+  <span class="p">(</span><span class="nb">loop</span> <span class="nv">for</span> <span class="nv">item</span> <span class="nv">from</span> <span class="mi">0</span> <span class="nv">to</span> <span class="p">(</span><span class="nb">1-</span> <span class="p">(</span><span class="nb">length</span> <span class="nv">items</span><span class="p">))</span> <span class="nv">by</span> <span class="mi">2</span>
+     <span class="nv">for</span> <span class="nv">key</span> <span class="nb">=</span> <span class="p">(</span><span class="nb">nth</span> <span class="nv">item</span> <span class="nv">items</span><span class="p">)</span>
+     <span class="nv">for</span> <span class="nv">data</span> <span class="nb">=</span> <span class="p">(</span><span class="nb">nth</span> <span class="p">(</span><span class="nb">1+</span> <span class="nv">item</span><span class="p">)</span> <span class="nv">items</span><span class="p">)</span>
+     <span class="nb">nconc</span> <span class="p">(</span><span class="nb">acons</span> <span class="nv">key</span> <span class="nv">data</span> <span class="no">nil</span><span class="p">)))</span>
+</code></pre></div></div>
+
+<h2 id="basic-example">Basic example</h2>
+
+<p>Running <code class="language-plaintext highlighter-rouge">list-&gt;alist</code> on this input:</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">list</span> <span class="ss">:key1</span> <span class="s">"value1"</span> <span class="ss">:key2</span> <span class="s">"value2"</span> <span class="ss">:key3</span> <span class="s">"value3"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>produces the following output:</p>
+
+<div class="language-common-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">((</span><span class="ss">:key1</span> <span class="o">.</span> <span class="s">"value1"</span><span class="p">)</span>
+ <span class="p">(</span><span class="ss">:key2</span> <span class="o">.</span> <span class="s">"value2"</span><span class="p">)</span>
+ <span class="p">(</span><span class="ss">:key3</span> <span class="o">.</span> <span class="s">"value3"</span><span class="p">))</span>
+</code></pre></div></div>
+
+:ET

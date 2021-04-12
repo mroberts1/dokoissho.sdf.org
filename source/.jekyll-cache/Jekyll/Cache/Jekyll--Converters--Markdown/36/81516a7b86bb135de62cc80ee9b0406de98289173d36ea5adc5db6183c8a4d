@@ -1,0 +1,25 @@
+I"�<p><a href="https://www.emacswiki.org/emacs/ParEdit">Paredit</a> is an Emacs extension for
+working with parenthesis and S-expressions.</p>
+
+<p>From the ParEdit page:</p>
+
+<blockquote>
+  <p>ParEdit (paredit.el) is a minor mode for performing structured editing of
+S-expression data. The typical example of this would be Lisp or Scheme source
+code.</p>
+
+  <p>ParEdit helps <strong>keep parentheses balanced</strong> and adds many keys for moving
+S-expressions and moving around in S-expressions.</p>
+</blockquote>
+
+<p>Seeing it in action makes it much clearer how useful it is. Here’s two great
+visual guides to ParEdit and what it can do:</p>
+
+<ol>
+  <li><a href="http://emacsrocks.com/e14.html">Emacs Rocks! Paredit</a></li>
+  <li><a href="http://danmidwood.com/content/2014/11/21/animated-paredit.html">The Animated Guide to Paredit</a></li>
+</ol>
+
+<p>Like most things Emacs, it takes a while to get used to. But once over the initial
+learning curve it’s indespensible.</p>
+:ET

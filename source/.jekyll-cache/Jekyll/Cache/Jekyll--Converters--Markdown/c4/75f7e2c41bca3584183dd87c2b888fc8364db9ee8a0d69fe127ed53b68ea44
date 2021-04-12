@@ -1,0 +1,17 @@
+I"¨<p>Over time a git repository can end up with a lot of feature branches. Most of
+these are not much use once theyâ€™ve been merged into the main branch.</p>
+
+<p>The following command shows a list of all local branch names, along with the date of
+their last commit:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git <span class="k">for</span><span class="nt">-each-ref</span> <span class="nt">--sort</span><span class="o">=</span>committerdate refs/heads/ <span class="nt">--format</span><span class="o">=</span><span class="s1">'%(committerdate:short) %(refname:short)'</span>
+</code></pre></div></div>
+
+<p>Produces output like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2015-10-12 feature-branch-name
+2016-01-15 another-feature-branch
+2016-03-16 one-last-feature-branch
+2017-05-24 master
+</code></pre></div></div>
+:ET

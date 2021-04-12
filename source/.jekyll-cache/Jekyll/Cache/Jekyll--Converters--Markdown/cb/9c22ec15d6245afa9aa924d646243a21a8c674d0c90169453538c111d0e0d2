@@ -1,0 +1,37 @@
+I"�<p>There are a plenty of packages for GNU/Linux that open Quake-style terminal
+windows. KDE has <a href="https://kde.org/applications/system/yakuake/">yakuake</a>, and
+GTK has <a href="https://github.com/lanoxx/tilda">tilda</a> and
+<a href="http://guake-project.org/">Guake</a> (and more).</p>
+
+<p>The built-in XFCE terminal can be opened in drop-down mode by calling
+<code class="language-plaintext highlighter-rouge">xfce4-terminal</code> with the <code class="language-plaintext highlighter-rouge">--drop-down</code> flag.</p>
+
+<p>The following steps will bind opening a terminal window to a keyboard shortcut
+without installing additional packages.</p>
+
+<h2 id="1-open-xfce-keyboard-settings">1. Open XFCE keyboard settings</h2>
+
+<p>This can be found under “Settings” &gt; “Keyboard” in the menu, or by running
+<code class="language-plaintext highlighter-rouge">xfce4-keyboard-settings</code> directly.</p>
+
+<h2 id="2-add-a-new-command">2. Add a new command</h2>
+
+<p><img src="/assets/images/xfce4-keyboard-settings.png" alt="XFCE keyboard settings window" /></p>
+
+<p>Switch to the “Application Shortcuts” tab and use the “Add” button to create a
+new shortcut.</p>
+
+<p>Enter <code class="language-plaintext highlighter-rouge">xfce4-terminal --drop-down</code> as the shortcut.</p>
+
+<p><img src="/assets/images/xfce4-shortcut.png" alt="XFCE new shortcut" /></p>
+
+<h2 id="3-enter-the-shortcut">3. Enter the shortcut</h2>
+
+<p>XFCE will prompt for a shortcut once the command has been added. I went with
+<code class="language-plaintext code--keycode highlighter-rouge">SUPER</code>+<code class="language-plaintext code--keycode highlighter-rouge">`</code>, but <code class="language-plaintext code--keycode highlighter-rouge">F12</code> is
+another popular shortcut.</p>
+
+<p>Once set up the shortcut key will show a terminal window at the top of the
+screen. Pressing it again will hide the window - the window keeps its previous
+contents so it can be hidden without losing anything.</p>
+:ET

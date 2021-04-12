@@ -1,0 +1,26 @@
+I"y<p><code class="language-plaintext highlighter-rouge">grep</code> can search for lines that <strong>don’t</strong> include word with the <code class="language-plaintext highlighter-rouge">-v</code>
+flag. We can use <code class="language-plaintext highlighter-rouge">-e</code> to search for multiple words, but this can be a pain when
+there’s a lot to search for.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">-f</code> flag allows us to specify a file that contains a list of words/phrases
+to search for (one on each line) which makes it much easier to read.</p>
+
+<p>For example:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-v</span> <span class="nt">-e</span> <span class="s2">"phrase one"</span> <span class="nt">-e</span> <span class="s2">"phrase two"</span> <span class="nt">-e</span> <span class="s2">"phrase three"</span> &lt;filename&gt;
+</code></pre></div></div>
+
+<p>Can be rewritten as follows:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">grep</span> <span class="nt">-v</span> <span class="nt">-f</span> words.txt &lt;filename&gt;
+</code></pre></div></div>
+
+<p>where <code class="language-plaintext highlighter-rouge">words.txt</code> looks like:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>phrase one
+phrase two
+phrase three
+</code></pre></div></div>
+
+<p>Removing the <code class="language-plaintext highlighter-rouge">-v</code> flag would search for only the words in the file.</p>
+:ET

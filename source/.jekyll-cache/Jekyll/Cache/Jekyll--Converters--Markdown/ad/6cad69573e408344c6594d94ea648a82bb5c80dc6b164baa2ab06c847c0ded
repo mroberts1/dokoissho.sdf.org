@@ -1,0 +1,41 @@
+I"<p>In Emacs Lisp, a property list (<code class="language-plaintext highlighter-rouge">plist</code>) looks like this:</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">list</span> <span class="ss">:property1</span> <span class="s">"value1"</span> <span class="ss">:property2</span> <span class="s">"value2"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I’m currently working on <a href="/projects/beeminder.el/">beeminder.el</a> and wanted to
+add some optional parameters to a function. Emacs Lisp doesn’t support <code class="language-plaintext highlighter-rouge">&amp;key</code>
+named parameters, so normally there isn’t a way to do something like this:</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nv">my-function</span> <span class="s">"required"</span> <span class="s">"also-required"</span> <span class="ss">:optional</span> <span class="s">"value"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>I settled on passing a <code class="language-plaintext highlighter-rouge">plist</code>, but wanted a way to whitelist keys. The
+following function will filter the <code class="language-plaintext highlighter-rouge">options</code> list to only include keys that are
+in <code class="language-plaintext highlighter-rouge">allowed</code>.</p>
+
+<p>It will probably re-order the list, but for a property list that usually isn’t
+an issue.</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="nb">defun</span> <span class="nv">filter-plist</span> <span class="p">(</span><span class="nv">options</span> <span class="nv">allowed</span><span class="p">)</span>
+  <span class="s">"Filter a symbol and values list OPTIONS to online include ALLOWED symbols.
+
+For example, filtering (:key value :other-key value) with allowed
+list of (:key) will return (:key value)."</span>
+  <span class="p">(</span><span class="k">let</span> <span class="p">((</span><span class="nv">filtered-list</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">key</span> <span class="nv">allowed</span><span class="p">)</span>
+      <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nv">plist-member</span> <span class="nv">options</span> <span class="nv">key</span><span class="p">)</span>
+        <span class="p">(</span><span class="k">setq</span> <span class="nv">filtered-list</span>
+              <span class="p">(</span><span class="nv">plist-put</span> <span class="nv">filtered-list</span> <span class="nv">key</span> <span class="p">(</span><span class="nv">plist-get</span> <span class="nv">options</span> <span class="nv">key</span><span class="p">)))))</span>
+    <span class="nv">filtered-list</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>This allows us to do this:</p>
+
+<div class="language-lisp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">;; List of parameters. Only want the :valid key/value pair.</span>
+<span class="p">(</span><span class="k">setq</span> <span class="nv">test-list</span> <span class="p">(</span><span class="nb">list</span> <span class="ss">:valid</span> <span class="s">"value"</span> <span class="ss">:invalid</span> <span class="s">"bad"</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nv">filter-plist</span> <span class="nv">test-list</span> <span class="p">(</span><span class="nb">list</span> <span class="ss">:valid</span><span class="p">))</span>
+<span class="c1">;; =&gt; (:valid "value")</span>
+</code></pre></div></div>
+:ET

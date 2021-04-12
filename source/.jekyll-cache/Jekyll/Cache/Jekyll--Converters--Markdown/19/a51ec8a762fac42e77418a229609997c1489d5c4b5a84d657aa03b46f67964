@@ -1,0 +1,7 @@
+I"²<p>To re-compile all packages installed from Melpa/Elpa, use
+<code class="language-plaintext highlighter-rouge">byte-recompile-directory</code>. This can be called via <code class="language-plaintext highlighter-rouge">M-:</code>:</p>
+
+<p><code class="language-plaintext highlighter-rouge">M-: (byte-recompile-directory package-user-dir nil 'force)</code></p>
+
+<p>Emacs will need to be restarted for the compiled changes to load.</p>
+:ET
